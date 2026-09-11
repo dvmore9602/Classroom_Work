@@ -1,0 +1,84 @@
+ 
+  Write each and every MYSQL Queries On Notepad:
+
+ 1)  SQL - SQL stand for structure query langauge. It is used to perform Opretion.
+ 2)  MySQL - MYSQL is dababases. 
+ 3)  Database  - Collections of tables .
+ 4) table - collections of row and column.
+ 5) Data -  data is the collection of informations.
+ 6) DBMS - DBMS is the Database management system.
+ 7) RDBMS - RDBMS is  the Relational database managemant System.
+ 
+
+ * Create a database.
+  - Create databases;
+
+ * Show the databases.
+  - Show databases ;
+ 
+
+ * Create the tables.
+  - create table empyloyees (emp_id int  PRIMARY KEY , emp_name varchar (50), department varchar(70),  salary bigint, email varchar(70));
+
+ * Describe table.
+   -desc employees;
+  
+ * use Table .
+   -use employees;
+
+
+ * Insert The values 
+  - insert into employees values( 101 , ' Dnyaneshwari', 'IT' 54000, 'dnyaneshwari@gmail.com'), (102, 'Isha', 'Software developer',36000, 'isha@gmail.com'),(103 ,'Damini','Marketing', 4500,'damini@gmail.com);
+ 
+ * Primary Key
+ -It has unique value .It null value is not allowed and duplicate values not allowed
+
+ * NOT NULL -values should not be empty or null
+  -create table (emp_id int  PRIMARY KEY , emp_name varchar (50), department varchar(70),  salary bigint, email varchar(70));
+
+ * Update (update the values)
+  -update student set name where id=1;
+
+ * delete (delete value)
+  -delete from student where id=2;
+
+ *Operator
+  1) AND --> single row
+  -select * from student where city='pune' AND age=22;
+
+  2)OR -->multiple rows
+  -select * from student where city='pune' OR age=18;
+
+  3)NOT 
+  -select * from student where NOT city pune;
+
+*Alter queries
+ 1)ADD COLUMN
+ -alter table student ADD COLUMN email varchar(50);
+
+ 2)MODIFY COLUMN
+ -alter table student MODIFY COLUMN email varchar(80);
+
+ 3)DROP COLUMN
+  -alter table student Drop column city;
+
+ 4)RENAME COLUMN
+  -alter table student RENAME COLUMN name to stud_name;
+
+ 5)RENAME TABLE
+  -alter table student RENAME studentdata;
+
+ * ORDER BY
+ 1) ASC(ascending)
+ -select * from student ORDER BY city ASC;
+
+ 2)DESC(desending)
+ -select * from student OREDER BY age DESC;
+
+  * DELETE
+ delete from employees where emp_id=101;
+  
+  * Drop 
+  drop table employees;
+
+ 

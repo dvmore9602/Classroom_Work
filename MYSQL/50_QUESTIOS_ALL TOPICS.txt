@@ -1,0 +1,1100 @@
+Write  each every queries including this topics
+
+ 50 SQL Practice Questions
+
+==============================================================================================================================================================================================
+A. Table & Insert — 1 to 10
+================================================================================================================================================================================================
+1).Create an employees table with emp_id, emp_name, department, salary, age, city, email, and experience.
+--> CREATE TABLE (emp_id INT PRIMARY KEY, emp_name VARCHAR(50), department VARCHAR(30), salary DECIMAL(10,2), age INT, city VARCHAR(30), email VARCHAR(100), experience INT)
+VALUES(1, 'Rahul', 'IT', 45000, 25,'pune', 'rahul@gmail.com' 2);
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2).Insert 10 employee records into the employees table.
+-->CREATE TABLE (emp_id INT PRIMARY KEY, emp_name VARCHAR(50), department VARCHAR(30), salary DECIMAL(10,2), age INT, city VARCHAR(30), email VARCHAR(100), experience INT)
+VALUES(1, 'Rahul', 'IT', 45000, 25,'pune', 'rahul@gmail.com' 2);
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+3). Insert an employee whose name is Rahul, department is IT, salary is 45000, age is 25, and city is Pune.
+-->INSERT INTO employees_demo (emp_id , emp_name, department, salary, age , city , email, experience )
+VALUES(1, 'Rahul', 'IT', 45000, 25,'pune', 'rahul@gmail.com' 2);
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+4).Insert an employee without providing emp_id. Observe how AUTO_INCREMENT works.
+-->INSERT INTO employees_demo ( emp_name, department, salary, age , city , email, experience )
+VALUES('Rahul', 'IT', 45000, 25,'pune', 'rahul@gmail.com' 2);
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+5). Insert an employee with a unique email address.
+-->INSERT INTO employees_demo (emp_id , emp_name, department, salary, age, city, email, experience INT)
+VALUES(1, 'Rahul', 'IT', 45000, 25,'pune', 'rahul@gmail.com' 2);
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+6).Try inserting two employees with the same email. What happens?
+-->INSERT INTO employees_demo (emp_id ,emp_name , department,salary, age, city, emaiL, experience INT)
+VALUES(1, 'Rahul', 'IT', 45000, 25,'pune', 'rahul@gmail.com' 2);
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+7).Try inserting an employee without emp_name. What happens?
+-->INSERT INTO employees_demo (emp_id INT PRIMARY KEY, emp_name VARCHAR(50), department VARCHAR(30), salary DECIMAL(10,2), age INT, city VARCHAR(30), email VARCHAR(100) UNIQUE, experience INT)
+VALUES(1, 'Rahul', 'IT', 45000, 25,'pune', 'rahul@gmail.com' 2);
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+8).Insert five employees belonging to the HR department.
+-->INSERT INTO employees_demo
+(emp_name, department, salary, age, city, email, experience)VALUES
+('Asha', 'HR', 32000, 23, 'Pune', 'asha@gmail.com', 1),
+('Komal', 'HR', 38000, 25, 'Mumbai', 'komal@gmail.com', 2),
+('Riya', 'HR', 45000, 27, 'Nashik', 'riya@gmail.com', 3),
+('Sonal', 'HR', 50000, 29, 'Pune', 'sonal@gmail.com', 4),
+('Divya', 'HR', 55000, 31, 'Mumbai', 'divya@gmail.com', 6);
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+9).Insert employees from Pune, Mumbai, Nashik, Nagpur and Bangalore.
+INSERT INTO employees_demo
+(emp_name, department, salary, age, city, email, experience)VALUES
+('Asha', 'HR', 32000, 23, 'Pune', 'asha@gmail.com', 1),
+('Komal', 'HR', 38000, 25, 'Mumbai', 'komal@gmail.com', 2),
+('Riya', 'HR', 45000, 27, 'Nashik', 'riya@gmail.com', 3),
+('Sonal', 'HR', 50000, 29, 'Pune', 'sonal@gmail.com', 4),
+('Divya', 'HR', 55000, 31, 'Mumbai', 'divya@gmail.com', 6);
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+Insert employees having different salaries and experience levels
+-->INSERT INTO employees_demo
+(emp_name, department, salary, age, city, email, experience)VALUES
+('Suresh', 'IT', 25000, 22, 'Pune', 'suresh@gmail.com', 0),
+('Ramesh', 'IT', 40000, 25, 'Mumbai', 'ramesh@gmail.com', 2),
+('Ganesh', 'IT', 70000, 32, 'Nashik', 'ganesh@gmail.com', 7);
+-------------------------------------------------------------------------------------------------------------------------------------------
+=============================================================================================================================================================
+B. SELECT & DISTINCT — 11 to 17
+===============================================================================================================================================================
+
+11). Display all records from the employees table.
+-->SELECT * FROM employees_demo;
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+12). Display only employee names and salaries.
+-->SELECT emp_name, salary FROM employees_demo;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+13). Display employee name, department and city.
+-->SELECT emp_name, department, city FROM employees_demo;
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+14). Display all unique departments using DISTINCT.
+-->SELECT DISTINCT department FROM employees_demo;
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+15). Display all unique cities.
+SELECT DISTINCT city FROM employees_demo;
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+16). Display unique combinations of department and city.
+-->SELECT DISTINCT department,city FROM employees_demo;
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+17). Display employee name with salary using an alias Employee_Name and Monthly_Salary.
+--> SELECT SELECT emp_name AS EMPLOYEES_NAME,salary AS Monthly_Salary FROM employees_demo;
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+======================================================================================================================================================================================
+C. WHERE & Operators — 18 to 20
+=======================================================================================================================================================================================
+
+18).Find employees whose salary is greater than 50000.
+-->SELECT * FROM employees_demo salary > 50000;
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+19). Find employees whose salary is less than 30000.
+-->SELECT * FROM employees_demo salary <3000;
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+20). Find employees whose salary is exactly 40000.
+-->SELECT * FROM employees_demo salary = 40000;
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+21). Find employees whose age is greater than or equal to 25.
+--> SELECT * FROM employees_demo age >=25;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+22).Find employees whose experience is less than 2 years.
+-->SELECT * FROM employees_demo experience < 2;
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+23). Find employees who belong to the IT department.
+-->SELECT * FROM employees_demo WHERE dempartment = 'IT';
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+24).Find employees who are not from the IT department.
+-->SELECT * FROM employees_demo WHERE NOT department = 'IT';
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+25). Find employees whose salary is between 30000 and 60000.
+-->SELECT * FROM employees_demo WHERE salary BETWEEN 30000 AND 60000;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+26).Find employees whose age is either 22, 25, or 30 using IN.
+-->SELECT * FROM employees_demo WHWRE age IN(22, 25, 30);
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+27).Find employees whose city is not Pune, Mumbai, or Nashik using NOT IN.
+--> SELECT  * FROM employees_demo WHERE city NOT IN ('pune', Mumbai', 'Nashik');
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+======================================================================================================================================================================================================
+D. LIKE & Logical Operators — 28 to 34
+======================================================================================================================================================================================================
+28)Find employees whose name starts with A.
+-->SELECT * FROM employees_demo WHERE  emp_name LIKE 'A%';
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+29).Find employees whose name ends with a.
+-->SELECT * FROM employees_demo WHERE emp_name LIKE '%a';
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+30).Find employees whose name contains an.
+SELECT * FROM employees_demo WHERE emp_name LIKE '%an%';
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+31).Find employees whose city starts with M.
+--> SELECT * FROM employees_demo WHERE city LIKE '%M';
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+31). Find employees from Pune AND whose salary is greater than 40000.
+-->SELECT * FROM employees_demo 
+WHERE city = 'pune' 
+AND  salary > 40000;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+32).Find employees from IT OR HR departments.
+SELECT * FROM employees_demo WHERE department = 'IT' OR department = 'HR';
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+33).Find employees whose salary is greater than 30000 AND experience is greater than 2.
+---> SELECT * FROM employees_demo WHERE salary >30000 AND experience > 2;
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+=================================================================================================================================================================================================================
+E. Aggregate Functions — 35 to 40
+==================================================================================================================================================================================================================
+
+35).Find the total number of employees using COUNT().
+-->SELECT COUNT(*)  AS Total_employees FROM employees_demo;
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+36).Find the highest salary using MAX().
+-->SELECT MAX(salary) AS maximun_salary FROM employees_demo;
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+37).Find the lowest salary using MIN().
+--> SELECT MIN(salary) AS minimun_salary FROM employees_demo;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+38).Find the average salary using AVG().
+-->SELECT AVG(salary) AS avarage_salary FROM employees_demo;
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+39).Find the total salary paid to all employees using SUM().
+-->SELECT SUM(salary) AS sum_of_salary FROM employees_demo;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+40).Find the average age of all employees.
+-->SELECT AVG(age) AS avarage_age FROM employees_demo;
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+======================================================================================================================================================================================================================================
+F. LIMIT, OFFSET & Sorting — 41 to 44
+==============================================================================================================================================================================================================================
+41). Display employees in ascending order of salary.
+->SELECT * FROM employees_demo ORDER BY salary ASC;
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+42). Display employees in descending order of salary.
+-->SELECT * FROM employees_demo ORDER BY salary DESC;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+43).Display the top 5 highest-paid employees using ORDER BY and LIMIT.
+-->SELECT * FROM employees_demo ORDER BY salary DESC LIMIT 5;
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+44).Display the second 5 employees using LIMIT and OFFSET.
+-->SELECT * FROM employees_demo ORDER BY emp_id LIMI 5 , OFFSET 5;
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+======================================================================================================================================================================================================================================
+G. UPDATE & DELETE — 45 to 47
+==========================================================================================================================================================================================================================================
+
+45)Increase the salary of all IT employees by 5000.
+-->UPDATE employees_demo SET salary = salry+ 5000 , department= 'IT';
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+46). Change the city of employee Rahul from Pune to Mumbai
+-->UPDATE employees_demo SET city =' mumbai' WHERE emp_name = 'Rahul';
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+47).Delete all employees whose experience is 0 years.
+-->DELETE  FROM employees_demo WHERE experience = 0;
+===========================================================================================================================================================================================================================================
+H. ALTER, TRUNCATE, DROP & Comments — 48 to 50
+============================================================================================================================================================================================================================================
+48).Add a new column phone_number to the employees table using ALTER TABLE.
+-->ALETE TABLE employees_demo ADD phone_number VARCHAR(30);
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+49).Remove the phone_number column using ALTER TABLE.
+-->ALTER employees_demo DROP cloumn phone_number;
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+50)Explain and execute the difference between:
+DELETE FROM employees_demo;
+
+
+
+ALL ANSWERS 
+
+Enter password: ***********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| abc                |
+| batch1343          |
+| company            |
+| employee           |
+| employeedata       |
+| hospital           |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+10 rows in set (0.25 sec)
+
+mysql> use databases;
+ERROR 1049 (42000): Unknown database 'databases'
+mysql> use batch1343;
+Database changed
+mysql> show tables;
++---------------------+
+| Tables_in_batch1343 |
++---------------------+
+| customer            |
+| employee_data       |
+| employees           |
+| employees_demo      |
+| product_data        |
+| product_record      |
+| products            |
+| student             |
+| students            |
++---------------------+
+9 rows in set (0.64 sec)
+
+mysql> select * from emlpoyees_demo
+    -> ;
+ERROR 1146 (42S02): Table 'batch1343.emlpoyees_demo' doesn't exist
+mysql> select * from employees_demo
+    -> ;
++--------+----------+------------+----------+------+-----------+------------------+------------+
+| emp_id | emp_name | department | salary   | age  | city      | email            | experience |
++--------+----------+------------+----------+------+-----------+------------------+------------+
+|      1 | Rahul    | IT         | 45000.00 |   25 | Pune      | rahul@gmail.com  |          2 |
+|      2 | Priya    | HR         | 35000.00 |   24 | Mumbai    | priya@gmail.com  |          1 |
+|      3 | Amit     | IT         | 60000.00 |   30 | Pune      | amit@gmail.com   |          5 |
+|      4 | Sneha    | Finance    | 55000.00 |   28 | Nashik    | sneha@gmail.com  |          4 |
+|      5 | Rohan    | IT         | 75000.00 |   32 | Mumbai    | rohan@gmail.com  |          7 |
+|      6 | Anjali   | HR         | 40000.00 |   26 | Pune      | anjali@gmail.com |          3 |
+|      7 | Vikas    | Sales      | 30000.00 |   23 | Nagpur    | vikas@gmail.com  |          1 |
+|      8 | Neha     | Finance    | 65000.00 |   29 | Bangalore | neha@gmail.com   |          5 |
+|      9 | Akash    | Sales      | 28000.00 |   22 | Pune      | akash@gmail.com  |          0 |
+|     10 | Pooja    | HR         | 50000.00 |   27 | Mumbai    | pooja@gmail.com  |          3 |
+|     12 | ram      | HR         | 46000.00 |   26 | Akola     | ram@gmail.com    |          4 |
+|     13 | shyam    | Markrting  | 43000.00 |   20 | delhi     | shyam@gmail.com  |          5 |
++--------+----------+------------+----------+------+-----------+------------------+------------+
+12 rows in set (0.16 sec)
+
+mysql> desc employees_demo;
++------------+---------------+------+-----+---------+----------------+
+| Field      | Type          | Null | Key | Default | Extra          |
++------------+---------------+------+-----+---------+----------------+
+| emp_id     | int           | NO   | PRI | NULL    | auto_increment |
+| emp_name   | varchar(50)   | NO   |     | NULL    |                |
+| department | varchar(30)   | YES  |     | NULL    |                |
+| salary     | decimal(10,2) | YES  |     | NULL    |                |
+| age        | int           | YES  |     | NULL    |                |
+| city       | varchar(30)   | YES  |     | NULL    |                |
+| email      | varchar(100)  | YES  | UNI | NULL    |                |
+| experience | int           | YES  |     | NULL    |                |
++------------+---------------+------+-----+---------+----------------+
+8 rows in set (0.02 sec)
+
+mysql> INSERT INTO employees
+    -> (emp_name, department, salary, age, city, email, experience)
+    -> VALUES
+    -> ('Suresh', 'IT', 25000, 22, 'Pune', 'suresh@gmail.com', 0),
+    -> ('Ramesh', 'IT', 40000, 25, 'Mumbai', 'ramesh@gmail.com', 2),
+    -> ('Ganesh', 'IT', 70000, 32, 'Nashik', 'ganesh@gmail.com', 7);
+ERROR 1054 (42S22): Unknown column 'age' in 'field list'
+mysql> INSERT INTO employees_demo
+    -> (emp_name, department, salary, age, city, email, experience)VALUES
+    -> ('Asha', 'HR', 32000, 23, 'Pune', 'asha@gmail.com', 1),
+    -> ('Komal', 'HR', 38000, 25, 'Mumbai', 'komal@gmail.com', 2),
+    -> ('Riya', 'HR', 45000, 27, 'Nashik', 'riya@gmail.com', 3),
+    -> ('Sonal', 'HR', 50000, 29, 'Pune', 'sonal@gmail.com', 4),
+    -> ('Divya', 'HR', 55000, 31, 'Mumbai', 'divya@gmail.com', 6);
+Query OK, 5 rows affected (0.19 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from employees_demo;
++--------+----------+------------+----------+------+-----------+------------------+------------+
+| emp_id | emp_name | department | salary   | age  | city      | email            | experience |
++--------+----------+------------+----------+------+-----------+------------------+------------+
+|      1 | Rahul    | IT         | 45000.00 |   25 | Pune      | rahul@gmail.com  |          2 |
+|      2 | Priya    | HR         | 35000.00 |   24 | Mumbai    | priya@gmail.com  |          1 |
+|      3 | Amit     | IT         | 60000.00 |   30 | Pune      | amit@gmail.com   |          5 |
+|      4 | Sneha    | Finance    | 55000.00 |   28 | Nashik    | sneha@gmail.com  |          4 |
+|      5 | Rohan    | IT         | 75000.00 |   32 | Mumbai    | rohan@gmail.com  |          7 |
+|      6 | Anjali   | HR         | 40000.00 |   26 | Pune      | anjali@gmail.com |          3 |
+|      7 | Vikas    | Sales      | 30000.00 |   23 | Nagpur    | vikas@gmail.com  |          1 |
+|      8 | Neha     | Finance    | 65000.00 |   29 | Bangalore | neha@gmail.com   |          5 |
+|      9 | Akash    | Sales      | 28000.00 |   22 | Pune      | akash@gmail.com  |          0 |
+|     10 | Pooja    | HR         | 50000.00 |   27 | Mumbai    | pooja@gmail.com  |          3 |
+|     12 | ram      | HR         | 46000.00 |   26 | Akola     | ram@gmail.com    |          4 |
+|     13 | shyam    | Markrting  | 43000.00 |   20 | delhi     | shyam@gmail.com  |          5 |
+|     15 | Asha     | HR         | 32000.00 |   23 | Pune      | asha@gmail.com   |          1 |
+|     16 | Komal    | HR         | 38000.00 |   25 | Mumbai    | komal@gmail.com  |          2 |
+|     17 | Riya     | HR         | 45000.00 |   27 | Nashik    | riya@gmail.com   |          3 |
+|     18 | Sonal    | HR         | 50000.00 |   29 | Pune      | sonal@gmail.com  |          4 |
+|     19 | Divya    | HR         | 55000.00 |   31 | Mumbai    | divya@gmail.com  |          6 |
++--------+----------+------------+----------+------+-----------+------------------+------------+
+17 rows in set (0.00 sec)
+
+mysql> SELECT emp_name, salary FROM employees_demo;
++----------+----------+
+| emp_name | salary   |
++----------+----------+
+| Rahul    | 45000.00 |
+| Priya    | 35000.00 |
+| Amit     | 60000.00 |
+| Sneha    | 55000.00 |
+| Rohan    | 75000.00 |
+| Anjali   | 40000.00 |
+| Vikas    | 30000.00 |
+| Neha     | 65000.00 |
+| Akash    | 28000.00 |
+| Pooja    | 50000.00 |
+| ram      | 46000.00 |
+| shyam    | 43000.00 |
+| Asha     | 32000.00 |
+| Komal    | 38000.00 |
+| Riya     | 45000.00 |
+| Sonal    | 50000.00 |
+| Divya    | 55000.00 |
++----------+----------+
+17 rows in set (0.00 sec)
+
+mysql> SELECT emp_name, department, salary FROM employees_demo;
++----------+------------+----------+
+| emp_name | department | salary   |
++----------+------------+----------+
+| Rahul    | IT         | 45000.00 |
+| Priya    | HR         | 35000.00 |
+| Amit     | IT         | 60000.00 |
+| Sneha    | Finance    | 55000.00 |
+| Rohan    | IT         | 75000.00 |
+| Anjali   | HR         | 40000.00 |
+| Vikas    | Sales      | 30000.00 |
+| Neha     | Finance    | 65000.00 |
+| Akash    | Sales      | 28000.00 |
+| Pooja    | HR         | 50000.00 |
+| ram      | HR         | 46000.00 |
+| shyam    | Markrting  | 43000.00 |
+| Asha     | HR         | 32000.00 |
+| Komal    | HR         | 38000.00 |
+| Riya     | HR         | 45000.00 |
+| Sonal    | HR         | 50000.00 |
+| Divya    | HR         | 55000.00 |
++----------+------------+----------+
+17 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT deparment FROM employees_demo;
+ERROR 1054 (42S22): Unknown column 'deparment' in 'field list'
+mysql> SELECT DISTINCT department FROM employees_demo;
++------------+
+| department |
++------------+
+| IT         |
+| HR         |
+| Finance    |
+| Sales      |
+| Markrting  |
++------------+
+5 rows in set (0.06 sec)
+
+mysql> SELECT DISTINCT city FROM employees_demo;
++-----------+
+| city      |
++-----------+
+| Pune      |
+| Mumbai    |
+| Nashik    |
+| Nagpur    |
+| Bangalore |
+| Akola     |
+| delhi     |
++-----------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT department, city FROM employees_demo;
++------------+-----------+
+| department | city      |
++------------+-----------+
+| IT         | Pune      |
+| HR         | Mumbai    |
+| Finance    | Nashik    |
+| IT         | Mumbai    |
+| HR         | Pune      |
+| Sales      | Nagpur    |
+| Finance    | Bangalore |
+| Sales      | Pune      |
+| HR         | Akola     |
+| Markrting  | delhi     |
+| HR         | Nashik    |
++------------+-----------+
+11 rows in set (0.00 sec)
+
+mysql> SELECT emp_name AS EMPLOYEES_NAME,salary AS Monthly_Salary FROM employees_demo;
++----------------+----------------+
+| EMPLOYEES_NAME | Monthly_Salary |
++----------------+----------------+
+| Rahul          |       45000.00 |
+| Priya          |       35000.00 |
+| Amit           |       60000.00 |
+| Sneha          |       55000.00 |
+| Rohan          |       75000.00 |
+| Anjali         |       40000.00 |
+| Vikas          |       30000.00 |
+| Neha           |       65000.00 |
+| Akash          |       28000.00 |
+| Pooja          |       50000.00 |
+| ram            |       46000.00 |
+| shyam          |       43000.00 |
+| Asha           |       32000.00 |
+| Komal          |       38000.00 |
+| Riya           |       45000.00 |
+| Sonal          |       50000.00 |
+| Divya          |       55000.00 |
++----------------+----------------+
+17 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employyes_demo WHERE salary>= 50000;
+ERROR 1146 (42S02): Table 'batch1343.employyes_demo' doesn't exist
+mysql> SELECT * FROM employyes_demo WHERE salary> 50000;
+ERROR 1146 (42S02): Table 'batch1343.employyes_demo' doesn't exist
+mysql> SELECT * FROM employees_demo WHERE salary> 50000;
++--------+----------+------------+----------+------+-----------+-----------------+------------+
+| emp_id | emp_name | department | salary   | age  | city      | email           | experience |
++--------+----------+------------+----------+------+-----------+-----------------+------------+
+|      3 | Amit     | IT         | 60000.00 |   30 | Pune      | amit@gmail.com  |          5 |
+|      4 | Sneha    | Finance    | 55000.00 |   28 | Nashik    | sneha@gmail.com |          4 |
+|      5 | Rohan    | IT         | 75000.00 |   32 | Mumbai    | rohan@gmail.com |          7 |
+|      8 | Neha     | Finance    | 65000.00 |   29 | Bangalore | neha@gmail.com  |          5 |
+|     19 | Divya    | HR         | 55000.00 |   31 | Mumbai    | divya@gmail.com |          6 |
++--------+----------+------------+----------+------+-----------+-----------------+------------+
+5 rows in set (0.05 sec)
+
+mysql> SELECT * FROM employees_demo WHERE salary <30000;
++--------+----------+------------+----------+------+------+-----------------+------------+
+| emp_id | emp_name | department | salary   | age  | city | email           | experience |
++--------+----------+------------+----------+------+------+-----------------+------------+
+|      9 | Akash    | Sales      | 28000.00 |   22 | Pune | akash@gmail.com |          0 |
++--------+----------+------------+----------+------+------+-----------------+------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM employees_demo WHERE  salary = 40000;
++--------+----------+------------+----------+------+------+------------------+------------+
+| emp_id | emp_name | department | salary   | age  | city | email            | experience |
++--------+----------+------------+----------+------+------+------------------+------------+
+|      6 | Anjali   | HR         | 40000.00 |   26 | Pune | anjali@gmail.com |          3 |
++--------+----------+------------+----------+------+------+------------------+------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM employees_demo WHERE age>= 25;
++--------+----------+------------+----------+------+-----------+------------------+------------+
+| emp_id | emp_name | department | salary   | age  | city      | email            | experience |
++--------+----------+------------+----------+------+-----------+------------------+------------+
+|      1 | Rahul    | IT         | 45000.00 |   25 | Pune      | rahul@gmail.com  |          2 |
+|      3 | Amit     | IT         | 60000.00 |   30 | Pune      | amit@gmail.com   |          5 |
+|      4 | Sneha    | Finance    | 55000.00 |   28 | Nashik    | sneha@gmail.com  |          4 |
+|      5 | Rohan    | IT         | 75000.00 |   32 | Mumbai    | rohan@gmail.com  |          7 |
+|      6 | Anjali   | HR         | 40000.00 |   26 | Pune      | anjali@gmail.com |          3 |
+|      8 | Neha     | Finance    | 65000.00 |   29 | Bangalore | neha@gmail.com   |          5 |
+|     10 | Pooja    | HR         | 50000.00 |   27 | Mumbai    | pooja@gmail.com  |          3 |
+|     12 | ram      | HR         | 46000.00 |   26 | Akola     | ram@gmail.com    |          4 |
+|     16 | Komal    | HR         | 38000.00 |   25 | Mumbai    | komal@gmail.com  |          2 |
+|     17 | Riya     | HR         | 45000.00 |   27 | Nashik    | riya@gmail.com   |          3 |
+|     18 | Sonal    | HR         | 50000.00 |   29 | Pune      | sonal@gmail.com  |          4 |
+|     19 | Divya    | HR         | 55000.00 |   31 | Mumbai    | divya@gmail.com  |          6 |
++--------+----------+------------+----------+------+-----------+------------------+------------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employees_demo WHERE age<=2;
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM employees_demo WHERE age>=2;
++--------+----------+------------+----------+------+-----------+------------------+------------+
+| emp_id | emp_name | department | salary   | age  | city      | email            | experience |
++--------+----------+------------+----------+------+-----------+------------------+------------+
+|      1 | Rahul    | IT         | 45000.00 |   25 | Pune      | rahul@gmail.com  |          2 |
+|      2 | Priya    | HR         | 35000.00 |   24 | Mumbai    | priya@gmail.com  |          1 |
+|      3 | Amit     | IT         | 60000.00 |   30 | Pune      | amit@gmail.com   |          5 |
+|      4 | Sneha    | Finance    | 55000.00 |   28 | Nashik    | sneha@gmail.com  |          4 |
+|      5 | Rohan    | IT         | 75000.00 |   32 | Mumbai    | rohan@gmail.com  |          7 |
+|      6 | Anjali   | HR         | 40000.00 |   26 | Pune      | anjali@gmail.com |          3 |
+|      7 | Vikas    | Sales      | 30000.00 |   23 | Nagpur    | vikas@gmail.com  |          1 |
+|      8 | Neha     | Finance    | 65000.00 |   29 | Bangalore | neha@gmail.com   |          5 |
+|      9 | Akash    | Sales      | 28000.00 |   22 | Pune      | akash@gmail.com  |          0 |
+|     10 | Pooja    | HR         | 50000.00 |   27 | Mumbai    | pooja@gmail.com  |          3 |
+|     12 | ram      | HR         | 46000.00 |   26 | Akola     | ram@gmail.com    |          4 |
+|     13 | shyam    | Markrting  | 43000.00 |   20 | delhi     | shyam@gmail.com  |          5 |
+|     15 | Asha     | HR         | 32000.00 |   23 | Pune      | asha@gmail.com   |          1 |
+|     16 | Komal    | HR         | 38000.00 |   25 | Mumbai    | komal@gmail.com  |          2 |
+|     17 | Riya     | HR         | 45000.00 |   27 | Nashik    | riya@gmail.com   |          3 |
+|     18 | Sonal    | HR         | 50000.00 |   29 | Pune      | sonal@gmail.com  |          4 |
+|     19 | Divya    | HR         | 55000.00 |   31 | Mumbai    | divya@gmail.com  |          6 |
++--------+----------+------------+----------+------+-----------+------------------+------------+
+17 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employees_demo WHERE age<2;
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM employees_demo WHERE experince<2;
+ERROR 1054 (42S22): Unknown column 'experince' in 'where clause'
+mysql> SELECT * FROM employees_demo WHERE experience < 2;
++--------+----------+------------+----------+------+--------+-----------------+------------+
+| emp_id | emp_name | department | salary   | age  | city   | email           | experience |
++--------+----------+------------+----------+------+--------+-----------------+------------+
+|      2 | Priya    | HR         | 35000.00 |   24 | Mumbai | priya@gmail.com |          1 |
+|      7 | Vikas    | Sales      | 30000.00 |   23 | Nagpur | vikas@gmail.com |          1 |
+|      9 | Akash    | Sales      | 28000.00 |   22 | Pune   | akash@gmail.com |          0 |
+|     15 | Asha     | HR         | 32000.00 |   23 | Pune   | asha@gmail.com  |          1 |
++--------+----------+------------+----------+------+--------+-----------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employees_demo WHERE department = 'IT';
++--------+----------+------------+----------+------+--------+-----------------+------------+
+| emp_id | emp_name | department | salary   | age  | city   | email           | experience |
++--------+----------+------------+----------+------+--------+-----------------+------------+
+|      1 | Rahul    | IT         | 45000.00 |   25 | Pune   | rahul@gmail.com |          2 |
+|      3 | Amit     | IT         | 60000.00 |   30 | Pune   | amit@gmail.com  |          5 |
+|      5 | Rohan    | IT         | 75000.00 |   32 | Mumbai | rohan@gmail.com |          7 |
++--------+----------+------------+----------+------+--------+-----------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employees_demo WHERE NOT department = 'IT';
++--------+----------+------------+----------+------+-----------+------------------+------------+
+| emp_id | emp_name | department | salary   | age  | city      | email            | experience |
++--------+----------+------------+----------+------+-----------+------------------+------------+
+|      2 | Priya    | HR         | 35000.00 |   24 | Mumbai    | priya@gmail.com  |          1 |
+|      4 | Sneha    | Finance    | 55000.00 |   28 | Nashik    | sneha@gmail.com  |          4 |
+|      6 | Anjali   | HR         | 40000.00 |   26 | Pune      | anjali@gmail.com |          3 |
+|      7 | Vikas    | Sales      | 30000.00 |   23 | Nagpur    | vikas@gmail.com  |          1 |
+|      8 | Neha     | Finance    | 65000.00 |   29 | Bangalore | neha@gmail.com   |          5 |
+|      9 | Akash    | Sales      | 28000.00 |   22 | Pune      | akash@gmail.com  |          0 |
+|     10 | Pooja    | HR         | 50000.00 |   27 | Mumbai    | pooja@gmail.com  |          3 |
+|     12 | ram      | HR         | 46000.00 |   26 | Akola     | ram@gmail.com    |          4 |
+|     13 | shyam    | Markrting  | 43000.00 |   20 | delhi     | shyam@gmail.com  |          5 |
+|     15 | Asha     | HR         | 32000.00 |   23 | Pune      | asha@gmail.com   |          1 |
+|     16 | Komal    | HR         | 38000.00 |   25 | Mumbai    | komal@gmail.com  |          2 |
+|     17 | Riya     | HR         | 45000.00 |   27 | Nashik    | riya@gmail.com   |          3 |
+|     18 | Sonal    | HR         | 50000.00 |   29 | Pune      | sonal@gmail.com  |          4 |
+|     19 | Divya    | HR         | 55000.00 |   31 | Mumbai    | divya@gmail.com  |          6 |
++--------+----------+------------+----------+------+-----------+------------------+------------+
+14 rows in set (0.01 sec)
+
+mysql> SELECT * FROM employees_demo WHERE salary BETWEEN 30000 AND 60000;
++--------+----------+------------+----------+------+--------+------------------+------------+
+| emp_id | emp_name | department | salary   | age  | city   | email            | experience |
++--------+----------+------------+----------+------+--------+------------------+------------+
+|      1 | Rahul    | IT         | 45000.00 |   25 | Pune   | rahul@gmail.com  |          2 |
+|      2 | Priya    | HR         | 35000.00 |   24 | Mumbai | priya@gmail.com  |          1 |
+|      3 | Amit     | IT         | 60000.00 |   30 | Pune   | amit@gmail.com   |          5 |
+|      4 | Sneha    | Finance    | 55000.00 |   28 | Nashik | sneha@gmail.com  |          4 |
+|      6 | Anjali   | HR         | 40000.00 |   26 | Pune   | anjali@gmail.com |          3 |
+|      7 | Vikas    | Sales      | 30000.00 |   23 | Nagpur | vikas@gmail.com  |          1 |
+|     10 | Pooja    | HR         | 50000.00 |   27 | Mumbai | pooja@gmail.com  |          3 |
+|     12 | ram      | HR         | 46000.00 |   26 | Akola  | ram@gmail.com    |          4 |
+|     13 | shyam    | Markrting  | 43000.00 |   20 | delhi  | shyam@gmail.com  |          5 |
+|     15 | Asha     | HR         | 32000.00 |   23 | Pune   | asha@gmail.com   |          1 |
+|     16 | Komal    | HR         | 38000.00 |   25 | Mumbai | komal@gmail.com  |          2 |
+|     17 | Riya     | HR         | 45000.00 |   27 | Nashik | riya@gmail.com   |          3 |
+|     18 | Sonal    | HR         | 50000.00 |   29 | Pune   | sonal@gmail.com  |          4 |
+|     19 | Divya    | HR         | 55000.00 |   31 | Mumbai | divya@gmail.com  |          6 |
++--------+----------+------------+----------+------+--------+------------------+------------+
+14 rows in set (0.05 sec)
+
+mysql> SELECT * FROM employees_demo WHERE age IN (22, 25 , 30);
++--------+----------+------------+----------+------+--------+-----------------+------------+
+| emp_id | emp_name | department | salary   | age  | city   | email           | experience |
++--------+----------+------------+----------+------+--------+-----------------+------------+
+|      1 | Rahul    | IT         | 45000.00 |   25 | Pune   | rahul@gmail.com |          2 |
+|      3 | Amit     | IT         | 60000.00 |   30 | Pune   | amit@gmail.com  |          5 |
+|      9 | Akash    | Sales      | 28000.00 |   22 | Pune   | akash@gmail.com |          0 |
+|     16 | Komal    | HR         | 38000.00 |   25 | Mumbai | komal@gmail.com |          2 |
++--------+----------+------------+----------+------+--------+-----------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employees_demo WHERE city NOT IN('Pune', 'Mumbai', 'Nashik');
++--------+----------+------------+----------+------+-----------+-----------------+------------+
+| emp_id | emp_name | department | salary   | age  | city      | email           | experience |
++--------+----------+------------+----------+------+-----------+-----------------+------------+
+|      7 | Vikas    | Sales      | 30000.00 |   23 | Nagpur    | vikas@gmail.com |          1 |
+|      8 | Neha     | Finance    | 65000.00 |   29 | Bangalore | neha@gmail.com  |          5 |
+|     12 | ram      | HR         | 46000.00 |   26 | Akola     | ram@gmail.com   |          4 |
+|     13 | shyam    | Markrting  | 43000.00 |   20 | delhi     | shyam@gmail.com |          5 |
++--------+----------+------------+----------+------+-----------+-----------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECET * FROM employees_demo WHERE emp_name LIKE 'A%';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SELECET * FROM employees_demo WHERE emp_name LIKE 'A%'' at line 1
+mysql> SELECT * FROM employees_demo WHERE emp_name LIKE 'A%';
++--------+----------+------------+----------+------+------+------------------+------------+
+| emp_id | emp_name | department | salary   | age  | city | email            | experience |
++--------+----------+------------+----------+------+------+------------------+------------+
+|      3 | Amit     | IT         | 60000.00 |   30 | Pune | amit@gmail.com   |          5 |
+|      6 | Anjali   | HR         | 40000.00 |   26 | Pune | anjali@gmail.com |          3 |
+|      9 | Akash    | Sales      | 28000.00 |   22 | Pune | akash@gmail.com  |          0 |
+|     15 | Asha     | HR         | 32000.00 |   23 | Pune | asha@gmail.com   |          1 |
++--------+----------+------------+----------+------+------+------------------+------------+
+4 rows in set (0.02 sec)
+
+mysql> SELECT * FROM employees_demo WHERE city LIKE 'M%';
++--------+----------+------------+----------+------+--------+-----------------+------------+
+| emp_id | emp_name | department | salary   | age  | city   | email           | experience |
++--------+----------+------------+----------+------+--------+-----------------+------------+
+|      2 | Priya    | HR         | 35000.00 |   24 | Mumbai | priya@gmail.com |          1 |
+|      5 | Rohan    | IT         | 75000.00 |   32 | Mumbai | rohan@gmail.com |          7 |
+|     10 | Pooja    | HR         | 50000.00 |   27 | Mumbai | pooja@gmail.com |          3 |
+|     16 | Komal    | HR         | 38000.00 |   25 | Mumbai | komal@gmail.com |          2 |
+|     19 | Divya    | HR         | 55000.00 |   31 | Mumbai | divya@gmail.com |          6 |
++--------+----------+------------+----------+------+--------+-----------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employees_demo WHERE city ='Pune' AND salary > 40000;
++--------+----------+------------+----------+------+------+-----------------+------------+
+| emp_id | emp_name | department | salary   | age  | city | email           | experience |
++--------+----------+------------+----------+------+------+-----------------+------------+
+|      1 | Rahul    | IT         | 45000.00 |   25 | Pune | rahul@gmail.com |          2 |
+|      3 | Amit     | IT         | 60000.00 |   30 | Pune | amit@gmail.com  |          5 |
+|     18 | Sonal    | HR         | 50000.00 |   29 | Pune | sonal@gmail.com |          4 |
++--------+----------+------------+----------+------+------+-----------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employees_demo WHERE department = 'IT' OR department = 'HR';
++--------+----------+------------+----------+------+--------+------------------+------------+
+| emp_id | emp_name | department | salary   | age  | city   | email            | experience |
++--------+----------+------------+----------+------+--------+------------------+------------+
+|      1 | Rahul    | IT         | 45000.00 |   25 | Pune   | rahul@gmail.com  |          2 |
+|      2 | Priya    | HR         | 35000.00 |   24 | Mumbai | priya@gmail.com  |          1 |
+|      3 | Amit     | IT         | 60000.00 |   30 | Pune   | amit@gmail.com   |          5 |
+|      5 | Rohan    | IT         | 75000.00 |   32 | Mumbai | rohan@gmail.com  |          7 |
+|      6 | Anjali   | HR         | 40000.00 |   26 | Pune   | anjali@gmail.com |          3 |
+|     10 | Pooja    | HR         | 50000.00 |   27 | Mumbai | pooja@gmail.com  |          3 |
+|     12 | ram      | HR         | 46000.00 |   26 | Akola  | ram@gmail.com    |          4 |
+|     15 | Asha     | HR         | 32000.00 |   23 | Pune   | asha@gmail.com   |          1 |
+|     16 | Komal    | HR         | 38000.00 |   25 | Mumbai | komal@gmail.com  |          2 |
+|     17 | Riya     | HR         | 45000.00 |   27 | Nashik | riya@gmail.com   |          3 |
+|     18 | Sonal    | HR         | 50000.00 |   29 | Pune   | sonal@gmail.com  |          4 |
+|     19 | Divya    | HR         | 55000.00 |   31 | Mumbai | divya@gmail.com  |          6 |
++--------+----------+------------+----------+------+--------+------------------+------------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employees_demo  WHERE salary > 30000 AND experience > 2;
++--------+----------+------------+----------+------+-----------+------------------+------------+
+| emp_id | emp_name | department | salary   | age  | city      | email            | experience |
++--------+----------+------------+----------+------+-----------+------------------+------------+
+|      3 | Amit     | IT         | 60000.00 |   30 | Pune      | amit@gmail.com   |          5 |
+|      4 | Sneha    | Finance    | 55000.00 |   28 | Nashik    | sneha@gmail.com  |          4 |
+|      5 | Rohan    | IT         | 75000.00 |   32 | Mumbai    | rohan@gmail.com  |          7 |
+|      6 | Anjali   | HR         | 40000.00 |   26 | Pune      | anjali@gmail.com |          3 |
+|      8 | Neha     | Finance    | 65000.00 |   29 | Bangalore | neha@gmail.com   |          5 |
+|     10 | Pooja    | HR         | 50000.00 |   27 | Mumbai    | pooja@gmail.com  |          3 |
+|     12 | ram      | HR         | 46000.00 |   26 | Akola     | ram@gmail.com    |          4 |
+|     13 | shyam    | Markrting  | 43000.00 |   20 | delhi     | shyam@gmail.com  |          5 |
+|     17 | Riya     | HR         | 45000.00 |   27 | Nashik    | riya@gmail.com   |          3 |
+|     18 | Sonal    | HR         | 50000.00 |   29 | Pune      | sonal@gmail.com  |          4 |
+|     19 | Divya    | HR         | 55000.00 |   31 | Mumbai    | divya@gmail.com  |          6 |
++--------+----------+------------+----------+------+-----------+------------------+------------+
+11 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(*) employees_demo;
++----------------+
+| employees_demo |
++----------------+
+|              1 |
++----------------+
+1 row in set (0.07 sec)
+
+mysql> SELECT COUNT(*) Total_employees AS emplyees_demo;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AS emplyees_demo' at line 1
+mysql> SELECT COUNT(*) Total_employees AS employees_demo;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AS employees_demo' at line 1
+mysql> SELECT COUNT(*) AS Total_employees WHERE  employees_demo;
+ERROR 1054 (42S22): Unknown column 'employees_demo' in 'where clause'
+mysql> SELECT COUNT(*) AS Total_employees FROM  employees_demo;
++-----------------+
+| Total_employees |
++-----------------+
+|              17 |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(salary) AS maximum_salary FROM employees_demo;
++----------------+
+| maximum_salary |
++----------------+
+|       75000.00 |
++----------------+
+1 row in set (0.04 sec)
+
+mysql> SELECT MIN(salary) AS  minimum_salary FROM employees_demo;
++----------------+
+| minimum_salary |
++----------------+
+|       28000.00 |
++----------------+
+1 row in set (0.02 sec)
+
+mysql> SELECT SUM(salary) AS sum_of_salary FROM employees_demo;
++---------------+
+| sum_of_salary |
++---------------+
+|     792000.00 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SUM(salary) AS sum_of_salary FROM employees_demo;
++---------------+
+| sum_of_salary |
++---------------+
+|     792000.00 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT AVG(*) avarege_of_all_employees FROM employees_demo;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*) avarege_of_all_employees FROM employees_demo' at line 1
+mysql> SELECT AVG(age) avarege_of_all_employees_age FROM employees_demo;
++------------------------------+
+| avarege_of_all_employees_age |
++------------------------------+
+|                      26.2941 |
++------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM employees
+    -> SELECT * FROM employees_demo ORDER BY salary ASC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SELECT * FROM employees_demo ORDER BY salary ASC' at line 2
+mysql> SELECT * FROM employees_demo ORDER BY salary ASC;
++--------+----------+------------+----------+------+-----------+------------------+------------+
+| emp_id | emp_name | department | salary   | age  | city      | email            | experience |
++--------+----------+------------+----------+------+-----------+------------------+------------+
+|      9 | Akash    | Sales      | 28000.00 |   22 | Pune      | akash@gmail.com  |          0 |
+|      7 | Vikas    | Sales      | 30000.00 |   23 | Nagpur    | vikas@gmail.com  |          1 |
+|     15 | Asha     | HR         | 32000.00 |   23 | Pune      | asha@gmail.com   |          1 |
+|      2 | Priya    | HR         | 35000.00 |   24 | Mumbai    | priya@gmail.com  |          1 |
+|     16 | Komal    | HR         | 38000.00 |   25 | Mumbai    | komal@gmail.com  |          2 |
+|      6 | Anjali   | HR         | 40000.00 |   26 | Pune      | anjali@gmail.com |          3 |
+|     13 | shyam    | Markrting  | 43000.00 |   20 | delhi     | shyam@gmail.com  |          5 |
+|      1 | Rahul    | IT         | 45000.00 |   25 | Pune      | rahul@gmail.com  |          2 |
+|     17 | Riya     | HR         | 45000.00 |   27 | Nashik    | riya@gmail.com   |          3 |
+|     12 | ram      | HR         | 46000.00 |   26 | Akola     | ram@gmail.com    |          4 |
+|     10 | Pooja    | HR         | 50000.00 |   27 | Mumbai    | pooja@gmail.com  |          3 |
+|     18 | Sonal    | HR         | 50000.00 |   29 | Pune      | sonal@gmail.com  |          4 |
+|      4 | Sneha    | Finance    | 55000.00 |   28 | Nashik    | sneha@gmail.com  |          4 |
+|     19 | Divya    | HR         | 55000.00 |   31 | Mumbai    | divya@gmail.com  |          6 |
+|      3 | Amit     | IT         | 60000.00 |   30 | Pune      | amit@gmail.com   |          5 |
+|      8 | Neha     | Finance    | 65000.00 |   29 | Bangalore | neha@gmail.com   |          5 |
+|      5 | Rohan    | IT         | 75000.00 |   32 | Mumbai    | rohan@gmail.com  |          7 |
++--------+----------+------------+----------+------+-----------+------------------+------------+
+17 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employees_demo ORDER BY salary DSC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DSC' at line 1
+mysql> SELECT * FROM employees_demo ORDER BY salary DSC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DSC' at line 1
+mysql> SELECT * FROM employees_demo ORDER BY salary DSC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DSC' at line 1
+mysql> SELECT * FROM employees_demo ORDER BY salary DESC;
++--------+----------+------------+----------+------+-----------+------------------+------------+
+| emp_id | emp_name | department | salary   | age  | city      | email            | experience |
++--------+----------+------------+----------+------+-----------+------------------+------------+
+|      5 | Rohan    | IT         | 75000.00 |   32 | Mumbai    | rohan@gmail.com  |          7 |
+|      8 | Neha     | Finance    | 65000.00 |   29 | Bangalore | neha@gmail.com   |          5 |
+|      3 | Amit     | IT         | 60000.00 |   30 | Pune      | amit@gmail.com   |          5 |
+|      4 | Sneha    | Finance    | 55000.00 |   28 | Nashik    | sneha@gmail.com  |          4 |
+|     19 | Divya    | HR         | 55000.00 |   31 | Mumbai    | divya@gmail.com  |          6 |
+|     10 | Pooja    | HR         | 50000.00 |   27 | Mumbai    | pooja@gmail.com  |          3 |
+|     18 | Sonal    | HR         | 50000.00 |   29 | Pune      | sonal@gmail.com  |          4 |
+|     12 | ram      | HR         | 46000.00 |   26 | Akola     | ram@gmail.com    |          4 |
+|      1 | Rahul    | IT         | 45000.00 |   25 | Pune      | rahul@gmail.com  |          2 |
+|     17 | Riya     | HR         | 45000.00 |   27 | Nashik    | riya@gmail.com   |          3 |
+|     13 | shyam    | Markrting  | 43000.00 |   20 | delhi     | shyam@gmail.com  |          5 |
+|      6 | Anjali   | HR         | 40000.00 |   26 | Pune      | anjali@gmail.com |          3 |
+|     16 | Komal    | HR         | 38000.00 |   25 | Mumbai    | komal@gmail.com  |          2 |
+|      2 | Priya    | HR         | 35000.00 |   24 | Mumbai    | priya@gmail.com  |          1 |
+|     15 | Asha     | HR         | 32000.00 |   23 | Pune      | asha@gmail.com   |          1 |
+|      7 | Vikas    | Sales      | 30000.00 |   23 | Nagpur    | vikas@gmail.com  |          1 |
+|      9 | Akash    | Sales      | 28000.00 |   22 | Pune      | akash@gmail.com  |          0 |
++--------+----------+------------+----------+------+-----------+------------------+------------+
+17 rows in set (0.00 sec)
+
+mysql> SELECT * FROM empolyees_demo ORDER BY DESC LIMIT 5;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DESC LIMIT 5' at line 1
+mysql> SELECT * FROM employees_demo ORDER BY DESC LIMIT 5;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DESC LIMIT 5' at line 1
+mysql> SELECT * FROM empolyees_demo ORDER BY salary DESC LIMIT 5;
+ERROR 1146 (42S02): Table 'batch1343.empolyees_demo' doesn't exist
+mysql> SELECT * FROM employees_demo ORDER BY salary DESC LIMIT 5;
++--------+----------+------------+----------+------+-----------+-----------------+------------+
+| emp_id | emp_name | department | salary   | age  | city      | email           | experience |
++--------+----------+------------+----------+------+-----------+-----------------+------------+
+|      5 | Rohan    | IT         | 75000.00 |   32 | Mumbai    | rohan@gmail.com |          7 |
+|      8 | Neha     | Finance    | 65000.00 |   29 | Bangalore | neha@gmail.com  |          5 |
+|      3 | Amit     | IT         | 60000.00 |   30 | Pune      | amit@gmail.com  |          5 |
+|     19 | Divya    | HR         | 55000.00 |   31 | Mumbai    | divya@gmail.com |          6 |
+|      4 | Sneha    | Finance    | 55000.00 |   28 | Nashik    | sneha@gmail.com |          4 |
++--------+----------+------------+----------+------+-----------+-----------------+------------+
+5 rows in set (0.04 sec)
+
+mysql> SELECT * FROM employees_demo ORDER BY  emp_id LIMIT 5, OFFSET 5;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '5' at line 1
+mysql> SELECT * FROM employees_demo ORDER BY salary  LIMIT 5 OFFSET 5;
++--------+----------+------------+----------+------+--------+------------------+------------+
+| emp_id | emp_name | department | salary   | age  | city   | email            | experience |
++--------+----------+------------+----------+------+--------+------------------+------------+
+|      6 | Anjali   | HR         | 40000.00 |   26 | Pune   | anjali@gmail.com |          3 |
+|     13 | shyam    | Markrting  | 43000.00 |   20 | delhi  | shyam@gmail.com  |          5 |
+|      1 | Rahul    | IT         | 45000.00 |   25 | Pune   | rahul@gmail.com  |          2 |
+|     17 | Riya     | HR         | 45000.00 |   27 | Nashik | riya@gmail.com   |          3 |
+|     12 | ram      | HR         | 46000.00 |   26 | Akola  | ram@gmail.com    |          4 |
++--------+----------+------------+----------+------+--------+------------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> UPDATE employees_demo WHERE salary = salary+5000 , dapartment = 'IT';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE salary = salary+5000 , dapartment = 'IT'' at line 1
+mysql> UPDATE employees_demo SET salary = salary+5000 , dapartment = 'IT';
+ERROR 1054 (42S22): Unknown column 'dapartment' in 'field list'
+mysql> UPDATE employees_demo SET salary = salary+5000 , department = 'IT';
+Query OK, 17 rows affected (0.21 sec)
+Rows matched: 17  Changed: 17  Warnings: 0
+
+mysql> select * from employees_demo;
++--------+----------+------------+----------+------+-----------+------------------+------------+
+| emp_id | emp_name | department | salary   | age  | city      | email            | experience |
++--------+----------+------------+----------+------+-----------+------------------+------------+
+|      1 | Rahul    | IT         | 50000.00 |   25 | Pune      | rahul@gmail.com  |          2 |
+|      2 | Priya    | IT         | 40000.00 |   24 | Mumbai    | priya@gmail.com  |          1 |
+|      3 | Amit     | IT         | 65000.00 |   30 | Pune      | amit@gmail.com   |          5 |
+|      4 | Sneha    | IT         | 60000.00 |   28 | Nashik    | sneha@gmail.com  |          4 |
+|      5 | Rohan    | IT         | 80000.00 |   32 | Mumbai    | rohan@gmail.com  |          7 |
+|      6 | Anjali   | IT         | 45000.00 |   26 | Pune      | anjali@gmail.com |          3 |
+|      7 | Vikas    | IT         | 35000.00 |   23 | Nagpur    | vikas@gmail.com  |          1 |
+|      8 | Neha     | IT         | 70000.00 |   29 | Bangalore | neha@gmail.com   |          5 |
+|      9 | Akash    | IT         | 33000.00 |   22 | Pune      | akash@gmail.com  |          0 |
+|     10 | Pooja    | IT         | 55000.00 |   27 | Mumbai    | pooja@gmail.com  |          3 |
+|     12 | ram      | IT         | 51000.00 |   26 | Akola     | ram@gmail.com    |          4 |
+|     13 | shyam    | IT         | 48000.00 |   20 | delhi     | shyam@gmail.com  |          5 |
+|     15 | Asha     | IT         | 37000.00 |   23 | Pune      | asha@gmail.com   |          1 |
+|     16 | Komal    | IT         | 43000.00 |   25 | Mumbai    | komal@gmail.com  |          2 |
+|     17 | Riya     | IT         | 50000.00 |   27 | Nashik    | riya@gmail.com   |          3 |
+|     18 | Sonal    | IT         | 55000.00 |   29 | Pune      | sonal@gmail.com  |          4 |
+|     19 | Divya    | IT         | 60000.00 |   31 | Mumbai    | divya@gmail.com  |          6 |
++--------+----------+------------+----------+------+-----------+------------------+------------+
+17 rows in set (0.00 sec)
+
+mysql> UPADATE employees_demo SET city ='Mumbai' WHERE emp_name = 'Rahul';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'UPADATE employees_demo SET city ='Mumbai' WHERE emp_name = 'Rahul'' at line 1
+mysql> UPDATE employees_demo SET city ='Mumbai' WHERE emp_name = 'Rahul';
+Query OK, 1 row affected (0.22 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employees_demo;
++--------+----------+------------+----------+------+-----------+------------------+------------+
+| emp_id | emp_name | department | salary   | age  | city      | email            | experience |
++--------+----------+------------+----------+------+-----------+------------------+------------+
+|      1 | Rahul    | IT         | 50000.00 |   25 | Mumbai    | rahul@gmail.com  |          2 |
+|      2 | Priya    | IT         | 40000.00 |   24 | Mumbai    | priya@gmail.com  |          1 |
+|      3 | Amit     | IT         | 65000.00 |   30 | Pune      | amit@gmail.com   |          5 |
+|      4 | Sneha    | IT         | 60000.00 |   28 | Nashik    | sneha@gmail.com  |          4 |
+|      5 | Rohan    | IT         | 80000.00 |   32 | Mumbai    | rohan@gmail.com  |          7 |
+|      6 | Anjali   | IT         | 45000.00 |   26 | Pune      | anjali@gmail.com |          3 |
+|      7 | Vikas    | IT         | 35000.00 |   23 | Nagpur    | vikas@gmail.com  |          1 |
+|      8 | Neha     | IT         | 70000.00 |   29 | Bangalore | neha@gmail.com   |          5 |
+|      9 | Akash    | IT         | 33000.00 |   22 | Pune      | akash@gmail.com  |          0 |
+|     10 | Pooja    | IT         | 55000.00 |   27 | Mumbai    | pooja@gmail.com  |          3 |
+|     12 | ram      | IT         | 51000.00 |   26 | Akola     | ram@gmail.com    |          4 |
+|     13 | shyam    | IT         | 48000.00 |   20 | delhi     | shyam@gmail.com  |          5 |
+|     15 | Asha     | IT         | 37000.00 |   23 | Pune      | asha@gmail.com   |          1 |
+|     16 | Komal    | IT         | 43000.00 |   25 | Mumbai    | komal@gmail.com  |          2 |
+|     17 | Riya     | IT         | 50000.00 |   27 | Nashik    | riya@gmail.com   |          3 |
+|     18 | Sonal    | IT         | 55000.00 |   29 | Pune      | sonal@gmail.com  |          4 |
+|     19 | Divya    | IT         | 60000.00 |   31 | Mumbai    | divya@gmail.com  |          6 |
++--------+----------+------------+----------+------+-----------+------------------+------------+
+17 rows in set (0.00 sec)
+
+mysql> DELETE employees
+    -> DELETE employees_demo WHERE experience =  0;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DELETE employees_demo WHERE experience =  0' at line 2
+mysql> DELETE FROM employees_demo WHERE experience =  0;
+Query OK, 1 row affected (0.11 sec)
+
+mysql> select * from employees_demo;
++--------+----------+------------+----------+------+-----------+------------------+------------+
+| emp_id | emp_name | department | salary   | age  | city      | email            | experience |
++--------+----------+------------+----------+------+-----------+------------------+------------+
+|      1 | Rahul    | IT         | 50000.00 |   25 | Mumbai    | rahul@gmail.com  |          2 |
+|      2 | Priya    | IT         | 40000.00 |   24 | Mumbai    | priya@gmail.com  |          1 |
+|      3 | Amit     | IT         | 65000.00 |   30 | Pune      | amit@gmail.com   |          5 |
+|      4 | Sneha    | IT         | 60000.00 |   28 | Nashik    | sneha@gmail.com  |          4 |
+|      5 | Rohan    | IT         | 80000.00 |   32 | Mumbai    | rohan@gmail.com  |          7 |
+|      6 | Anjali   | IT         | 45000.00 |   26 | Pune      | anjali@gmail.com |          3 |
+|      7 | Vikas    | IT         | 35000.00 |   23 | Nagpur    | vikas@gmail.com  |          1 |
+|      8 | Neha     | IT         | 70000.00 |   29 | Bangalore | neha@gmail.com   |          5 |
+|     10 | Pooja    | IT         | 55000.00 |   27 | Mumbai    | pooja@gmail.com  |          3 |
+|     12 | ram      | IT         | 51000.00 |   26 | Akola     | ram@gmail.com    |          4 |
+|     13 | shyam    | IT         | 48000.00 |   20 | delhi     | shyam@gmail.com  |          5 |
+|     15 | Asha     | IT         | 37000.00 |   23 | Pune      | asha@gmail.com   |          1 |
+|     16 | Komal    | IT         | 43000.00 |   25 | Mumbai    | komal@gmail.com  |          2 |
+|     17 | Riya     | IT         | 50000.00 |   27 | Nashik    | riya@gmail.com   |          3 |
+|     18 | Sonal    | IT         | 55000.00 |   29 | Pune      | sonal@gmail.com  |          4 |
+|     19 | Divya    | IT         | 60000.00 |   31 | Mumbai    | divya@gmail.com  |          6 |
++--------+----------+------------+----------+------+-----------+------------------+------------+
+16 rows in set (0.00 sec)
+
+mysql> ALTER employees_demo ADD  phone_number'
+    '> ALTER employees_demo ADD  phone_number VARCHAR(60);
+    '> ALTER employees_demo ADD  phone_number BIGINT
+    '> ALTER employees_demo ADD  phone_number BIGINT;
+    '> ^C
+mysql> ALTER employees_demo ADD  phone_number BIGINT;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'employees_demo ADD  phone_number BIGINT' at line 1
+mysql> ALTER employees_demo ADD  phone_number BIGINT;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'employees_demo ADD  phone_number BIGINT' at line 1
+mysql> ALTER employees_demo ADD  phone_number VARCHAR(20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'employees_demo ADD  phone_number VARCHAR(20)' at line 1
+mysql> ALETE TABLE employees_demo ADD phone_number VARCHAR(30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ALETE TABLE employees_demo ADD phone_number VARCHAR(30)' at line 1
+mysql>
+mysql> ^C
+mysql> >>ALETE TABLE employees_demo ADD phone_number VARCHAR(30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '>>ALETE TABLE employees_demo ADD phone_number VARCHAR(30)' at line 1
+mysql> >>ALTER TABLE employees_demo ADD phone_number VARCHAR(30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '>>ALTER TABLE employees_demo ADD phone_number VARCHAR(30)' at line 1
+mysql> >ALTER TABLE employees_demo ADD phone_number VARCHAR(30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '>ALTER TABLE employees_demo ADD phone_number VARCHAR(30)' at line 1
+mysql> DESC employee_demo;
+ERROR 1146 (42S02): Table 'batch1343.employee_demo' doesn't exist
+mysql> DESC employees_demo;
++------------+---------------+------+-----+---------+----------------+
+| Field      | Type          | Null | Key | Default | Extra          |
++------------+---------------+------+-----+---------+----------------+
+| emp_id     | int           | NO   | PRI | NULL    | auto_increment |
+| emp_name   | varchar(50)   | NO   |     | NULL    |                |
+| department | varchar(30)   | YES  |     | NULL    |                |
+| salary     | decimal(10,2) | YES  |     | NULL    |                |
+| age        | int           | YES  |     | NULL    |                |
+| city       | varchar(30)   | YES  |     | NULL    |                |
+| email      | varchar(100)  | YES  | UNI | NULL    |                |
+| experience | int           | YES  |     | NULL    |                |
++------------+---------------+------+-----+---------+----------------+
+8 rows in set (0.04 sec)
+
+mysql> ALTER TABLE employees_demo ADD phone_number VARCHAR(30);
+Query OK, 0 rows affected (1.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employees_demo;
++--------+----------+------------+----------+------+-----------+------------------+------------+--------------+
+| emp_id | emp_name | department | salary   | age  | city      | email            | experience | phone_number |
++--------+----------+------------+----------+------+-----------+------------------+------------+--------------+
+|      1 | Rahul    | IT         | 50000.00 |   25 | Mumbai    | rahul@gmail.com  |          2 | NULL         |
+|      2 | Priya    | IT         | 40000.00 |   24 | Mumbai    | priya@gmail.com  |          1 | NULL         |
+|      3 | Amit     | IT         | 65000.00 |   30 | Pune      | amit@gmail.com   |          5 | NULL         |
+|      4 | Sneha    | IT         | 60000.00 |   28 | Nashik    | sneha@gmail.com  |          4 | NULL         |
+|      5 | Rohan    | IT         | 80000.00 |   32 | Mumbai    | rohan@gmail.com  |          7 | NULL         |
+|      6 | Anjali   | IT         | 45000.00 |   26 | Pune      | anjali@gmail.com |          3 | NULL         |
+|      7 | Vikas    | IT         | 35000.00 |   23 | Nagpur    | vikas@gmail.com  |          1 | NULL         |
+|      8 | Neha     | IT         | 70000.00 |   29 | Bangalore | neha@gmail.com   |          5 | NULL         |
+|     10 | Pooja    | IT         | 55000.00 |   27 | Mumbai    | pooja@gmail.com  |          3 | NULL         |
+|     12 | ram      | IT         | 51000.00 |   26 | Akola     | ram@gmail.com    |          4 | NULL         |
+|     13 | shyam    | IT         | 48000.00 |   20 | delhi     | shyam@gmail.com  |          5 | NULL         |
+|     15 | Asha     | IT         | 37000.00 |   23 | Pune      | asha@gmail.com   |          1 | NULL         |
+|     16 | Komal    | IT         | 43000.00 |   25 | Mumbai    | komal@gmail.com  |          2 | NULL         |
+|     17 | Riya     | IT         | 50000.00 |   27 | Nashik    | riya@gmail.com   |          3 | NULL         |
+|     18 | Sonal    | IT         | 55000.00 |   29 | Pune      | sonal@gmail.com  |          4 | NULL         |
+|     19 | Divya    | IT         | 60000.00 |   31 | Mumbai    | divya@gmail.com  |          6 | NULL         |
++--------+----------+------------+----------+------+-----------+------------------+------------+--------------+
+16 rows in set (0.00 sec)
+
+mysql> select * from employees_demo;
++--------+----------+------------+----------+------+-----------+------------------+------------+--------------+
+| emp_id | emp_name | department | salary   | age  | city      | email            | experience | phone_number |
++--------+----------+------------+----------+------+-----------+------------------+------------+--------------+
+|      1 | Rahul    | IT         | 50000.00 |   25 | Mumbai    | rahul@gmail.com  |          2 | NULL         |
+|      2 | Priya    | IT         | 40000.00 |   24 | Mumbai    | priya@gmail.com  |          1 | NULL         |
+|      3 | Amit     | IT         | 65000.00 |   30 | Pune      | amit@gmail.com   |          5 | NULL         |
+|      4 | Sneha    | IT         | 60000.00 |   28 | Nashik    | sneha@gmail.com  |          4 | NULL         |
+|      5 | Rohan    | IT         | 80000.00 |   32 | Mumbai    | rohan@gmail.com  |          7 | NULL         |
+|      6 | Anjali   | IT         | 45000.00 |   26 | Pune      | anjali@gmail.com |          3 | NULL         |
+|      7 | Vikas    | IT         | 35000.00 |   23 | Nagpur    | vikas@gmail.com  |          1 | NULL         |
+|      8 | Neha     | IT         | 70000.00 |   29 | Bangalore | neha@gmail.com   |          5 | NULL         |
+|     10 | Pooja    | IT         | 55000.00 |   27 | Mumbai    | pooja@gmail.com  |          3 | NULL         |
+|     12 | ram      | IT         | 51000.00 |   26 | Akola     | ram@gmail.com    |          4 | NULL         |
+|     13 | shyam    | IT         | 48000.00 |   20 | delhi     | shyam@gmail.com  |          5 | NULL         |
+|     15 | Asha     | IT         | 37000.00 |   23 | Pune      | asha@gmail.com   |          1 | NULL         |
+|     16 | Komal    | IT         | 43000.00 |   25 | Mumbai    | komal@gmail.com  |          2 | NULL         |
+|     17 | Riya     | IT         | 50000.00 |   27 | Nashik    | riya@gmail.com   |          3 | NULL         |
+|     18 | Sonal    | IT         | 55000.00 |   29 | Pune      | sonal@gmail.com  |          4 | NULL         |
+|     19 | Divya    | IT         | 60000.00 |   31 | Mumbai    | divya@gmail.com  |          6 | NULL         |
++--------+----------+------------+----------+------+-----------+------------------+------------+--------------+
+16 rows in set (0.00 sec)
+
+mysql> ALTER employees_demo DROP COLUMN phone_number;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'employees_demo DROP COLUMN phone_number' at line 1
+mysql> ALTER TABLE employees_demo DROP COLUMN phone_number
+    -> ALTER TABLE employees_demo DROP COLUMN phone_number ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ALTER TABLE employees_demo DROP COLUMN phone_number' at line 2
+mysql> ^C
+mysql> ALTER TABLE employees_demo DROP COLUMN phone_number ;
+Query OK, 0 rows affected (0.47 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC employees_demo;
++------------+---------------+------+-----+---------+----------------+
+| Field      | Type          | Null | Key | Default | Extra          |
++------------+---------------+------+-----+---------+----------------+
+| emp_id     | int           | NO   | PRI | NULL    | auto_increment |
+| emp_name   | varchar(50)   | NO   |     | NULL    |                |
+| department | varchar(30)   | YES  |     | NULL    |                |
+| salary     | decimal(10,2) | YES  |     | NULL    |                |
+| age        | int           | YES  |     | NULL    |                |
+| city       | varchar(30)   | YES  |     | NULL    |                |
+| email      | varchar(100)  | YES  | UNI | NULL    |                |
+| experience | int           | YES  |     | NULL    |                |
++------------+---------------+------+-----+---------+----------------+
+8 rows in set (0.01 sec)
+
+
+

@@ -1,0 +1,499 @@
+Enter password: ***********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| abc                |
+| batch1343          |
+| company            |
+| employee           |
+| employeedata       |
+| hospital           |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+10 rows in set (1.32 sec)
+
+mysql> use batch1343;
+Database changed
+mysql> show tables;
++---------------------+
+| Tables_in_batch1343 |
++---------------------+
+| customer            |
+| employee_data       |
+| employees           |
+| product_data        |
+| product_record      |
+| products            |
+| student             |
++---------------------+
+7 rows in set (0.08 sec)
+
+mysql> select * from product_record;
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+| product_id | product_name    | category    | price    | quantity | rating | city   | product_status | manufacturing_date |
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+|        101 | Laptop          | Electronics | 55000.00 |       10 |    4.5 | Pune   | Available      | 2025-01-15         |
+|        102 | Mobile          | Electronics | 30000.00 |       15 |    4.6 | Mumbai | Available      | 2025-02-10         |
+|        103 | Chair           | Furniture   | 12000.00 |        8 |    4.2 | Pune   | Available      | 2024-12-20         |
+|        104 | Television      | Electronics | 45000.00 |        6 |    4.4 | Nashik | Available      | 2025-03-12         |
+|        105 | Refrigerator    | Electronics | 24000.00 |        5 |    4.3 | Mumbai | Available      | 2025-01-25         |
+|        106 | Dining Table    | Furniture   | 22000.00 |        4 |    4.7 | Pune   | Available      | 2024-11-15         |
+|        107 | Washing Machine | Electronics | 28000.00 |        7 |    4.5 | Nagpur | Available      | 2025-02-18         |
+|        108 | Bookshelf       | Furniture   | 15000.00 |        9 |    4.1 | Mumbai | Available      | 2024-10-10         |
+|        109 | Headphones      | Electronics |  5000.00 |       20 |    4.4 | Pune   | Available      | 2025-04-05         |
+|        110 | Sofa            | Furniture   | 60000.00 |        3 |    4.8 | Nashik | Available      | 2024-09-25         |
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+10 rows in set (0.04 sec)
+
+mysql> SELECT price FROM product_record WHERE price IN (55000.00, 12000.00, 5000.00);
++----------+
+| price    |
++----------+
+| 55000.00 |
+| 12000.00 |
+|  5000.00 |
++----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT price FROM product_record WHERE price NOT IN (55000.00, 12000.00, 5000.00);
++----------+
+| price    |
++----------+
+| 30000.00 |
+| 45000.00 |
+| 24000.00 |
+| 22000.00 |
+| 28000.00 |
+| 15000.00 |
+| 60000.00 |
++----------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT quantity FROM product_record WHERE quantity BETWEEN 3 AND 10;
++----------+
+| quantity |
++----------+
+|       10 |
+|        8 |
+|        6 |
+|        5 |
+|        4 |
+|        7 |
+|        9 |
+|        3 |
++----------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT quantity FROM product_record WHERE quantity NOT BETWEEN 3 AND 10;
++----------+
+| quantity |
++----------+
+|       15 |
+|       20 |
++----------+
+2 rows in set (0.00 sec)
+
+mysql> select * from product_record where city not between pune AND mumbai;
+ERROR 1054 (42S22): Unknown column 'pune' in 'where clause'
+mysql> SELECT * FROM product_record WHERE  city NOT BETWEEN 'pune' AND 'munbai';
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+| product_id | product_name    | category    | price    | quantity | rating | city   | product_status | manufacturing_date |
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+|        101 | Laptop          | Electronics | 55000.00 |       10 |    4.5 | Pune   | Available      | 2025-01-15         |
+|        102 | Mobile          | Electronics | 30000.00 |       15 |    4.6 | Mumbai | Available      | 2025-02-10         |
+|        103 | Chair           | Furniture   | 12000.00 |        8 |    4.2 | Pune   | Available      | 2024-12-20         |
+|        104 | Television      | Electronics | 45000.00 |        6 |    4.4 | Nashik | Available      | 2025-03-12         |
+|        105 | Refrigerator    | Electronics | 24000.00 |        5 |    4.3 | Mumbai | Available      | 2025-01-25         |
+|        106 | Dining Table    | Furniture   | 22000.00 |        4 |    4.7 | Pune   | Available      | 2024-11-15         |
+|        107 | Washing Machine | Electronics | 28000.00 |        7 |    4.5 | Nagpur | Available      | 2025-02-18         |
+|        108 | Bookshelf       | Furniture   | 15000.00 |        9 |    4.1 | Mumbai | Available      | 2024-10-10         |
+|        109 | Headphones      | Electronics |  5000.00 |       20 |    4.4 | Pune   | Available      | 2025-04-05         |
+|        110 | Sofa            | Furniture   | 60000.00 |        3 |    4.8 | Nashik | Available      | 2024-09-25         |
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT * FROM product_record WHERE price >=10000 AND price <= 50000;
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+| product_id | product_name    | category    | price    | quantity | rating | city   | product_status | manufacturing_date |
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+|        102 | Mobile          | Electronics | 30000.00 |       15 |    4.6 | Mumbai | Available      | 2025-02-10         |
+|        103 | Chair           | Furniture   | 12000.00 |        8 |    4.2 | Pune   | Available      | 2024-12-20         |
+|        104 | Television      | Electronics | 45000.00 |        6 |    4.4 | Nashik | Available      | 2025-03-12         |
+|        105 | Refrigerator    | Electronics | 24000.00 |        5 |    4.3 | Mumbai | Available      | 2025-01-25         |
+|        106 | Dining Table    | Furniture   | 22000.00 |        4 |    4.7 | Pune   | Available      | 2024-11-15         |
+|        107 | Washing Machine | Electronics | 28000.00 |        7 |    4.5 | Nagpur | Available      | 2025-02-18         |
+|        108 | Bookshelf       | Furniture   | 15000.00 |        9 |    4.1 | Mumbai | Available      | 2024-10-10         |
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+7 rows in set (0.01 sec)
+
+mysql> SELECT price FROM product_record WHERE price >=10000 AND price <= 50000;
++----------+
+| price    |
++----------+
+| 30000.00 |
+| 12000.00 |
+| 45000.00 |
+| 24000.00 |
+| 22000.00 |
+| 28000.00 |
+| 15000.00 |
++----------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(*) FROM product_record;
++----------+
+| COUNT(*) |
++----------+
+|       10 |
++----------+
+1 row in set (0.00 sec)
+
+mysql>  SELECT COUNT(*) FROM Total_product WHERE product_record;
+ERROR 1146 (42S02): Table 'batch1343.total_product' doesn't exist
+mysql> SELECT COUNT(*) AS Total_product FROM product_record;
++---------------+
+| Total_product |
++---------------+
+|            10 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(*) FROM City_total WHERE product_record;
+ERROR 1146 (42S02): Table 'batch1343.city_total' doesn't exist
+mysql> SELECT COUNT(*) AS CITY_TOTAL FROM product_record;
++------------+
+| CITY_TOTAL |
++------------+
+|         10 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(*) AS  price_total FROM product_record;
++-------------+
+| price_total |
++-------------+
+|          10 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SUM (price) AS Total_price FROM product_record;
+ERROR 1630 (42000): FUNCTION batch1343.SUM does not exist. Check the 'Function Name Parsing and Resolution' section in the Reference Manual
+mysql> SELECT SUM(price) AS Total_price FROM product_record;
++-------------+
+| Total_price |
++-------------+
+|   296000.00 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SUM(*) AS total_price FROM product_record;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*) AS total_price FROM product_record' at line 1
+mysql> SELECT SUM(quantity) AS total_quantity FROM product_record;
++----------------+
+| total_quantity |
++----------------+
+|             87 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT AVG(price) AS  Total_price FROM product_record;
++--------------+
+| Total_price  |
++--------------+
+| 29600.000000 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT AVG(quantity) AS total_quantity FROM product_record;
++----------------+
+| total_quantity |
++----------------+
+|         8.7000 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(price) AS max_price FROM product_record;
++-----------+
+| max_price |
++-----------+
+|  60000.00 |
++-----------+
+1 row in set (0.04 sec)
+
+mysql> SELECT  MIN(price) AS min_price FROM product_record;
++-----------+
+| min_price |
++-----------+
+|   5000.00 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(*) Total_product, SUM(quantity) AS total_quantity, AVG(price) AS Avarage_price, MAX(price) AS height_price, MIN(price) AS Lowest_price;
+ERROR 1054 (42S22): Unknown column 'quantity' in 'field list'
+mysql> SELECT COUNT(*) Total_product, SUM(price) AS total_price, AVG(price) AS Avarage_price, MAX(price) AS height_price, MIN(price) AS Lowest_price;
+ERROR 1054 (42S22): Unknown column 'price' in 'field list'
+mysql> SELECT *
+    -> FROM product_record
+    -> WHERE manufacturing_date
+    -> BETWEEN '2025-01-01' AND '2025-12-31';
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+| product_id | product_name    | category    | price    | quantity | rating | city   | product_status | manufacturing_date |
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+|        101 | Laptop          | Electronics | 55000.00 |       10 |    4.5 | Pune   | Available      | 2025-01-15         |
+|        102 | Mobile          | Electronics | 30000.00 |       15 |    4.6 | Mumbai | Available      | 2025-02-10         |
+|        104 | Television      | Electronics | 45000.00 |        6 |    4.4 | Nashik | Available      | 2025-03-12         |
+|        105 | Refrigerator    | Electronics | 24000.00 |        5 |    4.3 | Mumbai | Available      | 2025-01-25         |
+|        107 | Washing Machine | Electronics | 28000.00 |        7 |    4.5 | Nagpur | Available      | 2025-02-18         |
+|        109 | Headphones      | Electronics |  5000.00 |       20 |    4.4 | Pune   | Available      | 2025-04-05         |
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+6 rows in set (0.00 sec)
+
+mysql>  SELECT    COUNT(*) AS total_products,    SUM(quantity) AS total_quantity,    AVG(price) AS average_price,    MAX(price) AS highest_price,    MIN(price) AS lowest_priceFROM product_record;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'product_record' at line 1
+mysql>  SELECT COUNT(*) AS total_products, SUM(quantity) AS total_quantity,AVG(price) AS average_price, MAX(price) AS highest_price, MIN(price) AS lowest_priceFROM product_record;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'product_record' at line 1
+mysql>  SELECT COUNT(*) AS total_products, SUM(quantity) AS total_quantity,AVG(price) AS average_price, MAX(price) AS highest_price, MIN(price) AS lowest_price FROM product_record;
++----------------+----------------+---------------+---------------+--------------+
+| total_products | total_quantity | average_price | highest_price | lowest_price |
++----------------+----------------+---------------+---------------+--------------+
+|             10 |             87 |  29600.000000 |      60000.00 |      5000.00 |
++----------------+----------------+---------------+---------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT AVG(price) AS Total_price FROM product_record WHERE catagory = 'Electronic'
+    -> SELECT AVG(price) AS Total_price FROM product_record WHERE catagory = 'Electronic';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SELECT AVG(price) AS Total_price FROM product_record WHERE catagory = 'Electroni' at line 2
+mysql> SELECT AVG(price) AS Avarage_price FROM product_record WHERE catagory = 'Electronic';
+ERROR 1054 (42S22): Unknown column 'catagory' in 'where clause'
+mysql> SELECT AVG(price) AS Avarage_price FROM product_record WHERE category = 'Electronic';
++---------------+
+| Avarage_price |
++---------------+
+|          NULL |
++---------------+
+1 row in set (0.05 sec)
+
+mysql> SELECT AVG(price) AS Avarage_price FROM product_record WHERE category = 'Electronics';
++---------------+
+| Avarage_price |
++---------------+
+|  31166.666667 |
++---------------+
+1 row in set (0.04 sec)
+
+mysql> SELECT AVG(quantity) AS Avarage_quatity FROM product_record WHERE product_name = 'Laptop';
++-----------------+
+| Avarage_quatity |
++-----------------+
+|         10.0000 |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM product_record WHERE product_name = '%L_';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM product_record WHERE product_name = 'L%';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM product_record WHERE category = 'E%';
+Empty set (0.01 sec)
+
+mysql> SELECT *FROM product_recordWHERE product_name LIKE 'L%';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIKE 'L%'' at line 1
+mysql> SELECT *FROM product_record WHERE product_name LIKE 'L%';
++------------+--------------+-------------+----------+----------+--------+------+----------------+--------------------+
+| product_id | product_name | category    | price    | quantity | rating | city | product_status | manufacturing_date |
++------------+--------------+-------------+----------+----------+--------+------+----------------+--------------------+
+|        101 | Laptop       | Electronics | 55000.00 |       10 |    4.5 | Pune | Available      | 2025-01-15         |
++------------+--------------+-------------+----------+----------+--------+------+----------------+--------------------+
+1 row in set (0.08 sec)
+
+mysql> SELECT * FROM product_record WHERE product_name LIKE '_a%'
+    -> SELECT * FROM product_record WHERE product_name LIKE '_a%';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SELECT * FROM product_record WHERE product_name LIKE '_a%'' at line 2
+mysql> SELECT *FROM product_record WHERE product_name LIKE 'a%';
+Empty set (0.00 sec)
+
+mysql> SELECT *FROM product_record WHERE product_name LIKE '-a%';
+Empty set (0.00 sec)
+
+mysql> select * from product_record;
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+| product_id | product_name    | category    | price    | quantity | rating | city   | product_status | manufacturing_date |
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+|        101 | Laptop          | Electronics | 55000.00 |       10 |    4.5 | Pune   | Available      | 2025-01-15         |
+|        102 | Mobile          | Electronics | 30000.00 |       15 |    4.6 | Mumbai | Available      | 2025-02-10         |
+|        103 | Chair           | Furniture   | 12000.00 |        8 |    4.2 | Pune   | Available      | 2024-12-20         |
+|        104 | Television      | Electronics | 45000.00 |        6 |    4.4 | Nashik | Available      | 2025-03-12         |
+|        105 | Refrigerator    | Electronics | 24000.00 |        5 |    4.3 | Mumbai | Available      | 2025-01-25         |
+|        106 | Dining Table    | Furniture   | 22000.00 |        4 |    4.7 | Pune   | Available      | 2024-11-15         |
+|        107 | Washing Machine | Electronics | 28000.00 |        7 |    4.5 | Nagpur | Available      | 2025-02-18         |
+|        108 | Bookshelf       | Furniture   | 15000.00 |        9 |    4.1 | Mumbai | Available      | 2024-10-10         |
+|        109 | Headphones      | Electronics |  5000.00 |       20 |    4.4 | Pune   | Available      | 2025-04-05         |
+|        110 | Sofa            | Furniture   | 60000.00 |        3 |    4.8 | Nashik | Available      | 2024-09-25         |
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT * FROM product_record WHERE product_status LIKE '_v%';
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+| product_id | product_name    | category    | price    | quantity | rating | city   | product_status | manufacturing_date |
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+|        101 | Laptop          | Electronics | 55000.00 |       10 |    4.5 | Pune   | Available      | 2025-01-15         |
+|        102 | Mobile          | Electronics | 30000.00 |       15 |    4.6 | Mumbai | Available      | 2025-02-10         |
+|        103 | Chair           | Furniture   | 12000.00 |        8 |    4.2 | Pune   | Available      | 2024-12-20         |
+|        104 | Television      | Electronics | 45000.00 |        6 |    4.4 | Nashik | Available      | 2025-03-12         |
+|        105 | Refrigerator    | Electronics | 24000.00 |        5 |    4.3 | Mumbai | Available      | 2025-01-25         |
+|        106 | Dining Table    | Furniture   | 22000.00 |        4 |    4.7 | Pune   | Available      | 2024-11-15         |
+|        107 | Washing Machine | Electronics | 28000.00 |        7 |    4.5 | Nagpur | Available      | 2025-02-18         |
+|        108 | Bookshelf       | Furniture   | 15000.00 |        9 |    4.1 | Mumbai | Available      | 2024-10-10         |
+|        109 | Headphones      | Electronics |  5000.00 |       20 |    4.4 | Pune   | Available      | 2025-04-05         |
+|        110 | Sofa            | Furniture   | 60000.00 |        3 |    4.8 | Nashik | Available      | 2024-09-25         |
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT * FROM product
+    -> SELECT * FROM product_record WHERE product_name LIKE '%r'
+    -> SELECT * FROM product_record WHERE product_name LIKE '%r';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SELECT * FROM product_record WHERE product_name LIKE '%r'
+SELECT * FROM product_' at line 2
+mysql> SELECT * FROM product_record WHERE product_name LIKE 'r%';
++------------+--------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+| product_id | product_name | category    | price    | quantity | rating | city   | product_status | manufacturing_date |
++------------+--------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+|        105 | Refrigerator | Electronics | 24000.00 |        5 |    4.3 | Mumbai | Available      | 2025-01-25         |
++------------+--------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM product_record WHERE category LIKE 'r%';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM product_record WHERE category LIKE '%r';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM product_record WHERE city IN ('Pune', 'Mumbai', 'Nagapur');
++------------+--------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+| product_id | product_name | category    | price    | quantity | rating | city   | product_status | manufacturing_date |
++------------+--------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+|        101 | Laptop       | Electronics | 55000.00 |       10 |    4.5 | Pune   | Available      | 2025-01-15         |
+|        102 | Mobile       | Electronics | 30000.00 |       15 |    4.6 | Mumbai | Available      | 2025-02-10         |
+|        103 | Chair        | Furniture   | 12000.00 |        8 |    4.2 | Pune   | Available      | 2024-12-20         |
+|        105 | Refrigerator | Electronics | 24000.00 |        5 |    4.3 | Mumbai | Available      | 2025-01-25         |
+|        106 | Dining Table | Furniture   | 22000.00 |        4 |    4.7 | Pune   | Available      | 2024-11-15         |
+|        108 | Bookshelf    | Furniture   | 15000.00 |        9 |    4.1 | Mumbai | Available      | 2024-10-10         |
+|        109 | Headphones   | Electronics |  5000.00 |       20 |    4.4 | Pune   | Available      | 2025-04-05         |
++------------+--------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+7 rows in set (0.04 sec)
+
+mysql> SELECT * FROM product_record WHERE city = 'Pune' OR city = 'Mumbai' OR city = 'Nagpur';
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+| product_id | product_name    | category    | price    | quantity | rating | city   | product_status | manufacturing_date |
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+|        101 | Laptop          | Electronics | 55000.00 |       10 |    4.5 | Pune   | Available      | 2025-01-15         |
+|        102 | Mobile          | Electronics | 30000.00 |       15 |    4.6 | Mumbai | Available      | 2025-02-10         |
+|        103 | Chair           | Furniture   | 12000.00 |        8 |    4.2 | Pune   | Available      | 2024-12-20         |
+|        105 | Refrigerator    | Electronics | 24000.00 |        5 |    4.3 | Mumbai | Available      | 2025-01-25         |
+|        106 | Dining Table    | Furniture   | 22000.00 |        4 |    4.7 | Pune   | Available      | 2024-11-15         |
+|        107 | Washing Machine | Electronics | 28000.00 |        7 |    4.5 | Nagpur | Available      | 2025-02-18         |
+|        108 | Bookshelf       | Furniture   | 15000.00 |        9 |    4.1 | Mumbai | Available      | 2024-10-10         |
+|        109 | Headphones      | Electronics |  5000.00 |       20 |    4.4 | Pune   | Available      | 2025-04-05         |
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT * FROM product_record WHERE price BETWEEN 10000 AND 50000;
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+| product_id | product_name    | category    | price    | quantity | rating | city   | product_status | manufacturing_date |
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+|        102 | Mobile          | Electronics | 30000.00 |       15 |    4.6 | Mumbai | Available      | 2025-02-10         |
+|        103 | Chair           | Furniture   | 12000.00 |        8 |    4.2 | Pune   | Available      | 2024-12-20         |
+|        104 | Television      | Electronics | 45000.00 |        6 |    4.4 | Nashik | Available      | 2025-03-12         |
+|        105 | Refrigerator    | Electronics | 24000.00 |        5 |    4.3 | Mumbai | Available      | 2025-01-25         |
+|        106 | Dining Table    | Furniture   | 22000.00 |        4 |    4.7 | Pune   | Available      | 2024-11-15         |
+|        107 | Washing Machine | Electronics | 28000.00 |        7 |    4.5 | Nagpur | Available      | 2025-02-18         |
+|        108 | Bookshelf       | Furniture   | 15000.00 |        9 |    4.1 | Mumbai | Available      | 2024-10-10         |
++------------+-----------------+-------------+----------+----------+--------+--------+----------------+--------------------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(*) FROM product_record;
++----------+
+| COUNT(*) |
++----------+
+|       10 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(*) AS TOTAL_QUANTITY FROM product_record;
++----------------+
+| TOTAL_QUANTITY |
++----------------+
+|             10 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SUM(quantity) AS sum_of_quantity FROM product_record;
++-----------------+
+| sum_of_quantity |
++-----------------+
+|              87 |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT AVG(price) AS Avarage_price FROM product_record;
++---------------+
+| Avarage_price |
++---------------+
+|  29600.000000 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(price) AS height_price FROM product_record;
++--------------+
+| height_price |
++--------------+
+|     60000.00 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MIN(price) AS lowest_price FROM product_record;
++--------------+
+| lowest_price |
++--------------+
+|      5000.00 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM product_record WHERE product_name LIKE 'L%';
++------------+--------------+-------------+----------+----------+--------+------+----------------+--------------------+
+| product_id | product_name | category    | price    | quantity | rating | city | product_status | manufacturing_date |
++------------+--------------+-------------+----------+----------+--------+------+----------------+--------------------+
+|        101 | Laptop       | Electronics | 55000.00 |       10 |    4.5 | Pune | Available      | 2025-01-15         |
++------------+--------------+-------------+----------+----------+--------+------+----------------+--------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM product_record  WHERE product_name LIKE 'phone';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM product_record  WHERE product_name LIKE '%phone%';
++------------+--------------+-------------+---------+----------+--------+------+----------------+--------------------+
+| product_id | product_name | category    | price   | quantity | rating | city | product_status | manufacturing_date |
++------------+--------------+-------------+---------+----------+--------+------+----------------+--------------------+
+|        109 | Headphones   | Electronics | 5000.00 |       20 |    4.4 | Pune | Available      | 2025-04-05         |
++------------+--------------+-------------+---------+----------+--------+------+----------------+--------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT *FROM product_recordWHERE product_name LIKE 'L%';

@@ -1,0 +1,605 @@
+MYSQL TASK - EMPLOYEE MANAGEMENT SYSTEM
+
+1. Create a database named company_db.
+
+2. Create an employees table with employee_id, employee_name, email, department, salary, city, experience, and status. Make employee_id the PRIMARY KEY.
+
+3. Make employee_name, email, and department NOT NULL.
+ALTER TABLE Employees
+MODIFY name VARCHAR(50) NOT NULL,
+MODIFY email VARCHAR(100) NOT NULL,
+MODIFY department VARCHAR(50) NOT NULL;
+
+check into 
+desc emplyees;
+
+
+4. Insert at least 10 employee records into the employees table.
+INSERT INTO Employees
+(id, name, email, department, salary, city, experience, status)
+VALUES
+(101, 'Amit Sharma', 'amit@gmail.com', 'IT', 55000, 'Pune', 2, 'Active'),
+(102, 'Priya Patil', 'priya@gmail.com', 'HR', 42000, 'Mumbai', 3, 'Active'),
+(103, 'Rahul More', 'rahul@gmail.com', 'IT', 60000, 'Pune', 4, 'Active'),
+(104, 'Sneha Joshi', 'sneha@gmail.com', 'Finance', 48000, 'Nashik', 5, 'Active'),
+(105, 'Akash Kulkarni', 'akash@gmail.com', 'Sales', 38000, 'Pune', 1, 'Inactive'),
+(106, 'Neha Deshmukh', 'neha@gmail.com', 'IT', 65000, 'Mumbai', 6, 'Active'),
+(107, 'Rohit Pawar', 'rohit@gmail.com', 'Marketing', 45000, 'Nagpur', 7, 'Active'),
+(108, 'Pooja Shinde', 'pooja@gmail.com', 'HR', 40000, 'Pune', 2, 'Inactive'),
+(109, 'Sagar Jadhav', 'sagar@gmail.com', 'IT', 58000, 'Aurangabad', 3, 'Active'),
+(110, 'Kavita More', 'kavita@gmail.com', 'Finance', 62000, 'Pune', 8, 'Active');
+
+select * from employees;
+
+
+5. Display all employee records.
+select * from employees;
+
+6. Display only employee_name, department, and salary.
+select name , department , salary from employees;
+
+7. Display employees whose salary is greater than 50000.
+
+8. Display employees who have more than 2 years of experience.
+
+9. Display employees who work in the Java department AND have a salary greater than 50000.
+
+10. Display employees who are from Pune OR Mumbai.
+
+11. Display employees who work in the Java OR Python department.
+
+12. Display employees who are NOT from Pune.
+
+13. Display employees whose salary is greater than 40000 AND experience is greater than 1.
+
+14. Display employees whose city is Pune OR Mumbai AND salary is greater than 40000.
+
+15. An employee gets a salary increment. Update the salary of a particular employee.
+
+16. An employee moves from Pune to Mumbai. Update the employee's city.
+
+17. An employee leaves the company. Delete that employee's record.
+
+18. Add a new column phone to the employees table using ALTER TABLE.
+
+19. Remove the phone column using ALTER TABLE.
+
+20. Create a temporary table named old_employees and then DROP the table.
+
+Enter password: ***********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| abc                |
+| batch1343          |
+| employee           |
+| employeedata       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+8 rows in set (0.14 sec)
+
+mysql> create table employeeDemo;
+ERROR 1046 (3D000): No database selected
+mysql> create table employeeDemo (emp_id int , emp_name varchar(50) , email varchar(40), departement varchar (60), salary bigint, city varchar(50), experience int);
+ERROR 1046 (3D000): No database selected
+mysql> use batch1343;
+Database changed
+mysql> create table employeeDemo (emp_id int , emp_name varchar(50) , email varchar(40), departement varchar (60), salary bigint, city varchar(50), experience int);
+Query OK, 0 rows affected (1.49 sec)
+
+mysql> create table employeeDemo (emp_id int , emp_name varchar(50) , email varchar(40), departement varchar (60), salary bigint, city varchar(50), experience int);
+ERROR 1050 (42S01): Table 'employeedemo' already exists
+mysql> desc employeeDemo;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| emp_id      | int         | YES  |     | NULL    |       |
+| emp_name    | varchar(50) | YES  |     | NULL    |       |
+| email       | varchar(40) | YES  |     | NULL    |       |
+| departement | varchar(60) | YES  |     | NULL    |       |
+| salary      | bigint      | YES  |     | NULL    |       |
+| city        | varchar(50) | YES  |     | NULL    |       |
+| experience  | int         | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> insert into employeeDemo values(121,'Dnyanu', 'dnyanu@gmail.com', 'SoftWare Developer',50000, 'Akola','1 year');
+ERROR 1265 (01000): Data truncated for column 'experience' at row 1
+mysql> INSERT INTO Employee
+    -> (id, name, email, department, salary, city, experience, status)
+    -> VALUES
+    -> (101, 'Amit Sharma', 'amit@gmail.com', 'IT', 55000, 'Pune', 2, 'Active'),
+    -> (102, 'Priya Patil', 'priya@gmail.com', 'HR', 42000, 'Mumbai', 3, 'Active'),
+    -> (103, 'Rahul More', 'rahul@gmail.com', 'IT', 60000, 'Pune', 4, 'Active'),
+    -> (104, 'Sneha Joshi', 'sneha@gmail.com', 'Finance', 48000, 'Nashik', 5, 'Active'),
+    -> (105, 'Akash Kulkarni', 'akash@gmail.com', 'Sales', 38000, 'Pune', 1, 'Inactive'),
+    -> (106, 'Neha Deshmukh', 'neha@gmail.com', 'IT', 65000, 'Mumbai', 6, 'Active'),
+    -> (107, 'Rohit Pawar', 'rohit@gmail.com', 'Marketing', 45000, 'Nagpur', 7, 'Active'),
+    -> (108, 'Pooja Shinde', 'pooja@gmail.com', 'HR', 40000, 'Pune', 2, 'Inactive'),
+    -> (109, 'Sagar Jadhav', 'sagar@gmail.com', 'IT', 58000, 'Aurangabad', 3, 'Active'),
+    -> (110, 'Kavita More', 'kavita@gmail.com', 'Finance', 62000, 'Pune', 8, 'Active'),
+    -> (111, 'Nikhil Patil', 'nikhil@gmail.com', 'Sales', 70000, 'Mumbai', 10, 'Active'),
+    -> (112, 'Riya Shah', 'riya@gmail.com', 'IT', 57000, 'Pune', 2, 'Active'),
+    -> (113, 'Vishal Pawar', 'vishal@gmail.com', 'Marketing', 43000, 'Nashik', 4, 'Inactive'),
+    -> (114, 'Anjali Gaikwad', 'anjali@gmail.com', 'Finance', 47000, 'Pune', 3, 'Active'),
+    -> (115, 'Kunal Joshi', 'kunal@gmail.com', 'IT', 68000, 'Mumbai', 7, 'Active');
+ERROR 1146 (42S02): Table 'batch1343.employee' doesn't exist
+mysql> INSERT INTO Employee
+    -> (id, name, email, department, salary, city, experience, status)
+    -> VALUES
+    -> (101, 'Amit Sharma', 'amit@gmail.com', 'IT', 55000, 'Pune', 2, 'Active'),
+    -> (102, 'Priya Patil', 'priya@gmail.com', 'HR', 42000, 'Mumbai', 3, 'Active'),
+    -> (103, 'Rahul More', 'rahul@gmail.com', 'IT', 60000, 'Pune', 4, 'Active'),
+    -> (104, 'Sneha Joshi', 'sneha@gmail.com', 'Finance', 48000, 'Nashik', 5, 'Active'),
+    -> (105, 'Akash Kulkarni', 'akash@gmail.com', 'Sales', 38000, 'Pune', 1, 'Inactive'),
+    -> (106, 'Neha Deshmukh', 'neha@gmail.com', 'IT', 65000, 'Mumbai', 6, 'Active'),
+    -> (107, 'Rohit Pawar', 'rohit@gmail.com', 'Marketing', 45000, 'Nagpur', 7, 'Active'),
+    -> (108, 'Pooja Shinde', 'pooja@gmail.com', 'HR', 40000, 'Pune', 2, 'Inactive'),
+    -> (109, 'Sagar Jadhav', 'sagar@gmail.com', 'IT', 58000, 'Aurangabad', 3, 'Active'),
+    -> (110, 'Kavita More', 'kavita@gmail.com', 'Finance', 62000, 'Pune', 8, 'Active'),
+    -> (111, 'Nikhil Patil', 'nikhil@gmail.com', 'Sales', 70000, 'Mumbai', 10, 'Active'),
+    -> (112, 'Riya Shah', 'riya@gmail.com', 'IT', 57000, 'Pune', 2, 'Active'),
+    -> (113, 'Vishal Pawar', 'vishal@gmail.com', 'Marketing', 43000, 'Nashik', 4, 'Inactive'),
+    -> (114, 'Anjali Gaikwad', 'anjali@gmail.com', 'Finance', 47000, 'Pune', 3, 'Active'),
+    -> (114, 'Anjali Gaikwad', 'anjali@gmail.com', 'Finance', 47000, 'Pune', 3, 'Active');
+ERROR 1146 (42S02): Table 'batch1343.employee' doesn't exist
+mysql> INSERT INTO EmployeeDemo
+    -> (id, name, email, department, salary, city, experience, status)
+    -> VALUES
+    -> (101, 'Amit Sharma', 'amit@gmail.com', 'IT', 55000, 'Pune', 2, 'Active'),
+    -> (102, 'Priya Patil', 'priya@gmail.com', 'HR', 42000, 'Mumbai', 3, 'Active'),
+    -> (103, 'Rahul More', 'rahul@gmail.com', 'IT', 60000, 'Pune', 4, 'Active'),
+    -> (104, 'Sneha Joshi', 'sneha@gmail.com', 'Finance', 48000, 'Nashik', 5, 'Active'),
+    -> (105, 'Akash Kulkarni', 'akash@gmail.com', 'Sales', 38000, 'Pune', 1, 'Inactive'),
+    -> (106, 'Neha Deshmukh', 'neha@gmail.com', 'IT', 65000, 'Mumbai', 6, 'Active'),
+    -> (107, 'Rohit Pawar', 'rohit@gmail.com', 'Marketing', 45000, 'Nagpur', 7, 'Active'),
+    -> (108, 'Pooja Shinde', 'pooja@gmail.com', 'HR', 40000, 'Pune', 2, 'Inactive'),
+    -> (109, 'Sagar Jadhav', 'sagar@gmail.com', 'IT', 58000, 'Aurangabad', 3, 'Active'),
+    -> (110, 'Kavita More', 'kavita@gmail.com', 'Finance', 62000, 'Pune', 8, 'Active'),
+    -> (111, 'Nikhil Patil', 'nikhil@gmail.com', 'Sales', 70000, 'Mumbai', 10, 'Active'),
+    -> (112, 'Riya Shah', 'riya@gmail.com', 'IT', 57000, 'Pune', 2, 'Active'),
+    -> (113, 'Vishal Pawar', 'vishal@gmail.com', 'Marketing', 43000, 'Nashik', 4, 'Inactive'),
+    -> (114, 'Anjali Gaikwad', 'anjali@gmail.com', 'Finance', 47000, 'Pune', 3, 'Active'),
+    -> (115, 'Kunal Joshi', 'kunal@gmail.com', 'IT', 68000, 'Mumbai', 7, 'Active');
+ERROR 1054 (42S22): Unknown column 'id' in 'field list'
+mysql> drop table employeeDemo;
+Query OK, 0 rows affected (0.31 sec)
+
+mysql> show tables;
++---------------------+
+| Tables_in_batch1343 |
++---------------------+
+| customer            |
+| student             |
++---------------------+
+2 rows in set (0.01 sec)
+
+mysql> create table employees(
+    -> employee_id,emplyee_name varchar(50),email varchar(40), Demartment varchar(50), salary varchar(50), city varchar(40), experience int , status varchar(60));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',emplyee_name varchar(50),email varchar(40), Demartment varchar(50), salary varc' at line 2
+mysql> employee_id,emplyee_name varchar(50),email varchar(40), Demartment varchar(50), salary int, city varchar(40), experience int , status varchar(60));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'employee_id,emplyee_name varchar(50),email varchar(40), Demartment varchar(50), ' at line 1
+mysql> CREATE TABLE Employees (
+    ->     id INT PRIMARY KEY,
+    ->     name VARCHAR(50),
+    ->     email VARCHAR(100),
+    ->     department VARCHAR(50),
+    ->     salary INT,
+    ->     city VARCHAR(50),
+    ->     experience INT,
+    ->     status VARCHAR(20)
+    -> );
+Query OK, 0 rows affected (0.42 sec)
+
+mysql> desc eployees;
+ERROR 1146 (42S02): Table 'batch1343.eployees' doesn't exist
+mysql> desc employees;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| id         | int          | NO   | PRI | NULL    |       |
+| name       | varchar(50)  | YES  |     | NULL    |       |
+| email      | varchar(100) | YES  |     | NULL    |       |
+| department | varchar(50)  | YES  |     | NULL    |       |
+| salary     | int          | YES  |     | NULL    |       |
+| city       | varchar(50)  | YES  |     | NULL    |       |
+| experience | int          | YES  |     | NULL    |       |
+| status     | varchar(20)  | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+mysql> show tables;
++---------------------+
+| Tables_in_batch1343 |
++---------------------+
+| customer            |
+| employees           |
+| student             |
++---------------------+
+3 rows in set (0.01 sec)
+
+mysql> use employees;
+ERROR 1049 (42000): Unknown database 'employees'
+mysql> INSERT INTO Employees
+    -> (id, name, email, department, salary, city, experience, status)
+    -> VALUES
+    -> (101, 'Amit Sharma', 'amit@gmail.com', 'IT', 55000, 'Pune', 2, 'Active'),
+    -> (102, 'Priya Patil', 'priya@gmail.com', 'HR', 42000, 'Mumbai', 3, 'Active'),
+    -> (103, 'Rahul More', 'rahul@gmail.com', 'IT', 60000, 'Pune', 4, 'Active'),
+    -> (104, 'Sneha Joshi', 'sneha@gmail.com', 'Finance', 48000, 'Nashik', 5, 'Active'),
+    -> (105, 'Akash Kulkarni', 'akash@gmail.com', 'Sales', 38000, 'Pune', 1, 'Inactive'),
+    -> (106, 'Neha Deshmukh', 'neha@gmail.com', 'IT', 65000, 'Mumbai', 6, 'Active'),
+    -> (107, 'Rohit Pawar', 'rohit@gmail.com', 'Marketing', 45000, 'Nagpur', 7, 'Active'),
+    -> (108, 'Pooja Shinde', 'pooja@gmail.com', 'HR', 40000, 'Pune', 2, 'Inactive'),
+    -> (109, 'Sagar Jadhav', 'sagar@gmail.com', 'IT', 58000, 'Aurangabad', 3, 'Active'),
+    -> (110, 'Kavita More', 'kavita@gmail.com', 'Finance', 62000, 'Pune', 8, 'Active'),
+    -> (111, 'Nikhil Patil', 'nikhil@gmail.com', 'Sales', 70000, 'Mumbai', 10, 'Active'),
+    -> (112, 'Riya Shah', 'riya@gmail.com', 'IT', 57000, 'Pune', 2, 'Active'),
+    -> (113, 'Vishal Pawar', 'vishal@gmail.com', 'Marketing', 43000, 'Nashik', 4, 'Inactive'),
+    -> (114, 'Anjali Gaikwad', 'anjali@gmail.com', 'Finance', 47000, 'Pune', 3, 'Active'),
+    -> (115, 'Kunal Joshi', 'kunal@gmail.com', 'IT', 68000, 'Mumbai', 7, 'Active');
+Query OK, 15 rows affected (0.11 sec)
+Records: 15  Duplicates: 0  Warnings: 0
+
+mysql> select * from emplyees;
+ERROR 1146 (42S02): Table 'batch1343.emplyees' doesn't exist
+mysql> SELECT * FROM Employees;
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+| id  | name           | email            | department | salary | city       | experience | status   |
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+| 101 | Amit Sharma    | amit@gmail.com   | IT         |  55000 | Pune       |          2 | Active   |
+| 102 | Priya Patil    | priya@gmail.com  | HR         |  42000 | Mumbai     |          3 | Active   |
+| 103 | Rahul More     | rahul@gmail.com  | IT         |  60000 | Pune       |          4 | Active   |
+| 104 | Sneha Joshi    | sneha@gmail.com  | Finance    |  48000 | Nashik     |          5 | Active   |
+| 105 | Akash Kulkarni | akash@gmail.com  | Sales      |  38000 | Pune       |          1 | Inactive |
+| 106 | Neha Deshmukh  | neha@gmail.com   | IT         |  65000 | Mumbai     |          6 | Active   |
+| 107 | Rohit Pawar    | rohit@gmail.com  | Marketing  |  45000 | Nagpur     |          7 | Active   |
+| 108 | Pooja Shinde   | pooja@gmail.com  | HR         |  40000 | Pune       |          2 | Inactive |
+| 109 | Sagar Jadhav   | sagar@gmail.com  | IT         |  58000 | Aurangabad |          3 | Active   |
+| 110 | Kavita More    | kavita@gmail.com | Finance    |  62000 | Pune       |          8 | Active   |
+| 111 | Nikhil Patil   | nikhil@gmail.com | Sales      |  70000 | Mumbai     |         10 | Active   |
+| 112 | Riya Shah      | riya@gmail.com   | IT         |  57000 | Pune       |          2 | Active   |
+| 113 | Vishal Pawar   | vishal@gmail.com | Marketing  |  43000 | Nashik     |          4 | Inactive |
+| 114 | Anjali Gaikwad | anjali@gmail.com | Finance    |  47000 | Pune       |          3 | Active   |
+| 115 | Kunal Joshi    | kunal@gmail.com  | IT         |  68000 | Mumbai     |          7 | Active   |
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+15 rows in set (0.00 sec)
+
+mysql> Alter table employees modify name varchar(50) NOT NULL,modify email varchar(100)NOT NULL, modify department varchar(50)NOT NULL;
+Query OK, 0 rows affected (0.85 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employees;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| id         | int          | NO   | PRI | NULL    |       |
+| name       | varchar(50)  | NO   |     | NULL    |       |
+| email      | varchar(100) | NO   |     | NULL    |       |
+| department | varchar(50)  | NO   |     | NULL    |       |
+| salary     | int          | YES  |     | NULL    |       |
+| city       | varchar(50)  | YES  |     | NULL    |       |
+| experience | int          | YES  |     | NULL    |       |
+| status     | varchar(20)  | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+mysql> select  name , department, salary from emplyees;
+ERROR 1146 (42S02): Table 'batch1343.emplyees' doesn't exist
+mysql> SELECT name, department, salary
+    -> FROM Employees;
++----------------+------------+--------+
+| name           | department | salary |
++----------------+------------+--------+
+| Amit Sharma    | IT         |  55000 |
+| Priya Patil    | HR         |  42000 |
+| Rahul More     | IT         |  60000 |
+| Sneha Joshi    | Finance    |  48000 |
+| Akash Kulkarni | Sales      |  38000 |
+| Neha Deshmukh  | IT         |  65000 |
+| Rohit Pawar    | Marketing  |  45000 |
+| Pooja Shinde   | HR         |  40000 |
+| Sagar Jadhav   | IT         |  58000 |
+| Kavita More    | Finance    |  62000 |
+| Nikhil Patil   | Sales      |  70000 |
+| Riya Shah      | IT         |  57000 |
+| Vishal Pawar   | Marketing  |  43000 |
+| Anjali Gaikwad | Finance    |  47000 |
+| Kunal Joshi    | IT         |  68000 |
++----------------+------------+--------+
+15 rows in set (0.00 sec)
+
+mysql> select * from employees where salary > 50000;
++-----+---------------+------------------+------------+--------+------------+------------+--------+
+| id  | name          | email            | department | salary | city       | experience | status |
++-----+---------------+------------------+------------+--------+------------+------------+--------+
+| 101 | Amit Sharma   | amit@gmail.com   | IT         |  55000 | Pune       |          2 | Active |
+| 103 | Rahul More    | rahul@gmail.com  | IT         |  60000 | Pune       |          4 | Active |
+| 106 | Neha Deshmukh | neha@gmail.com   | IT         |  65000 | Mumbai     |          6 | Active |
+| 109 | Sagar Jadhav  | sagar@gmail.com  | IT         |  58000 | Aurangabad |          3 | Active |
+| 110 | Kavita More   | kavita@gmail.com | Finance    |  62000 | Pune       |          8 | Active |
+| 111 | Nikhil Patil  | nikhil@gmail.com | Sales      |  70000 | Mumbai     |         10 | Active |
+| 112 | Riya Shah     | riya@gmail.com   | IT         |  57000 | Pune       |          2 | Active |
+| 115 | Kunal Joshi   | kunal@gmail.com  | IT         |  68000 | Mumbai     |          7 | Active |
++-----+---------------+------------------+------------+--------+------------+------------+--------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employees where experience >2;
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+| id  | name           | email            | department | salary | city       | experience | status   |
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+| 102 | Priya Patil    | priya@gmail.com  | HR         |  42000 | Mumbai     |          3 | Active   |
+| 103 | Rahul More     | rahul@gmail.com  | IT         |  60000 | Pune       |          4 | Active   |
+| 104 | Sneha Joshi    | sneha@gmail.com  | Finance    |  48000 | Nashik     |          5 | Active   |
+| 106 | Neha Deshmukh  | neha@gmail.com   | IT         |  65000 | Mumbai     |          6 | Active   |
+| 107 | Rohit Pawar    | rohit@gmail.com  | Marketing  |  45000 | Nagpur     |          7 | Active   |
+| 109 | Sagar Jadhav   | sagar@gmail.com  | IT         |  58000 | Aurangabad |          3 | Active   |
+| 110 | Kavita More    | kavita@gmail.com | Finance    |  62000 | Pune       |          8 | Active   |
+| 111 | Nikhil Patil   | nikhil@gmail.com | Sales      |  70000 | Mumbai     |         10 | Active   |
+| 113 | Vishal Pawar   | vishal@gmail.com | Marketing  |  43000 | Nashik     |          4 | Inactive |
+| 114 | Anjali Gaikwad | anjali@gmail.com | Finance    |  47000 | Pune       |          3 | Active   |
+| 115 | Kunal Joshi    | kunal@gmail.com  | IT         |  68000 | Mumbai     |          7 | Active   |
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+11 rows in set (0.00 sec)
+
+mysql> select * from employees where department ='IT' AND salary >50000;
++-----+---------------+-----------------+------------+--------+------------+------------+--------+
+| id  | name          | email           | department | salary | city       | experience | status |
++-----+---------------+-----------------+------------+--------+------------+------------+--------+
+| 101 | Amit Sharma   | amit@gmail.com  | IT         |  55000 | Pune       |          2 | Active |
+| 103 | Rahul More    | rahul@gmail.com | IT         |  60000 | Pune       |          4 | Active |
+| 106 | Neha Deshmukh | neha@gmail.com  | IT         |  65000 | Mumbai     |          6 | Active |
+| 109 | Sagar Jadhav  | sagar@gmail.com | IT         |  58000 | Aurangabad |          3 | Active |
+| 112 | Riya Shah     | riya@gmail.com  | IT         |  57000 | Pune       |          2 | Active |
+| 115 | Kunal Joshi   | kunal@gmail.com | IT         |  68000 | Mumbai     |          7 | Active |
++-----+---------------+-----------------+------------+--------+------------+------------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employees where pune OR Mumbai;
+ERROR 1054 (42S22): Unknown column 'pune' in 'where clause'
+mysql> select * from employees where city pune OR Mumbai;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'pune OR Mumbai' at line 1
+mysql> select * from employees where city ='pune' OR city='Mumbai';
++-----+----------------+------------------+------------+--------+--------+------------+----------+
+| id  | name           | email            | department | salary | city   | experience | status   |
++-----+----------------+------------------+------------+--------+--------+------------+----------+
+| 101 | Amit Sharma    | amit@gmail.com   | IT         |  55000 | Pune   |          2 | Active   |
+| 102 | Priya Patil    | priya@gmail.com  | HR         |  42000 | Mumbai |          3 | Active   |
+| 103 | Rahul More     | rahul@gmail.com  | IT         |  60000 | Pune   |          4 | Active   |
+| 105 | Akash Kulkarni | akash@gmail.com  | Sales      |  38000 | Pune   |          1 | Inactive |
+| 106 | Neha Deshmukh  | neha@gmail.com   | IT         |  65000 | Mumbai |          6 | Active   |
+| 108 | Pooja Shinde   | pooja@gmail.com  | HR         |  40000 | Pune   |          2 | Inactive |
+| 110 | Kavita More    | kavita@gmail.com | Finance    |  62000 | Pune   |          8 | Active   |
+| 111 | Nikhil Patil   | nikhil@gmail.com | Sales      |  70000 | Mumbai |         10 | Active   |
+| 112 | Riya Shah      | riya@gmail.com   | IT         |  57000 | Pune   |          2 | Active   |
+| 114 | Anjali Gaikwad | anjali@gmail.com | Finance    |  47000 | Pune   |          3 | Active   |
+| 115 | Kunal Joshi    | kunal@gmail.com  | IT         |  68000 | Mumbai |          7 | Active   |
++-----+----------------+------------------+------------+--------+--------+------------+----------+
+11 rows in set (0.00 sec)
+
+mysql> select * from employees where dempertment ='IT' OR department ='sales';
+ERROR 1054 (42S22): Unknown column 'dempertment' in 'where clause'
+mysql> select * from employees where depertment ='IT' OR department ='sales'
+    -> select * from employees where depertment ='IT' OR department ='sales';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select * from employees where depertment ='IT' OR department ='sales'' at line 2
+mysql> select * from where department ='IT' OR department = 'sales';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where department ='IT' OR department = 'sales'' at line 1
+mysql> select * from employees where department ='IT' OR department = 'sales';
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+| id  | name           | email            | department | salary | city       | experience | status   |
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+| 101 | Amit Sharma    | amit@gmail.com   | IT         |  55000 | Pune       |          2 | Active   |
+| 103 | Rahul More     | rahul@gmail.com  | IT         |  60000 | Pune       |          4 | Active   |
+| 105 | Akash Kulkarni | akash@gmail.com  | Sales      |  38000 | Pune       |          1 | Inactive |
+| 106 | Neha Deshmukh  | neha@gmail.com   | IT         |  65000 | Mumbai     |          6 | Active   |
+| 109 | Sagar Jadhav   | sagar@gmail.com  | IT         |  58000 | Aurangabad |          3 | Active   |
+| 111 | Nikhil Patil   | nikhil@gmail.com | Sales      |  70000 | Mumbai     |         10 | Active   |
+| 112 | Riya Shah      | riya@gmail.com   | IT         |  57000 | Pune       |          2 | Active   |
+| 115 | Kunal Joshi    | kunal@gmail.com  | IT         |  68000 | Mumbai     |          7 | Active   |
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employees where NOT  city ='pune';
++-----+---------------+------------------+------------+--------+------------+------------+----------+
+| id  | name          | email            | department | salary | city       | experience | status   |
++-----+---------------+------------------+------------+--------+------------+------------+----------+
+| 102 | Priya Patil   | priya@gmail.com  | HR         |  42000 | Mumbai     |          3 | Active   |
+| 104 | Sneha Joshi   | sneha@gmail.com  | Finance    |  48000 | Nashik     |          5 | Active   |
+| 106 | Neha Deshmukh | neha@gmail.com   | IT         |  65000 | Mumbai     |          6 | Active   |
+| 107 | Rohit Pawar   | rohit@gmail.com  | Marketing  |  45000 | Nagpur     |          7 | Active   |
+| 109 | Sagar Jadhav  | sagar@gmail.com  | IT         |  58000 | Aurangabad |          3 | Active   |
+| 111 | Nikhil Patil  | nikhil@gmail.com | Sales      |  70000 | Mumbai     |         10 | Active   |
+| 113 | Vishal Pawar  | vishal@gmail.com | Marketing  |  43000 | Nashik     |          4 | Inactive |
+| 115 | Kunal Joshi   | kunal@gmail.com  | IT         |  68000 | Mumbai     |          7 | Active   |
++-----+---------------+------------------+------------+--------+------------+------------+----------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employees where salary >40000 AND experience>1
+    -> select * from employees where salary >40000 AND experience>1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select * from employees where salary >40000 AND experience>1' at line 2
+mysql> select * from employees where salary >40000 AND experience>1;
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+| id  | name           | email            | department | salary | city       | experience | status   |
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+| 101 | Amit Sharma    | amit@gmail.com   | IT         |  55000 | Pune       |          2 | Active   |
+| 102 | Priya Patil    | priya@gmail.com  | HR         |  42000 | Mumbai     |          3 | Active   |
+| 103 | Rahul More     | rahul@gmail.com  | IT         |  60000 | Pune       |          4 | Active   |
+| 104 | Sneha Joshi    | sneha@gmail.com  | Finance    |  48000 | Nashik     |          5 | Active   |
+| 106 | Neha Deshmukh  | neha@gmail.com   | IT         |  65000 | Mumbai     |          6 | Active   |
+| 107 | Rohit Pawar    | rohit@gmail.com  | Marketing  |  45000 | Nagpur     |          7 | Active   |
+| 109 | Sagar Jadhav   | sagar@gmail.com  | IT         |  58000 | Aurangabad |          3 | Active   |
+| 110 | Kavita More    | kavita@gmail.com | Finance    |  62000 | Pune       |          8 | Active   |
+| 111 | Nikhil Patil   | nikhil@gmail.com | Sales      |  70000 | Mumbai     |         10 | Active   |
+| 112 | Riya Shah      | riya@gmail.com   | IT         |  57000 | Pune       |          2 | Active   |
+| 113 | Vishal Pawar   | vishal@gmail.com | Marketing  |  43000 | Nashik     |          4 | Inactive |
+| 114 | Anjali Gaikwad | anjali@gmail.com | Finance    |  47000 | Pune       |          3 | Active   |
+| 115 | Kunal Joshi    | kunal@gmail.com  | IT         |  68000 | Mumbai     |          7 | Active   |
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+13 rows in set (0.00 sec)
+
+mysql> select * from employees where city = 'pune' OR 'mumbai'AND salary>40000;
++-----+----------------+------------------+------------+--------+------+------------+----------+
+| id  | name           | email            | department | salary | city | experience | status   |
++-----+----------------+------------------+------------+--------+------+------------+----------+
+| 101 | Amit Sharma    | amit@gmail.com   | IT         |  55000 | Pune |          2 | Active   |
+| 103 | Rahul More     | rahul@gmail.com  | IT         |  60000 | Pune |          4 | Active   |
+| 105 | Akash Kulkarni | akash@gmail.com  | Sales      |  38000 | Pune |          1 | Inactive |
+| 108 | Pooja Shinde   | pooja@gmail.com  | HR         |  40000 | Pune |          2 | Inactive |
+| 110 | Kavita More    | kavita@gmail.com | Finance    |  62000 | Pune |          8 | Active   |
+| 112 | Riya Shah      | riya@gmail.com   | IT         |  57000 | Pune |          2 | Active   |
+| 114 | Anjali Gaikwad | anjali@gmail.com | Finance    |  47000 | Pune |          3 | Active   |
++-----+----------------+------------------+------------+--------+------+------------+----------+
+7 rows in set, 1 warning (0.00 sec)
+
+mysql> update employees set salary = 60000 where id = 101;
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employees;
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+| id  | name           | email            | department | salary | city       | experience | status   |
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+| 101 | Amit Sharma    | amit@gmail.com   | IT         |  60000 | Pune       |          2 | Active   |
+| 102 | Priya Patil    | priya@gmail.com  | HR         |  42000 | Mumbai     |          3 | Active   |
+| 103 | Rahul More     | rahul@gmail.com  | IT         |  60000 | Pune       |          4 | Active   |
+| 104 | Sneha Joshi    | sneha@gmail.com  | Finance    |  48000 | Nashik     |          5 | Active   |
+| 105 | Akash Kulkarni | akash@gmail.com  | Sales      |  38000 | Pune       |          1 | Inactive |
+| 106 | Neha Deshmukh  | neha@gmail.com   | IT         |  65000 | Mumbai     |          6 | Active   |
+| 107 | Rohit Pawar    | rohit@gmail.com  | Marketing  |  45000 | Nagpur     |          7 | Active   |
+| 108 | Pooja Shinde   | pooja@gmail.com  | HR         |  40000 | Pune       |          2 | Inactive |
+| 109 | Sagar Jadhav   | sagar@gmail.com  | IT         |  58000 | Aurangabad |          3 | Active   |
+| 110 | Kavita More    | kavita@gmail.com | Finance    |  62000 | Pune       |          8 | Active   |
+| 111 | Nikhil Patil   | nikhil@gmail.com | Sales      |  70000 | Mumbai     |         10 | Active   |
+| 112 | Riya Shah      | riya@gmail.com   | IT         |  57000 | Pune       |          2 | Active   |
+| 113 | Vishal Pawar   | vishal@gmail.com | Marketing  |  43000 | Nashik     |          4 | Inactive |
+| 114 | Anjali Gaikwad | anjali@gmail.com | Finance    |  47000 | Pune       |          3 | Active   |
+| 115 | Kunal Joshi    | kunal@gmail.com  | IT         |  68000 | Mumbai     |          7 | Active   |
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+15 rows in set (0.00 sec)
+
+mysql> update employees set city ='pune'where id = 101;
+Query OK, 1 row affected (0.15 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employees;
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+| id  | name           | email            | department | salary | city       | experience | status   |
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+| 101 | Amit Sharma    | amit@gmail.com   | IT         |  60000 | pune       |          2 | Active   |
+| 102 | Priya Patil    | priya@gmail.com  | HR         |  42000 | Mumbai     |          3 | Active   |
+| 103 | Rahul More     | rahul@gmail.com  | IT         |  60000 | Pune       |          4 | Active   |
+| 104 | Sneha Joshi    | sneha@gmail.com  | Finance    |  48000 | Nashik     |          5 | Active   |
+| 105 | Akash Kulkarni | akash@gmail.com  | Sales      |  38000 | Pune       |          1 | Inactive |
+| 106 | Neha Deshmukh  | neha@gmail.com   | IT         |  65000 | Mumbai     |          6 | Active   |
+| 107 | Rohit Pawar    | rohit@gmail.com  | Marketing  |  45000 | Nagpur     |          7 | Active   |
+| 108 | Pooja Shinde   | pooja@gmail.com  | HR         |  40000 | Pune       |          2 | Inactive |
+| 109 | Sagar Jadhav   | sagar@gmail.com  | IT         |  58000 | Aurangabad |          3 | Active   |
+| 110 | Kavita More    | kavita@gmail.com | Finance    |  62000 | Pune       |          8 | Active   |
+| 111 | Nikhil Patil   | nikhil@gmail.com | Sales      |  70000 | Mumbai     |         10 | Active   |
+| 112 | Riya Shah      | riya@gmail.com   | IT         |  57000 | Pune       |          2 | Active   |
+| 113 | Vishal Pawar   | vishal@gmail.com | Marketing  |  43000 | Nashik     |          4 | Inactive |
+| 114 | Anjali Gaikwad | anjali@gmail.com | Finance    |  47000 | Pune       |          3 | Active   |
+| 115 | Kunal Joshi    | kunal@gmail.com  | IT         |  68000 | Mumbai     |          7 | Active   |
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+15 rows in set (0.00 sec)
+
+mysql> delete from emplyees where id = 101;
+ERROR 1146 (42S02): Table 'batch1343.emplyees' doesn't exist
+mysql> DELETE FROM Employees
+    -> WHERE id = 101;
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from employees;
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+| id  | name           | email            | department | salary | city       | experience | status   |
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+| 102 | Priya Patil    | priya@gmail.com  | HR         |  42000 | Mumbai     |          3 | Active   |
+| 103 | Rahul More     | rahul@gmail.com  | IT         |  60000 | Pune       |          4 | Active   |
+| 104 | Sneha Joshi    | sneha@gmail.com  | Finance    |  48000 | Nashik     |          5 | Active   |
+| 105 | Akash Kulkarni | akash@gmail.com  | Sales      |  38000 | Pune       |          1 | Inactive |
+| 106 | Neha Deshmukh  | neha@gmail.com   | IT         |  65000 | Mumbai     |          6 | Active   |
+| 107 | Rohit Pawar    | rohit@gmail.com  | Marketing  |  45000 | Nagpur     |          7 | Active   |
+| 108 | Pooja Shinde   | pooja@gmail.com  | HR         |  40000 | Pune       |          2 | Inactive |
+| 109 | Sagar Jadhav   | sagar@gmail.com  | IT         |  58000 | Aurangabad |          3 | Active   |
+| 110 | Kavita More    | kavita@gmail.com | Finance    |  62000 | Pune       |          8 | Active   |
+| 111 | Nikhil Patil   | nikhil@gmail.com | Sales      |  70000 | Mumbai     |         10 | Active   |
+| 112 | Riya Shah      | riya@gmail.com   | IT         |  57000 | Pune       |          2 | Active   |
+| 113 | Vishal Pawar   | vishal@gmail.com | Marketing  |  43000 | Nashik     |          4 | Inactive |
+| 114 | Anjali Gaikwad | anjali@gmail.com | Finance    |  47000 | Pune       |          3 | Active   |
+| 115 | Kunal Joshi    | kunal@gmail.com  | IT         |  68000 | Mumbai     |          7 | Active   |
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+14 rows in set (0.00 sec)
+
+mysql> inseDELETE FROM Employees
+    -> WHERE id = 101;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'inseDELETE FROM Employees
+WHERE id = 101' at line 1
+mysql> Alter table  employees add phone ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> Alter table  employees ADD phone int  ;
+Query OK, 0 rows affected (0.25 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employees;
++-----+----------------+------------------+------------+--------+------------+------------+----------+-------+
+| id  | name           | email            | department | salary | city       | experience | status   | phone |
++-----+----------------+------------------+------------+--------+------------+------------+----------+-------+
+| 102 | Priya Patil    | priya@gmail.com  | HR         |  42000 | Mumbai     |          3 | Active   |  NULL |
+| 103 | Rahul More     | rahul@gmail.com  | IT         |  60000 | Pune       |          4 | Active   |  NULL |
+| 104 | Sneha Joshi    | sneha@gmail.com  | Finance    |  48000 | Nashik     |          5 | Active   |  NULL |
+| 105 | Akash Kulkarni | akash@gmail.com  | Sales      |  38000 | Pune       |          1 | Inactive |  NULL |
+| 106 | Neha Deshmukh  | neha@gmail.com   | IT         |  65000 | Mumbai     |          6 | Active   |  NULL |
+| 107 | Rohit Pawar    | rohit@gmail.com  | Marketing  |  45000 | Nagpur     |          7 | Active   |  NULL |
+| 108 | Pooja Shinde   | pooja@gmail.com  | HR         |  40000 | Pune       |          2 | Inactive |  NULL |
+| 109 | Sagar Jadhav   | sagar@gmail.com  | IT         |  58000 | Aurangabad |          3 | Active   |  NULL |
+| 110 | Kavita More    | kavita@gmail.com | Finance    |  62000 | Pune       |          8 | Active   |  NULL |
+| 111 | Nikhil Patil   | nikhil@gmail.com | Sales      |  70000 | Mumbai     |         10 | Active   |  NULL |
+| 112 | Riya Shah      | riya@gmail.com   | IT         |  57000 | Pune       |          2 | Active   |  NULL |
+| 113 | Vishal Pawar   | vishal@gmail.com | Marketing  |  43000 | Nashik     |          4 | Inactive |  NULL |
+| 114 | Anjali Gaikwad | anjali@gmail.com | Finance    |  47000 | Pune       |          3 | Active   |  NULL |
+| 115 | Kunal Joshi    | kunal@gmail.com  | IT         |  68000 | Mumbai     |          7 | Active   |  NULL |
++-----+----------------+------------------+------------+--------+------------+------------+----------+-------+
+14 rows in set (0.00 sec)
+
+mysql> alter table employees Drop column phone ;
+Query OK, 0 rows affected (0.33 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employees;
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+| id  | name           | email            | department | salary | city       | experience | status   |
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+| 102 | Priya Patil    | priya@gmail.com  | HR         |  42000 | Mumbai     |          3 | Active   |
+| 103 | Rahul More     | rahul@gmail.com  | IT         |  60000 | Pune       |          4 | Active   |
+| 104 | Sneha Joshi    | sneha@gmail.com  | Finance    |  48000 | Nashik     |          5 | Active   |
+| 105 | Akash Kulkarni | akash@gmail.com  | Sales      |  38000 | Pune       |          1 | Inactive |
+| 106 | Neha Deshmukh  | neha@gmail.com   | IT         |  65000 | Mumbai     |          6 | Active   |
+| 107 | Rohit Pawar    | rohit@gmail.com  | Marketing  |  45000 | Nagpur     |          7 | Active   |
+| 108 | Pooja Shinde   | pooja@gmail.com  | HR         |  40000 | Pune       |          2 | Inactive |
+| 109 | Sagar Jadhav   | sagar@gmail.com  | IT         |  58000 | Aurangabad |          3 | Active   |
+| 110 | Kavita More    | kavita@gmail.com | Finance    |  62000 | Pune       |          8 | Active   |
+| 111 | Nikhil Patil   | nikhil@gmail.com | Sales      |  70000 | Mumbai     |         10 | Active   |
+| 112 | Riya Shah      | riya@gmail.com   | IT         |  57000 | Pune       |          2 | Active   |
+| 113 | Vishal Pawar   | vishal@gmail.com | Marketing  |  43000 | Nashik     |          4 | Inactive |
+| 114 | Anjali Gaikwad | anjali@gmail.com | Finance    |  47000 | Pune       |          3 | Active   |
+| 115 | Kunal Joshi    | kunal@gmail.com  | IT         |  68000 | Mumbai     |          7 | Active   |
++-----+----------------+------------------+------------+--------+------------+------------+----------+
+14 rows in set (0.00 sec)
+
+mysql>
