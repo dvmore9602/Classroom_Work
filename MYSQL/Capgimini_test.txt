@@ -1,0 +1,225 @@
+
+The Kiran Academy
+DATABASE NAME: Capgimini
+Table Name: employee
+
+CREATE DAYABASE capgimini;
+
+use database capgimini;
+show databases;
+
+Create employee Table
+
+--> CREATE TABLE employee (
+    id INT PRIMARY KEY,
+    name VARCHAR(50),
+    profile VARCHAR(50),
+    email VARCHAR(100),
+    salary INT,
+    age INT,
+    experience INT
+);
+Insert 5 Records
+--> INSERT INTO employee
+(id, name, profile, email, salary, age, experience)
+VALUES
+(1, 'rani', 'dev', 'rani@gmail.com', 11000, 43, 27),
+(2, 'raj', 'test', 'raj@gmail.com', 21000, 33, 17),
+(3, 'radha', 'test', 'radha@gmail.com', 26000, 38, 21),
+(4, 'raj', 'dev', 'raj12@gmail.com', 51000, 32, 12),
+(5, 'john', 'dev', 'john@gmail.com', 51000, 39, 27);
+
+Check the tables
+--> SELECT * FROM employee;
+
+1. As a user, I want to add an column branch_location so I can
+efficiently search the branch wise record.
+--> ALTER TABLE employee ADD  branch_location VARCHAR(50);
+mysql> ALTER TABLE employee ADD branch_location VARCHAR(50);
+Query OK, 0 rows affected (0.52 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee;
++----+-------+---------+-----------------+--------+------+------------+-----------------+
+| id | name  | profile | email           | salary | age  | experience | branch_location |
++----+-------+---------+-----------------+--------+------+------------+-----------------+
+|  1 | rani  | dev     | rani@gmail.com  |  11000 |   43 |         27 | NULL            |
+|  2 | raj   | test    | raj@gmail.com   |  21000 |   33 |         17 | NULL            |
+|  3 | radha | test    | radha@gmail.com |  26000 |   38 |         21 | NULL            |
+|  4 | raj   | dev     | raj12@gmail.com |  51000 |   32 |         12 | NULL            |
+|  5 | john  | dev     | john@gmail.com  |  51000 |   39 |         27 | NULL            |
++----+-------+---------+-----------------+--------+------+------------+-----------------+
+5 rows in set (0.00 sec)
+
+--> ALTER TABLE employee ADD COLUMN branch_location VARCHAR(100);
+
+
+2. As a user, I want to check the total salary expenses on employees.
+--> SELECT MAX(salary) FROM employee ;
+mysql> SELECT MAX(salary) FROM employee;
++-------------+
+| MAX(salary) |
++-------------+
+|       51000 |
++-------------+
+1 row in set (0.13 sec)
+    -> ^C
+mysql> SELECT SUM(salary + 0) AS total_salary
+    -> FROM employee;
++--------------+
+| total_salary |
++--------------+
+|       160000 |
++--------------+
+1 row in set (0.03 sec)
+
+mysql> SELECT MAX(salary) AS Total_salary  FROM employee;
++--------------+
+| Total_salary |
++--------------+
+|        51000 |
++--------------+
+1 row in set (0.00 s
+
+3. As a user, I want to see the max salary of employee from test
+profile.
+--> SELECT MAX(salary) AS total_salary FROM employee WHERE profile = 'test';
+mysql> SELECT MAX(salary) AS Total_salary FROM employee WHERE profile = 'test';
++--------------+
+| Total_salary |
++--------------+
+|        26000 |
++--------------+
+1 row in set (0.06 sec)
+4. As a user I want to get the average experience level of employees.
+SELECT AVG(experience) AS Average_experince FROM employee;
+mysql> SELECT AVG(experience) AS Average_experince FROM employee;
++-------------------+
+| Average_experince |
++-------------------+
+|           20.8000 |
++-------------------+
+
+
+5. As a user I want to see the name of highest paid employee.
+--> SELECT name FROM employee WHERE salary = (SELECT MAX(salary) FROM employee );
+
+mysql> SELECT name FROM employee WHERE salary = (SELECT MAX(salary) FROM employee );
++------+
+| name |
++------+
+| raj  |
+| john |
++------+
+2 rows in set (0.05 sec)
+
+6. As a user, I want to see the name and experience of lowest paid
+employee.
+-->SELECT name FROM employee WHERE salary = (SELECT MIN(salary) FROM employee );
+
+mysql> SELECT name FROM employee WHERE salary = (SELECT MIN(salary) FROM employee );
++------+
+| name |
++------+
+| rani |
++------+
+1 row in set (0.00 s
+
+7. As a user I want check how many employees are working in
+company.
+-->SELECT COUNT(*) AS Total_count_emp FROM employee;
+
+mysql> SELCET COUNT(*)  AS Total_couont_emp FROM employee ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SELCET COUNT(*)      AS Total_couont_emp FROM employee' at line 1
+mysql> SELECT COUNT(*) AS Total_count_emp FROM employee;
++-----------------+
+| Total_count_emp |
++-----------------+
+|               5 |
++-----------------+
+1 row in set (0.05 sec)
+
+8. As a user I want to see those employee names who are from test
+profile and having salary more than 25K.
+-->SELECT name FROM employee WHERE profile = 'test' AND salary > 25000;
+mysql> SELECT name FROM employee WHERE profile = 'test' AND salary > 25000;
++-------+
+| name  |
++-------+
+| radha |
++-------+
+1 row in set (0.00 sec)
+
+9. As a user, I want to shift Radha on support profile.
+-->UPDATE employee SET profile = 'support' WHERE name = 'radha';
+mysql> UPDATE employee SET profile = 'support' WHERE name = 'radha';
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++----+-------+---------+-----------------+--------+------+------------+-----------------+
+| id | name  | profile | email           | salary | age  | experience | branch_location |
++----+-------+---------+-----------------+--------+------+------------+-----------------+
+|  1 | rani  | dev     | rani@gmail.com  |  11000 |   43 |         27 | NULL            |
+|  2 | raj   | test    | raj@gmail.com   |  21000 |   33 |         17 | NULL            |
+|  3 | radha | support | radha@gmail.com |  26000 |   38 |         21 | NULL            |
+|  4 | raj   | dev     | raj12@gmail.com |  51000 |   32 |         12 | NULL            |
+|  5 | john  | dev     | john@gmail.com  |  51000 |   39 |         27 | NULL            |
++----+-------+---------+-----------------+--------+------+------------+-----------------+
+5 rows in set (0.00 sec)
+
+10. As a user, I want to get the second highest salary of employee.
+--> SELECT MAX(salary)  AS Total_salary FROM employee WHERE salary <(SELECT MAX(salary) FROM emplyee);
+mysql> SELECT MAX(salary)  AS Total_salary FROM employee WHERE salary < (SELECT MAX(salary) FROM employee);
++--------------+
+| Total_salary |
++--------------+
+|        26000 |
++--------------+
+1 row in set (0.00 sec)
+
+11. As a user I want to get the second lowest salary of employee.
+SELECT MIN(salary)  AS Total_salary FROM employee WHERE salary > (SELECT MIN(salary) FROM emplyee);
+mysql> SELECT MIN(salary)  AS Total_salary FROM employee WHERE salary > (SELECT MIN(salary) FROM employee);
++--------------+
+| Total_salary |
++--------------+
+|        21000 |
++--------------+
+1 row in set (0.00 s
+
+12. As a user, I want to calculate the average salary of employees
+those are belongs to dev profile.
+--> SELECT AVG(salary)  AS AVG_salary FROM employee WHERE profile = 'dev';
+mysql> SELECT AVG(salary)  AS AVG_salary FROM employee WHERE profile = 'dev';
++------------+
+| AVG_salary |
++------------+
+| 37666.6667 |
++------------+
+1 row in set (0.00 sec)
+
+13. As a user, I want to see the employee’s name and salary who is
+having lowest experience.
+-->mysql> SELECT name,salary FROM employee WHERE experience = (SELECT MIN(experience) FROM employee);
++------+--------+
+| name | salary |
++------+--------+
+| raj  |  51000 |
++------+--------+
+1 row in set (0.00 sec)
+
+14. As a user, I want to see the employee name who is having lowest
+age with max salary.
+--> SELECT name, age, salary FROM employee WHERE salary = (SELECT MAX(salary) FROM employee) AND age = (SELECT MIN(age) FROM employee WHERE salary = (SELECT MAX(salary) FROM employee));
+
+mysql> SELECT name, age, salary FROM employee WHERE salary = (SELECT MAX(salary) FROM employee) AND age = (SELECT MIN(age) FROM employee WHERE salary = (SELECT MAX(salary) FROM employee));
++------+------+--------+
+| name | age  | salary |
++------+------+--------+
+| raj  |   32 |  51000 |
++------+------+--------+
+1 row in set (0.01 sec)
+
+15. As a user, I want to remove all the employee from company.
+--> DELETE FROM employee;

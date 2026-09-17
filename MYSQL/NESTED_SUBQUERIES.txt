@@ -1,0 +1,484 @@
+Nested Query – Practice Questions
+Find students who scored more than Rahul.
+Find students who scored less than Priya.
+Find students having the same marks as Rohit.
+Find students older than Amit.
+Find students younger than Sneha.
+Find students who scored above the average marks.
+Find students who scored below the average marks.
+Find the student with the highest marks.
+Find the student with the lowest marks.
+Find students whose marks are equal to the maximum marks.
+Find students whose marks are greater than the maximum marks of students from Mumbai.
+Find students whose marks are less than the minimum marks of students from Pune.
+Find students who are enrolled in the same course as Rahul.
+Find students whose age is present among Mumbai students.
+Find students whose marks are present among Pune students.
+
+ANSWER:-
+Enter password: ***********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| abc                |
+| batch1343          |
+| company            |
+| employee           |
+| employeedata       |
+| hospital           |
+| information_schema |
+| mysql              |
+| performance_schema |
+| practice_questions |
+| sys                |
++--------------------+
+11 rows in set (2.16 sec)
+
+mysql> use batch1343;
+Database changed
+mysql> show tables;
++---------------------+
+| Tables_in_batch1343 |
++---------------------+
+| customer            |
+| employee_data       |
+| employees           |
+| employees_demo      |
+| product_data        |
+| product_record      |
+| products            |
+| shop                |
+| student             |
+| student_demo        |
+| students            |
++---------------------+
+11 rows in set (0.95 sec)
+
+mysql> CREATE TABLE student_datas (
+    ->     student_id INT PRIMARY KEY AUTO_INCREMENT,
+    ->     student_name VARCHAR(50) NOT NULL,
+    ->     marks INT NOT NULL,
+    ->     age INT NOT NULL,
+    ->     city VARCHAR(50) NOT NULL,
+    ->     course VARCHAR(50) NOT NULL
+    -> );
+Query OK, 0 rows affected (2.20 sec)
+
+mysql> desc student_datas;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| student_id   | int         | NO   | PRI | NULL    | auto_increment |
+| student_name | varchar(50) | NO   |     | NULL    |                |
+| marks        | int         | NO   |     | NULL    |                |
+| age          | int         | NO   |     | NULL    |                |
+| city         | varchar(50) | NO   |     | NULL    |                |
+| course       | varchar(50) | NO   |     | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+6 rows in set (0.12 sec)
+
+mysql> INSERT INTO student_datas
+    -> (student_name, marks, age, city, course)
+    -> VALUES
+    -> ('Rahul', 78, 21, 'Pune', 'Java'),
+    -> ('Priya', 65, 22, 'Mumbai', 'Python'),
+    -> ('Rohit', 85, 20, 'Pune', 'Java'),
+    -> ('Sneha', 72, 21, 'Mumbai', 'Python'),
+    -> ('Amit', 90, 23, 'Nagpur', 'Java'),
+    -> ('Neha', 55, 20, 'Pune', 'Python'),
+    -> ('Akash', 82, 22, 'Mumbai', 'Java'),
+    -> ('Pooja', 68, 21, 'Pune', 'Web Development'),
+    -> ('Vikas', 95, 24, 'Mumbai', 'Data Science'),
+    -> ('Riya', 75, 20, 'Nagpur', 'Java'),
+    -> ('Karan', 60, 22, 'Pune', 'Python'),
+    -> ('Anjali', 88, 23, 'Mumbai', 'Web Development'),
+    -> ('Suresh', 70, 21, 'Pune', 'Java'),
+    -> ('Kavita', 92, 22, 'Mumbai', 'Data Science'),
+    -> ('Nikhil', 58, 20, 'Nagpur', 'Python'),
+    -> ('Meena', 80, 24, 'Pune', 'Java'),
+    -> ('Vivek', 73, 23, 'Mumbai', 'Python'),
+    -> ('Swati', 66, 21, 'Pune', 'Web Development'),
+    -> ('Manish', 87, 22, 'Mumbai', 'Java'),
+    -> ('Aarti', 76, 20, 'Nagpur', 'Data Science'),
+    -> ('Sachin', 64, 24, 'Pune', 'Python'),
+    -> ('Komal', 89, 23, 'Mumbai', 'Web Development'),
+    -> ('Deepak', 71, 21, 'Pune', 'Java'),
+    -> ('Nisha', 83, 22, 'Mumbai', 'Python'),
+    -> ('Ajay', 50, 20, 'Nagpur', 'Java');
+Query OK, 25 rows affected (1.18 sec)
+Records: 25  Duplicates: 0  Warnings: 0
+
+mysql> select * from  student_datas;
++------------+--------------+-------+-----+--------+-----------------+
+| student_id | student_name | marks | age | city   | course          |
++------------+--------------+-------+-----+--------+-----------------+
+|          1 | Rahul        |    78 |  21 | Pune   | Java            |
+|          2 | Priya        |    65 |  22 | Mumbai | Python          |
+|          3 | Rohit        |    85 |  20 | Pune   | Java            |
+|          4 | Sneha        |    72 |  21 | Mumbai | Python          |
+|          5 | Amit         |    90 |  23 | Nagpur | Java            |
+|          6 | Neha         |    55 |  20 | Pune   | Python          |
+|          7 | Akash        |    82 |  22 | Mumbai | Java            |
+|          8 | Pooja        |    68 |  21 | Pune   | Web Development |
+|          9 | Vikas        |    95 |  24 | Mumbai | Data Science    |
+|         10 | Riya         |    75 |  20 | Nagpur | Java            |
+|         11 | Karan        |    60 |  22 | Pune   | Python          |
+|         12 | Anjali       |    88 |  23 | Mumbai | Web Development |
+|         13 | Suresh       |    70 |  21 | Pune   | Java            |
+|         14 | Kavita       |    92 |  22 | Mumbai | Data Science    |
+|         15 | Nikhil       |    58 |  20 | Nagpur | Python          |
+|         16 | Meena        |    80 |  24 | Pune   | Java            |
+|         17 | Vivek        |    73 |  23 | Mumbai | Python          |
+|         18 | Swati        |    66 |  21 | Pune   | Web Development |
+|         19 | Manish       |    87 |  22 | Mumbai | Java            |
+|         20 | Aarti        |    76 |  20 | Nagpur | Data Science    |
+|         21 | Sachin       |    64 |  24 | Pune   | Python          |
+|         22 | Komal        |    89 |  23 | Mumbai | Web Development |
+|         23 | Deepak       |    71 |  21 | Pune   | Java            |
+|         24 | Nisha        |    83 |  22 | Mumbai | Python          |
+|         25 | Ajay         |    50 |  20 | Nagpur | Java            |
++------------+--------------+-------+-----+--------+-----------------+
+25 rows in set (0.00 sec)
+
+mysql> SELECT * FROM student_datas WHERE marks > name = 'Rahul';
+ERROR 1054 (42S22): Unknown column 'name' in 'where clause'
+mysql> SELECT * FROM student_datas WHERE marks >  (SELECT marks FROM student_datas WHERE name = 'Rahul');
+ERROR 1054 (42S22): Unknown column 'name' in 'where clause'
+mysql> SELECT * FROM student_datas WHERE marks >  (SELECT marks FROM student_datas WHERE student_name = 'Rahul');
++------------+--------------+-------+-----+--------+-----------------+
+| student_id | student_name | marks | age | city   | course          |
++------------+--------------+-------+-----+--------+-----------------+
+|          3 | Rohit        |    85 |  20 | Pune   | Java            |
+|          5 | Amit         |    90 |  23 | Nagpur | Java            |
+|          7 | Akash        |    82 |  22 | Mumbai | Java            |
+|          9 | Vikas        |    95 |  24 | Mumbai | Data Science    |
+|         12 | Anjali       |    88 |  23 | Mumbai | Web Development |
+|         14 | Kavita       |    92 |  22 | Mumbai | Data Science    |
+|         16 | Meena        |    80 |  24 | Pune   | Java            |
+|         19 | Manish       |    87 |  22 | Mumbai | Java            |
+|         22 | Komal        |    89 |  23 | Mumbai | Web Development |
+|         24 | Nisha        |    83 |  22 | Mumbai | Python          |
++------------+--------------+-------+-----+--------+-----------------+
+10 rows in set (0.02 sec)
+
+mysql> SELECT * FROM student_datas WHERE marks <  (SELECT marks FROM student_datas WHERE student_name = 'Priya');
++------------+--------------+-------+-----+--------+--------+
+| student_id | student_name | marks | age | city   | course |
++------------+--------------+-------+-----+--------+--------+
+|          6 | Neha         |    55 |  20 | Pune   | Python |
+|         11 | Karan        |    60 |  22 | Pune   | Python |
+|         15 | Nikhil       |    58 |  20 | Nagpur | Python |
+|         21 | Sachin       |    64 |  24 | Pune   | Python |
+|         25 | Ajay         |    50 |  20 | Nagpur | Java   |
++------------+--------------+-------+-----+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM student_datas WHERE marks = (SELECT marks FROM student_datas WHERE student_name = 'Rohit');
++------------+--------------+-------+-----+------+--------+
+| student_id | student_name | marks | age | city | course |
++------------+--------------+-------+-----+------+--------+
+|          3 | Rohit        |    85 |  20 | Pune | Java   |
++------------+--------------+-------+-----+------+--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM student_datas WHERE age < (SELECT age FROM student_datas WHERE student_name = 'Amit');
++------------+--------------+-------+-----+--------+-----------------+
+| student_id | student_name | marks | age | city   | course          |
++------------+--------------+-------+-----+--------+-----------------+
+|          1 | Rahul        |    78 |  21 | Pune   | Java            |
+|          2 | Priya        |    65 |  22 | Mumbai | Python          |
+|          3 | Rohit        |    85 |  20 | Pune   | Java            |
+|          4 | Sneha        |    72 |  21 | Mumbai | Python          |
+|          6 | Neha         |    55 |  20 | Pune   | Python          |
+|          7 | Akash        |    82 |  22 | Mumbai | Java            |
+|          8 | Pooja        |    68 |  21 | Pune   | Web Development |
+|         10 | Riya         |    75 |  20 | Nagpur | Java            |
+|         11 | Karan        |    60 |  22 | Pune   | Python          |
+|         13 | Suresh       |    70 |  21 | Pune   | Java            |
+|         14 | Kavita       |    92 |  22 | Mumbai | Data Science    |
+|         15 | Nikhil       |    58 |  20 | Nagpur | Python          |
+|         18 | Swati        |    66 |  21 | Pune   | Web Development |
+|         19 | Manish       |    87 |  22 | Mumbai | Java            |
+|         20 | Aarti        |    76 |  20 | Nagpur | Data Science    |
+|         23 | Deepak       |    71 |  21 | Pune   | Java            |
+|         24 | Nisha        |    83 |  22 | Mumbai | Python          |
+|         25 | Ajay         |    50 |  20 | Nagpur | Java            |
++------------+--------------+-------+-----+--------+-----------------+
+18 rows in set (0.00 sec)
+
+mysql> SELECT * FROM student_datas WHERE age > (SELECT age FROM student_datas WHERE student_name = 'Sneha');
++------------+--------------+-------+-----+--------+-----------------+
+| student_id | student_name | marks | age | city   | course          |
++------------+--------------+-------+-----+--------+-----------------+
+|          2 | Priya        |    65 |  22 | Mumbai | Python          |
+|          5 | Amit         |    90 |  23 | Nagpur | Java            |
+|          7 | Akash        |    82 |  22 | Mumbai | Java            |
+|          9 | Vikas        |    95 |  24 | Mumbai | Data Science    |
+|         11 | Karan        |    60 |  22 | Pune   | Python          |
+|         12 | Anjali       |    88 |  23 | Mumbai | Web Development |
+|         14 | Kavita       |    92 |  22 | Mumbai | Data Science    |
+|         16 | Meena        |    80 |  24 | Pune   | Java            |
+|         17 | Vivek        |    73 |  23 | Mumbai | Python          |
+|         19 | Manish       |    87 |  22 | Mumbai | Java            |
+|         21 | Sachin       |    64 |  24 | Pune   | Python          |
+|         22 | Komal        |    89 |  23 | Mumbai | Web Development |
+|         24 | Nisha        |    83 |  22 | Mumbai | Python          |
++------------+--------------+-------+-----+--------+-----------------+
+13 rows in set (0.00 sec)
+
+mysql> SELECT AVG(marks) ROM student_datas WHERE < (SELECT AVG(marks) FROM student_datas );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'student_datas WHERE < (SELECT AVG(marks) FROM student_datas )' at line 1
+mysql> SELECT AVG(marks) FROM student_datas WHERE marks < (SELECT AVG(marks) FROM student_datas );
++------------+
+| AVG(marks) |
++------------+
+|    64.3333 |
++------------+
+1 row in set (0.06 sec)
+
+mysql> SELECT AVG(marks) FROM student_datas WHERE marks > (SELECT AVG(marks) FROM student_datas );
++------------+
+| AVG(marks) |
++------------+
+|    84.6154 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(marks) FROM student_datas WHERE marks > (SELECT MAX(marks) FROM student_datas );
++------------+
+| MAX(marks) |
++------------+
+|       NULL |
++------------+
+1 row in set (0.03 sec)
+
+mysql> SELECT * FROM student_datas;
++------------+--------------+-------+-----+--------+-----------------+
+| student_id | student_name | marks | age | city   | course          |
++------------+--------------+-------+-----+--------+-----------------+
+|          1 | Rahul        |    78 |  21 | Pune   | Java            |
+|          2 | Priya        |    65 |  22 | Mumbai | Python          |
+|          3 | Rohit        |    85 |  20 | Pune   | Java            |
+|          4 | Sneha        |    72 |  21 | Mumbai | Python          |
+|          5 | Amit         |    90 |  23 | Nagpur | Java            |
+|          6 | Neha         |    55 |  20 | Pune   | Python          |
+|          7 | Akash        |    82 |  22 | Mumbai | Java            |
+|          8 | Pooja        |    68 |  21 | Pune   | Web Development |
+|          9 | Vikas        |    95 |  24 | Mumbai | Data Science    |
+|         10 | Riya         |    75 |  20 | Nagpur | Java            |
+|         11 | Karan        |    60 |  22 | Pune   | Python          |
+|         12 | Anjali       |    88 |  23 | Mumbai | Web Development |
+|         13 | Suresh       |    70 |  21 | Pune   | Java            |
+|         14 | Kavita       |    92 |  22 | Mumbai | Data Science    |
+|         15 | Nikhil       |    58 |  20 | Nagpur | Python          |
+|         16 | Meena        |    80 |  24 | Pune   | Java            |
+|         17 | Vivek        |    73 |  23 | Mumbai | Python          |
+|         18 | Swati        |    66 |  21 | Pune   | Web Development |
+|         19 | Manish       |    87 |  22 | Mumbai | Java            |
+|         20 | Aarti        |    76 |  20 | Nagpur | Data Science    |
+|         21 | Sachin       |    64 |  24 | Pune   | Python          |
+|         22 | Komal        |    89 |  23 | Mumbai | Web Development |
+|         23 | Deepak       |    71 |  21 | Pune   | Java            |
+|         24 | Nisha        |    83 |  22 | Mumbai | Python          |
+|         25 | Ajay         |    50 |  20 | Nagpur | Java            |
++------------+--------------+-------+-----+--------+-----------------+
+25 rows in set (0.00 sec)
+
+mysql> SELECT MAX(marks) FROM student_datas WHERE marks;
++------------+
+| MAX(marks) |
++------------+
+|         95 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MIN(marks) FROM student_datas WHERE marks;
++------------+
+| MIN(marks) |
++------------+
+|         50 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM student_datas WHERE marks = (SELECT MAX(marks) FROM student_datas );
++------------+--------------+-------+-----+--------+--------------+
+| student_id | student_name | marks | age | city   | course       |
++------------+--------------+-------+-----+--------+--------------+
+|          9 | Vikas        |    95 |  24 | Mumbai | Data Science |
++------------+--------------+-------+-----+--------+--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(marks) FROM student_datas WHERE marks > (SELECT MAX(marks) FROM student_datas WHERE city = 'Mumbai'); 
++------------+
+| MAX(marks) |
++------------+
+|       NULL |
++------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM student_datas WHERE marks > (SELECT MAX(marks) FROM student_datas WHERE city = 'Mumbai');
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM student_datas WHERE marks = ( SELECT MAX(marks) FROM student_datas);
++------------+--------------+-------+-----+--------+--------------+
+| student_id | student_name | marks | age | city   | course       |
++------------+--------------+-------+-----+--------+--------------+
+|          9 | Vikas        |    95 |  24 | Mumbai | Data Science |
++------------+--------------+-------+-----+--------+--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM student_datas WHERE marks = ( SELECT MIN(marks) FROM student_datas);
++------------+--------------+-------+-----+--------+--------+
+| student_id | student_name | marks | age | city   | course |
++------------+--------------+-------+-----+--------+--------+
+|         25 | Ajay         |    50 |  20 | Nagpur | Java   |
++------------+--------------+-------+-----+--------+--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM student_datas WHERE marks < (SELECT MAX(marks) FROM student_datas WHERE city = 'Pune');
++------------+--------------+-------+-----+--------+-----------------+
+| student_id | student_name | marks | age | city   | course          |
++------------+--------------+-------+-----+--------+-----------------+
+|          1 | Rahul        |    78 |  21 | Pune   | Java            |
+|          2 | Priya        |    65 |  22 | Mumbai | Python          |
+|          4 | Sneha        |    72 |  21 | Mumbai | Python          |
+|          6 | Neha         |    55 |  20 | Pune   | Python          |
+|          7 | Akash        |    82 |  22 | Mumbai | Java            |
+|          8 | Pooja        |    68 |  21 | Pune   | Web Development |
+|         10 | Riya         |    75 |  20 | Nagpur | Java            |
+|         11 | Karan        |    60 |  22 | Pune   | Python          |
+|         13 | Suresh       |    70 |  21 | Pune   | Java            |
+|         15 | Nikhil       |    58 |  20 | Nagpur | Python          |
+|         16 | Meena        |    80 |  24 | Pune   | Java            |
+|         17 | Vivek        |    73 |  23 | Mumbai | Python          |
+|         18 | Swati        |    66 |  21 | Pune   | Web Development |
+|         20 | Aarti        |    76 |  20 | Nagpur | Data Science    |
+|         21 | Sachin       |    64 |  24 | Pune   | Python          |
+|         23 | Deepak       |    71 |  21 | Pune   | Java            |
+|         24 | Nisha        |    83 |  22 | Mumbai | Python          |
+|         25 | Ajay         |    50 |  20 | Nagpur | Java            |
++------------+--------------+-------+-----+--------+-----------------+
+18 rows in set (0.00 sec)
+
+mysql> SELECT * FROM student_datas WHERE course = (SELECT course FROM student_datas WHERE student_name = 'Rahul');
++------------+--------------+-------+-----+--------+--------+
+| student_id | student_name | marks | age | city   | course |
++------------+--------------+-------+-----+--------+--------+
+|          1 | Rahul        |    78 |  21 | Pune   | Java   |
+|          3 | Rohit        |    85 |  20 | Pune   | Java   |
+|          5 | Amit         |    90 |  23 | Nagpur | Java   |
+|          7 | Akash        |    82 |  22 | Mumbai | Java   |
+|         10 | Riya         |    75 |  20 | Nagpur | Java   |
+|         13 | Suresh       |    70 |  21 | Pune   | Java   |
+|         16 | Meena        |    80 |  24 | Pune   | Java   |
+|         19 | Manish       |    87 |  22 | Mumbai | Java   |
+|         23 | Deepak       |    71 |  21 | Pune   | Java   |
+|         25 | Ajay         |    50 |  20 | Nagpur | Java   |
++------------+--------------+-------+-----+--------+--------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT * FROM student_datas WHERE age = (SELECT course FROM student_datas WHERE city = 'Mumbai');
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql> SELECT * FROM student_datas WHERE age IN (SELECT age FROM student_datas where city = 'Mumbai');
++------------+--------------+-------+-----+--------+-----------------+
+| student_id | student_name | marks | age | city   | course          |
++------------+--------------+-------+-----+--------+-----------------+
+|          1 | Rahul        |    78 |  21 | Pune   | Java            |
+|          2 | Priya        |    65 |  22 | Mumbai | Python          |
+|          4 | Sneha        |    72 |  21 | Mumbai | Python          |
+|          5 | Amit         |    90 |  23 | Nagpur | Java            |
+|          7 | Akash        |    82 |  22 | Mumbai | Java            |
+|          8 | Pooja        |    68 |  21 | Pune   | Web Development |
+|          9 | Vikas        |    95 |  24 | Mumbai | Data Science    |
+|         11 | Karan        |    60 |  22 | Pune   | Python          |
+|         12 | Anjali       |    88 |  23 | Mumbai | Web Development |
+|         13 | Suresh       |    70 |  21 | Pune   | Java            |
+|         14 | Kavita       |    92 |  22 | Mumbai | Data Science    |
+|         16 | Meena        |    80 |  24 | Pune   | Java            |
+|         17 | Vivek        |    73 |  23 | Mumbai | Python          |
+|         18 | Swati        |    66 |  21 | Pune   | Web Development |
+|         19 | Manish       |    87 |  22 | Mumbai | Java            |
+|         21 | Sachin       |    64 |  24 | Pune   | Python          |
+|         22 | Komal        |    89 |  23 | Mumbai | Web Development |
+|         23 | Deepak       |    71 |  21 | Pune   | Java            |
+|         24 | Nisha        |    83 |  22 | Mumbai | Python          |
++------------+--------------+-------+-----+--------+-----------------+
+19 rows in set (0.10 sec)
+
+mysql> SELECT * FROM student_datas WHERE age IN (SELECT age FROM student_datas where city = 'Pune');
++------------+--------------+-------+-----+--------+-----------------+
+| student_id | student_name | marks | age | city   | course          |
++------------+--------------+-------+-----+--------+-----------------+
+|          1 | Rahul        |    78 |  21 | Pune   | Java            |
+|          2 | Priya        |    65 |  22 | Mumbai | Python          |
+|          3 | Rohit        |    85 |  20 | Pune   | Java            |
+|          4 | Sneha        |    72 |  21 | Mumbai | Python          |
+|          6 | Neha         |    55 |  20 | Pune   | Python          |
+|          7 | Akash        |    82 |  22 | Mumbai | Java            |
+|          8 | Pooja        |    68 |  21 | Pune   | Web Development |
+|          9 | Vikas        |    95 |  24 | Mumbai | Data Science    |
+|         10 | Riya         |    75 |  20 | Nagpur | Java            |
+|         11 | Karan        |    60 |  22 | Pune   | Python          |
+|         13 | Suresh       |    70 |  21 | Pune   | Java            |
+|         14 | Kavita       |    92 |  22 | Mumbai | Data Science    |
+|         15 | Nikhil       |    58 |  20 | Nagpur | Python          |
+|         16 | Meena        |    80 |  24 | Pune   | Java            |
+|         18 | Swati        |    66 |  21 | Pune   | Web Development |
+|         19 | Manish       |    87 |  22 | Mumbai | Java            |
+|         20 | Aarti        |    76 |  20 | Nagpur | Data Science    |
+|         21 | Sachin       |    64 |  24 | Pune   | Python          |
+|         23 | Deepak       |    71 |  21 | Pune   | Java            |
+|         24 | Nisha        |    83 |  22 | Mumbai | Python          |
+|         25 | Ajay         |    50 |  20 | Nagpur | Java            |
++------------+--------------+-------+-----+--------+-----------------+
+21 rows in set (0.00 sec)
+
+mysql> SELECT * FROM student_datas WHERE marks IN (SELECT age FROM student_datas where city = 'Pune');
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM student_datas WHERE marks IN (SELECT marks FROM student_datas where city = 'Pune');
++------------+--------------+-------+-----+------+-----------------+
+| student_id | student_name | marks | age | city | course          |
++------------+--------------+-------+-----+------+-----------------+
+|          1 | Rahul        |    78 |  21 | Pune | Java            |
+|          3 | Rohit        |    85 |  20 | Pune | Java            |
+|          6 | Neha         |    55 |  20 | Pune | Python          |
+|          8 | Pooja        |    68 |  21 | Pune | Web Development |
+|         11 | Karan        |    60 |  22 | Pune | Python          |
+|         13 | Suresh       |    70 |  21 | Pune | Java            |
+|         16 | Meena        |    80 |  24 | Pune | Java            |
+|         18 | Swati        |    66 |  21 | Pune | Web Development |
+|         21 | Sachin       |    64 |  24 | Pune | Python          |
+|         23 | Deepak       |    71 |  21 | Pune | Java            |
++------------+--------------+-------+-----+------+-----------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT * FROM student_datas WHERE marks IN (SELECT marks FROM student_datas where city = 'Mumbai');
++------------+--------------+-------+-----+--------+-----------------+
+| student_id | student_name | marks | age | city   | course          |
++------------+--------------+-------+-----+--------+-----------------+
+|          2 | Priya        |    65 |  22 | Mumbai | Python          |
+|          4 | Sneha        |    72 |  21 | Mumbai | Python          |
+|          7 | Akash        |    82 |  22 | Mumbai | Java            |
+|          9 | Vikas        |    95 |  24 | Mumbai | Data Science    |
+|         12 | Anjali       |    88 |  23 | Mumbai | Web Development |
+|         14 | Kavita       |    92 |  22 | Mumbai | Data Science    |
+|         17 | Vivek        |    73 |  23 | Mumbai | Python          |
+|         19 | Manish       |    87 |  22 | Mumbai | Java            |
+|         22 | Komal        |    89 |  23 | Mumbai | Web Development |
+|         24 | Nisha        |    83 |  22 | Mumbai | Python          |
++------------+--------------+-------+-----+--------+-----------------+
+10 rows in set (0.00 sec)
