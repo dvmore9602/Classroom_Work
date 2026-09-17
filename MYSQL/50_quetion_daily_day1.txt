@@ -1,0 +1,771 @@
+                                   ALL Topics SQL 
+1. Database & Table
+2. CREATE
+3. INSERT
+4. SELECT
+5. WHERE
+6. DISTINCT
+7. UPDATE
+8. DELETE
+9. DROP
+10. TRUNCATE
+11. ALTER
+12. Constraints
+13. Data Types
+14. Operators
+15. IN
+16. BETWEEN
+17. LIKE
+18. ORDER BY
+19. LIMIT
+20. OFFSET
+21. Alias
+22. Aggregate Functions
+23. GROUP BY
+24. HAVING
+25. JOINS
+26. Subqueries
+27. UNION
+28. CASE
+29. String Functions
+30. Date Functions
+31. Views
+32. Indexes
+33. Transactions
+34. Stored Procedures
+35. CTE
+36. Window Functions
+
+📝 DAY 1 — 50 REAL-WORLD QUESTIONS
+
+Try solving these yourself first. Answers are provided below.
+
+🟢 Level 1 — Basic
+Q1Create a database called company_db.
+-->create database ecommerce_db;
+
+Q2Select/use the company_db database.
+-->use ecommerce_db;
+
+Q3Create a customers table with:
+customer_id
+name
+email
+age
+city
+-->CREATE TABLE customers (
+    customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    age INT,
+    city VARCHAR(50)
+);
+
+Q4. Display the structure of the customers table.
+-->desc customers;
+mysql> desc customers;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| customer_id | int          | NO   | PRI | NULL    | auto_increment |
+| name        | varchar(100) | NO   |     | NULL    |                |
+| email       | varchar(100) | YES  | UNI | NULL    |                |
+| age         | int          | YES  |     | NULL    |                |
+| city        | varchar(50)  | YES  |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+
+Q5Insert one customer.
+--> INSERT INTO customers
+(name, email, age, city)
+VALUES
+('Priya Sharma', 'priya@gmail.com', 24, 'Mumbai'),
+('Amit Joshi', 'amit@gmail.com', 29, 'Nashik'),
+('Sneha More', 'sneha@gmail.com', 22, 'Pune'),
+('Neha Deshmukh', 'neha@gmail.com', 31, 'Nagpur'),
+('Rohit Kulkarni', 'rohit@gmail.com', 27, 'Pune'),
+('Pooja Patil', 'pooja@gmail.com', 23, 'Kolhapur'),
+('Akash Shinde', 'akash@gmail.com', 35, 'Mumbai'),
+('Kiran Pawar', 'kiran@gmail.com', 28, 'Pune'),
+('Sakshi Jadhav', 'sakshi@gmail.com', 26, 'Nashik');
+mysql> select * from customers;
++-------------+----------------+------------------+------+----------+
+| customer_id | name           | email            | age  | city     |
++-------------+----------------+------------------+------+----------+
+|           1 | Priya Sharma   | priya@gmail.com  |   24 | Mumbai   |
+|           2 | Amit Joshi     | amit@gmail.com   |   29 | Nashik   |
+|           3 | Sneha More     | sneha@gmail.com  |   22 | Pune     |
+|           4 | Neha Deshmukh  | neha@gmail.com   |   31 | Nagpur   |
+|           5 | Rohit Kulkarni | rohit@gmail.com  |   27 | Pune     |
+|           6 | Pooja Patil    | pooja@gmail.com  |   23 | Kolhapur |
+|           7 | Akash Shinde   | akash@gmail.com  |   35 | Mumbai   |
+|           8 | Kiran Pawar    | kiran@gmail.com  |   28 | Pune     |
+|           9 | Sakshi Jadhav  | sakshi@gmail.com |   26 | Nashik   |
++-------------+----------------+------------------+------+----------+
+9 rows in set (0.00 sec)
+
+Q6Insert 10 customers.
+-->INSERT INTO customers
+(name, email, age, city)
+VALUES
+('Priya Sharma', 'priya@gmail.com', 24, 'Mumbai'),
+('Amit Joshi', 'amit@gmail.com', 29, 'Nashik'),
+('Sneha More', 'sneha@gmail.com', 22, 'Pune'),
+('Neha Deshmukh', 'neha@gmail.com', 31, 'Nagpur'),
+('Rohit Kulkarni', 'rohit@gmail.com', 27, 'Pune'),
+('Pooja Patil', 'pooja@gmail.com', 23, 'Kolhapur'),
+('Akash Shinde', 'akash@gmail.com', 35, 'Mumbai'),
+('Kiran Pawar', 'kiran@gmail.com', 28, 'Pune'),
+('Sakshi Jadhav', 'sakshi@gmail.com', 26, 'Nashik');
+mysql> select * from customers;
++-------------+----------------+------------------+------+----------+
+| customer_id | name           | email            | age  | city     |
++-------------+----------------+------------------+------+----------+
+|           1 | Priya Sharma   | priya@gmail.com  |   24 | Mumbai   |
+|           2 | Amit Joshi     | amit@gmail.com   |   29 | Nashik   |
+|           3 | Sneha More     | sneha@gmail.com  |   22 | Pune     |
+|           4 | Neha Deshmukh  | neha@gmail.com   |   31 | Nagpur   |
+|           5 | Rohit Kulkarni | rohit@gmail.com  |   27 | Pune     |
+|           6 | Pooja Patil    | pooja@gmail.com  |   23 | Kolhapur |
+|           7 | Akash Shinde   | akash@gmail.com  |   35 | Mumbai   |
+|           8 | Kiran Pawar    | kiran@gmail.com  |   28 | Pune     |
+|           9 | Sakshi Jadhav  | sakshi@gmail.com |   26 | Nashik   |
++-------------+----------------+------------------+------+----------+
+9 rows in set (0.00 sec)
+
+Q7Display all customers.
+--> select * from customers;
+
+mysql> select * from customers;
++-------------+----------------+------------------+------+----------+
+| customer_id | name           | email            | age  | city     |
++-------------+----------------+------------------+------+----------+
+|           1 | Priya Sharma   | priya@gmail.com  |   24 | Mumbai   |
+|           2 | Amit Joshi     | amit@gmail.com   |   29 | Nashik   |
+|           3 | Sneha More     | sneha@gmail.com  |   22 | Pune     |
+|           4 | Neha Deshmukh  | neha@gmail.com   |   31 | Nagpur   |
+|           5 | Rohit Kulkarni | rohit@gmail.com  |   27 | Pune     |
+|           6 | Pooja Patil    | pooja@gmail.com  |   23 | Kolhapur |
+|           7 | Akash Shinde   | akash@gmail.com  |   35 | Mumbai   |
+|           8 | Kiran Pawar    | kiran@gmail.com  |   28 | Pune     |
+|           9 | Sakshi Jadhav  | sakshi@gmail.com |   26 | Nashik   |
++-------------+----------------+------------------+------+----------+
+
+Q8Display only customer names.
+--> SELECT name FROM customers;
+
+mysql> select name from customers;
++----------------+
+| name           |
++----------------+
+| Priya Sharma   |
+| Amit Joshi     |
+| Sneha More     |
+| Neha Deshmukh  |
+| Rohit Kulkarni |
+| Pooja Patil    |
+| Akash Shinde   |
+| Kiran Pawar    |
+| Sakshi Jadhav  |
+
+Q9Display customer names and cities.
+--> SELECT city FROM customers;
+mysql> SELECT city FROM customers;
++----------+
+| city     |
++----------+
+| Mumbai   |
+| Nashik   |
+| Pune     |
+| Nagpur   |
+| Pune     |
+| Kolhapur |
+| Mumbai   |
+| Pune     |
+| Nashik   |
++----------+
+9 rows in set (0.00 s
+
+
+Q10Display unique cities.
+-->SELECT  DISCNICT city FROM customers;
+mysql> select DISTINCT city FROM customers;
++----------+
+| city     |
++----------+
+| Mumbai   |
+| Nashik   |
+| Pune     |
+| Nagpur   |
+| Kolhapur |
++----------+
+5 rows in set (0.02 sec)
+
+🟢 Level 2 — WHERE & Operators
+Q11Find customers from Pune.
+--> SELECT * FROM customer WHERE city = 'Pune';
+mysql> SELECT * FROM customers WHERE city = 'Pune';
++-------------+----------------+-----------------+------+------+
+| customer_id | name           | email           | age  | city |
++-------------+----------------+-----------------+------+------+
+|           3 | Sneha More     | sneha@gmail.com |   22 | Pune |
+|           5 | Rohit Kulkarni | rohit@gmail.com |   27 | Pune |
+|           8 | Kiran Pawar    | kiran@gmail.com |   28 | Pune |
++-------------+----------------+-----------------+------+------+
+3 rows in set (0.00 sec)
+
+Q12Find customers from Mumbai.
+-->SELECT * FROM customers WHERE city = 'Mumbai';
+mysql> SELECT * FROM customers WHERE city = 'Mumbai';
++-------------+--------------+-----------------+------+--------+
+| customer_id | name         | email           | age  | city   |
++-------------+--------------+-----------------+------+--------+
+|           1 | Priya Sharma | priya@gmail.com |   24 | Mumbai |
+|           7 | Akash Shinde | akash@gmail.com |   35 | Mumbai |
++-------------+--------------+-----------------+------+--------+
+2 rows in set (0.00 sec)
+
+Q13Find customers older than 25.
+-->SELECT * FROM customers WHERE age < 25;
+mysql> SELECT * FROM customers WHERE age < 25;
++-------------+--------------+-----------------+------+----------+
+| customer_id | name         | email           | age  | city     |
++-------------+--------------+-----------------+------+----------+
+|           1 | Priya Sharma | priya@gmail.com |   24 | Mumbai   |
+|           3 | Sneha More   | sneha@gmail.com |   22 | Pune     |
+|           6 | Pooja Patil  | pooja@gmail.com |   23 | Kolhapur |
++-------------+--------------+-----------------+------+----------+
+3 rows in set (0.03 sec)
+
+
+Q14Find customers younger than 25.
+--> SELECT * FROM customers WHERE age > 25;
+mysql> SELECT * FROM customers WHERE age > 25;
++-------------+----------------+------------------+------+--------+
+| customer_id | name           | email            | age  | city   |
++-------------+----------------+------------------+------+--------+
+|           2 | Amit Joshi     | amit@gmail.com   |   29 | Nashik |
+|           4 | Neha Deshmukh  | neha@gmail.com   |   31 | Nagpur |
+|           5 | Rohit Kulkarni | rohit@gmail.com  |   27 | Pune   |
+|           7 | Akash Shinde   | akash@gmail.com  |   35 | Mumbai |
+|           8 | Kiran Pawar    | kiran@gmail.com  |   28 | Pune   |
+|           9 | Sakshi Jadhav  | sakshi@gmail.com |   26 | Nashik |
++-------------+----------------+------------------+------+--------+
+6 rows in set (0.00 sec)
+
+
+Q15Find customers aged exactly 25.
+-->SELECT * FROM customers WHERE age = 25;
+mysql> SELECT * FROM customers WHERE age = 25;
+Empty set (0.00 sec)
+
+Q16Find customers whose age is greater than or equal to 30.
+-->SELECT * FROM customers WHERE age >= 30;
+
+mysql> SELECT * FROM customers WHERE age >= 30;
++-------------+---------------+-----------------+------+--------+
+| customer_id | name          | email           | age  | city   |
++-------------+---------------+-----------------+------+--------+
+|           4 | Neha Deshmukh | neha@gmail.com  |   31 | Nagpur |
+|           7 | Akash Shinde  | akash@gmail.com |   35 | Mumbai |
++-------------+---------------+-----------------+------+--------+
+2 rows in set (0.00 sec)
+
+Q17Find customers whose age is not 25.
+-->SELECT * FROM customers WHERE NOT age = 25;
+mysql> SELECT * FROM customers WHERE NOT age = 25;
++-------------+----------------+------------------+------+----------+
+| customer_id | name           | email            | age  | city     |
++-------------+----------------+------------------+------+----------+
+|           1 | Priya Sharma   | priya@gmail.com  |   24 | Mumbai   |
+|           2 | Amit Joshi     | amit@gmail.com   |   29 | Nashik   |
+|           3 | Sneha More     | sneha@gmail.com  |   22 | Pune     |
+|           4 | Neha Deshmukh  | neha@gmail.com   |   31 | Nagpur   |
+|           5 | Rohit Kulkarni | rohit@gmail.com  |   27 | Pune     |
+|           6 | Pooja Patil    | pooja@gmail.com  |   23 | Kolhapur |
+|           7 | Akash Shinde   | akash@gmail.com  |   35 | Mumbai   |
+|           8 | Kiran Pawar    | kiran@gmail.com  |   28 | Pune     |
+|           9 | Sakshi Jadhav  | sakshi@gmail.com |   26 | Nashik   |
++-------------+----------------+------------------+------+----------+
+9 rows in set (0.00 sec)
+
+Q18Find Pune customers older than 25.
+-->SELECT * FROM customers WHERE city = 'Pune' AND age < 25;
+mysql> SELECT * FROM customers WHERE city = 'Pune' AND age < 25;
++-------------+------------+-----------------+------+------+
+| customer_id | name       | email           | age  | city |
++-------------+------------+-----------------+------+------+
+|           3 | Sneha More | sneha@gmail.com |   22 | Pune |
++-------------+------------+-----------------+------+------+
+1 row in set (0.00 sec)
+
+Q19Find customers from Pune or Mumbai.
+--> SELECT * FROM customers WHERE city = 'Pune' OR city = 'Mumbai';
+mysql> SELECT * FROM customers WHERE city = 'Pune' OR city = 'Mumbai';
++-------------+----------------+-----------------+------+--------+
+| customer_id | name           | email           | age  | city   |
++-------------+----------------+-----------------+------+--------+
+|           1 | Priya Sharma   | priya@gmail.com |   24 | Mumbai |
+|           3 | Sneha More     | sneha@gmail.com |   22 | Pune   |
+|           5 | Rohit Kulkarni | rohit@gmail.com |   27 | Pune   |
+|           7 | Akash Shinde   | akash@gmail.com |   35 | Mumbai |
+|           8 | Kiran Pawar    | kiran@gmail.com |   28 | Pune   |
++-------------+----------------+-----------------+------+--------+
+5 rows in set (0.00 sec)
+
+
+Q20Find customers who are not from Pune.
+-->SELECT * FROM customers WHERE  NOT city = 'Pune';
+mysql> SELECT * FROM customers WHERE NOT city = 'Pune';
++-------------+---------------+------------------+------+----------+
+| customer_id | name          | email            | age  | city     |
++-------------+---------------+------------------+------+----------+
+|           1 | Priya Sharma  | priya@gmail.com  |   24 | Mumbai   |
+|           2 | Amit Joshi    | amit@gmail.com   |   29 | Nashik   |
+|           4 | Neha Deshmukh | neha@gmail.com   |   31 | Nagpur   |
+|           6 | Pooja Patil   | pooja@gmail.com  |   23 | Kolhapur |
+|           7 | Akash Shinde  | akash@gmail.com  |   35 | Mumbai   |
+|           9 | Sakshi Jadhav | sakshi@gmail.com |   26 | Nashik   |
++-------------+---------------+------------------+------+----------+
+6 rows in set (0.00 sec)
+
+
+🟡 Level 3 — IN, BETWEEN, LIKE
+Q21
+
+Find customers from Pune, Mumbai and Nashik using IN.
+-->SELECT * FROM customers WHERE city IN (Pune, Mumbai, Nashik);
+mysql> SELECT * FROM customers WHERE city IN ('Pune', 'Mumbai', 'Nashik');
++-------------+----------------+------------------+------+--------+
+| customer_id | name           | email            | age  | city   |
++-------------+----------------+------------------+------+--------+
+|           1 | Priya Sharma   | priya@gmail.com  |   24 | Mumbai |
+|           2 | Amit Joshi     | amit@gmail.com   |   29 | Nashik |
+|           3 | Sneha More     | sneha@gmail.com  |   22 | Pune   |
+|           5 | Rohit Kulkarni | rohit@gmail.com  |   27 | Pune   |
+|           7 | Akash Shinde   | akash@gmail.com  |   35 | Mumbai |
+|           8 | Kiran Pawar    | kiran@gmail.com  |   28 | Pune   |
+|           9 | Sakshi Jadhav  | sakshi@gmail.com |   26 | Nashik |
++-------------+----------------+------------------+------+--------+
+7 rows in set (0.00 sec)
+
+Q22Find customers who are not from Pune or Mumbai.
+--> SELECT * FROM customers WHERE NOT city IN ('Pune', Mumbai');
+mysql> SELECT * FROM customers WHERE city  NOT IN ('Pune', 'Mumbai');
++-------------+---------------+------------------+------+----------+
+| customer_id | name          | email            | age  | city     |
++-------------+---------------+------------------+------+----------+
+|           2 | Amit Joshi    | amit@gmail.com   |   29 | Nashik   |
+|           4 | Neha Deshmukh | neha@gmail.com   |   31 | Nagpur   |
+|           6 | Pooja Patil   | pooja@gmail.com  |   23 | Kolhapur |
+|           9 | Sakshi Jadhav | sakshi@gmail.com |   26 | Nashik   |
++-------------+---------------+------------------+------+----------+
+4 rows in set (0.00 sec)
+
+Q23Find customers whose age is between 20 and 30.
+-->SELECT * FROM customers WHERE age BETWEEN 20 AND 30;mysql> SELECT * FROM customers WHERE age BETWEEN 20 AND 30;
++-------------+----------------+------------------+------+----------+
+| customer_id | name           | email            | age  | city     |
++-------------+----------------+------------------+------+----------+
+|           1 | Priya Sharma   | priya@gmail.com  |   24 | Mumbai   |
+|           2 | Amit Joshi     | amit@gmail.com   |   29 | Nashik   |
+|           3 | Sneha More     | sneha@gmail.com  |   22 | Pune     |
+|           5 | Rohit Kulkarni | rohit@gmail.com  |   27 | Pune     |
+|           6 | Pooja Patil    | pooja@gmail.com  |   23 | Kolhapur |
+|           8 | Kiran Pawar    | kiran@gmail.com  |   28 | Pune     |
+|           9 | Sakshi Jadhav  | sakshi@gmail.com |   26 | Nashik   |
++-------------+----------------+------------------+------+----------+
+7 rows in set (0.00 sec)
+
+
+Q24Find customers whose age is NOT between 20 and 30.
+--> SELECT * FROM customers WHERE NOT age BETWEEN 20 AND 30;
+mysql> SELECT * FROM customers WHERE NOT age BETWEEN 20 AND 30;
++-------------+---------------+-----------------+------+--------+
+| customer_id | name          | email           | age  | city   |
++-------------+---------------+-----------------+------+--------+
+|           4 | Neha Deshmukh | neha@gmail.com  |   31 | Nagpur |
+|           7 | Akash Shinde  | akash@gmail.com |   35 | Mumbai |
++-------------+---------------+-----------------+------+--------+
+2 rows in set (0.00 sec)
+
+
+Q25Find names starting with R.
+--> SELECT * FROM customers WHERE name LIKE 'R%';
+
+mysql> SELECT * FROM customers WHERE name LIKE 'R%';
++-------------+----------------+-----------------+------+------+
+| customer_id | name           | email           | age  | city |
++-------------+----------------+-----------------+------+------+
+|           5 | Rohit Kulkarni | rohit@gmail.com |   27 | Pune |
++-------------+----------------+-----------------+------+------+
+1 row in set (0.10 sec)
+
+Q26Find names starting with P.
+--> SELECT * FROM customers WHERE name LIKE 'P%';
+mysql> SELECT * FROM customers WHERE name LIKE 'P%';
++-------------+--------------+-----------------+------+----------+
+| customer_id | name         | email           | age  | city     |
++-------------+--------------+-----------------+------+----------+
+|           1 | Priya Sharma | priya@gmail.com |   24 | Mumbai   |
+|           6 | Pooja Patil  | pooja@gmail.com |   23 | Kolhapur |
++-------------+--------------+-----------------+------+----------+
+2 rows in set (0.00 sec)
+
+
+Q27Find names ending with a.
+--> SELECT * FROM customers WHERE name LIKE '%a';
+mysql> SELECT * FROM customers WHERE name LIKE '%a';
++-------------+--------------+-----------------+------+--------+
+| customer_id | name         | email           | age  | city   |
++-------------+--------------+-----------------+------+--------+
+|           1 | Priya Sharma | priya@gmail.com |   24 | Mumbai |
++-------------+--------------+-----------------+------+--------+
+1 row in set (0.00 sec)
+
+Q28Find names containing sh.
+-->SELECT * FROM customers WHERE name LIKE '%sh%';
+mysql> SELECT * FROM customers WHERE name LIKE '%sh%';
++-------------+---------------+------------------+------+--------+
+| customer_id | name          | email            | age  | city   |
++-------------+---------------+------------------+------+--------+
+|           1 | Priya Sharma  | priya@gmail.com  |   24 | Mumbai |
+|           2 | Amit Joshi    | amit@gmail.com   |   29 | Nashik |
+|           4 | Neha Deshmukh | neha@gmail.com   |   31 | Nagpur |
+|           7 | Akash Shinde  | akash@gmail.com  |   35 | Mumbai |
+|           9 | Sakshi Jadhav | sakshi@gmail.com |   26 | Nashik |
++-------------+---------------+------------------+------+--------+
+5 rows in set (0.00 sec)
+
+
+mysql> SELECT * FROM customers WHERE name LIKE '_n%';
++-------------+------------+-----------------+------+------+
+| customer_id | name       | email           | age  | city |
++-------------+------------+-----------------+------+------+
+|           3 | Sneha More | sneha@gmail.com |   22 | Pune |
++-------------+------------+-----------------+------+------+
+1 row in set (0.00 sec)
+
+Q29Find names containing an.
+-->SELECT * FROM customers WHERE name LIKE '_an_';
+mysql> SELECT * FROM customers WHERE name LIKE '%an%';
++-------------+-------------+-----------------+------+------+
+| customer_id | name        | email           | age  | city |
++-------------+-------------+-----------------+------+------+
+|           8 | Kiran Pawar | kiran@gmail.com |   28 | Pune |
++-------------+-------------+-----------------+------+------+
+1 row in set (0.00 sec)
+
+Q30Find customers whose names have exactly 5 characters.
+-->SELECT * FROM customers WHERE name LIKE '____';
+
+ql> SELECT * FROM customers WHERE name LIKE '____';
+Empty set (0.00 sec)
+
+🟡 Level 4 — Sorting & Limiting
+Q31Display customers from youngest to oldest.
+SELECT* FROM customers ORDER BY age ASC;
+
+-->mysql> SELECT* FROM customers ORDER BY age ASC;
++-------------+----------------+------------------+------+----------+
+| customer_id | name           | email            | age  | city     |
++-------------+----------------+------------------+------+----------+
+|           3 | Sneha More     | sneha@gmail.com  |   22 | Pune     |
+|           6 | Pooja Patil    | pooja@gmail.com  |   23 | Kolhapur |
+|           1 | Priya Sharma   | priya@gmail.com  |   24 | Mumbai   |
+|           9 | Sakshi Jadhav  | sakshi@gmail.com |   26 | Nashik   |
+|           5 | Rohit Kulkarni | rohit@gmail.com  |   27 | Pune     |
+|           8 | Kiran Pawar    | kiran@gmail.com  |   28 | Pune     |
+|           2 | Amit Joshi     | amit@gmail.com   |   29 | Nashik   |
+|           4 | Neha Deshmukh  | neha@gmail.com   |   31 | Nagpur   |
+|           7 | Akash Shinde   | akash@gmail.com  |   35 | Mumbai   |
++-------------+----------------+------------------+------+----------+
+9 rows in set (0.00 sec)
+
+Q32 Display customers from oldest to youngest.
+--> SELECT * FROM customers ORDER BY age DESC;
+
+mysql> SELECT * FROM customers ORDER BY age DESC;
++-------------+----------------+------------------+------+----------+
+| customer_id | name           | email            | age  | city     |
++-------------+----------------+------------------+------+----------+
+|           7 | Akash Shinde   | akash@gmail.com  |   35 | Mumbai   |
+|           4 | Neha Deshmukh  | neha@gmail.com   |   31 | Nagpur   |
+|           2 | Amit Joshi     | amit@gmail.com   |   29 | Nashik   |
+|           8 | Kiran Pawar    | kiran@gmail.com  |   28 | Pune     |
+|           5 | Rohit Kulkarni | rohit@gmail.com  |   27 | Pune     |
+|           9 | Sakshi Jadhav  | sakshi@gmail.com |   26 | Nashik   |
+|           1 | Priya Sharma   | priya@gmail.com  |   24 | Mumbai   |
+|           6 | Pooja Patil    | pooja@gmail.com  |   23 | Kolhapur |
+|           3 | Sneha More     | sneha@gmail.com  |   22 | Pune     |
++-------------+----------------+------------------+------+----------+
+9 rows in set (0.00 sec)
+
+Q33. Display customers alphabetically by name.
+-->SELECT * FROM customers ORDER BY name ASC;
+mysql> SELECT * FROM customers ORDER BY name ASC;
++-------------+----------------+------------------+------+----------+
+| customer_id | name           | email            | age  | city     |
++-------------+----------------+------------------+------+----------+
+|           7 | Akash Shinde   | akash@gmail.com  |   35 | Mumbai   |
+|           2 | Amit Joshi     | amit@gmail.com   |   29 | Nashik   |
+|           8 | Kiran Pawar    | kiran@gmail.com  |   28 | Pune     |
+|           4 | Neha Deshmukh  | neha@gmail.com   |   31 | Nagpur   |
+|           6 | Pooja Patil    | pooja@gmail.com  |   23 | Kolhapur |
+|           1 | Priya Sharma   | priya@gmail.com  |   24 | Mumbai   |
+|           5 | Rohit Kulkarni | rohit@gmail.com  |   27 | Pune     |
+|           9 | Sakshi Jadhav  | sakshi@gmail.com |   26 | Nashik   |
+|           3 | Sneha More     | sneha@gmail.com  |   22 | Pune     |
++-------------+----------------+------------------+------+----------+
+9 rows in set (0.00 sec)
+
+Q34 Display customers in reverse alphabetical order.
+-->SELECT * FROM customers ORDER BY name DESC;
+mysql> SELECT * FROM customers ORDER BY name DESC;
++-------------+----------------+------------------+------+----------+
+| customer_id | name           | email            | age  | city     |
++-------------+----------------+------------------+------+----------+
+|           3 | Sneha More     | sneha@gmail.com  |   22 | Pune     |
+|           9 | Sakshi Jadhav  | sakshi@gmail.com |   26 | Nashik   |
+|           5 | Rohit Kulkarni | rohit@gmail.com  |   27 | Pune     |
+|           1 | Priya Sharma   | priya@gmail.com  |   24 | Mumbai   |
+|           6 | Pooja Patil    | pooja@gmail.com  |   23 | Kolhapur |
+|           4 | Neha Deshmukh  | neha@gmail.com   |   31 | Nagpur   |
+|           8 | Kiran Pawar    | kiran@gmail.com  |   28 | Pune     |
+|           2 | Amit Joshi     | amit@gmail.com   |   29 | Nashik   |
+|           7 | Akash Shinde   | akash@gmail.com  |   35 | Mumbai   |
++-------------+----------------+------------------+------+----------+
+9 rows in set (0.01 sec)
+Q35 Display the first 5 customers.
+--> SELECT * FROM customers LIMIT 5;
+mysql>  SELECT * FROM customers LIMIT 5;
++-------------+----------------+-----------------+------+--------+
+| customer_id | name           | email           | age  | city   |
++-------------+----------------+-----------------+------+--------+
+|           1 | Priya Sharma   | priya@gmail.com |   24 | Mumbai |
+|           2 | Amit Joshi     | amit@gmail.com  |   29 | Nashik |
+|           3 | Sneha More     | sneha@gmail.com |   22 | Pune   |
+|           4 | Neha Deshmukh  | neha@gmail.com  |   31 | Nagpur |
+|           5 | Rohit Kulkarni | rohit@gmail.com |   27 | Pune   |
++-------------+----------------+-----------------+------+--------+
+5 rows in set (0.00 s
+
+Q36 Display the 3 oldest customers.
+-->SELECT * FROM customers ORDER BY age ASC LIMIT 3;
+mysql> SELECT *  FROM customers ORDER BY age ASC LIMIT 3;
++-------------+--------------+-----------------+------+----------+
+| customer_id | name         | email           | age  | city     |
++-------------+--------------+-----------------+------+----------+
+|           3 | Sneha More   | sneha@gmail.com |   22 | Pune     |
+|           6 | Pooja Patil  | pooja@gmail.com |   23 | Kolhapur |
+|           1 | Priya Sharma | priya@gmail.com |   24 | Mumbai   |
++-------------+--------------+-----------------+------+----------+
+3 rows in set (0.00 sec)
+
+Q37 Display the 3 youngest customers.
+--> SELECT  * FROM customers ORDER BY age DESC LIMIT 3;
+mysql> SELECT *  FROM customers ORDER BY age DESC LIMIT 3;
++-------------+---------------+-----------------+------+--------+
+| customer_id | name          | email           | age  | city   |
++-------------+---------------+-----------------+------+--------+
+|           7 | Akash Shinde  | akash@gmail.com |   35 | Mumbai |
+|           4 | Neha Deshmukh | neha@gmail.com  |   31 | Nagpur |
+|           2 | Amit Joshi    | amit@gmail.com  |   29 | Nashik |
++-------------+---------------+-----------------+------+--------+
+3 rows in set (0.00 sec)
+
+Q38 Display the first 5 customers from Pune.
+-->SELECT * FROM customers ORDER BY city = 'pune' LIMIT 5;
+
+mysql> SELECT * FROM customers ORDER BY city = 'Pune' LIMIT 5;
++-------------+---------------+-----------------+------+----------+
+| customer_id | name          | email           | age  | city     |
++-------------+---------------+-----------------+------+----------+
+|           1 | Priya Sharma  | priya@gmail.com |   24 | Mumbai   |
+|           2 | Amit Joshi    | amit@gmail.com  |   29 | Nashik   |
+|           4 | Neha Deshmukh | neha@gmail.com  |   31 | Nagpur   |
+|           6 | Pooja Patil   | pooja@gmail.com |   23 | Kolhapur |
+|           7 | Akash Shinde  | akash@gmail.com |   35 | Mumbai   |
++-------------+---------------+-----------------+------+----------+
+5 rows in set (0.00 sec)
+
+Q39 Display customers from Pune ordered by age descending.
+--> SELECT * FROM customers  WHERE city = 'Pune' ORDER BY age DESC;
+mysql> SELECT * FROM customers WHERE city = 'Pune' ORDER BY age DESC;
++-------------+----------------+-----------------+------+------+
+| customer_id | name           | email           | age  | city |
++-------------+----------------+-----------------+------+------+
+|           8 | Kiran Pawar    | kiran@gmail.com |   28 | Pune |
+|           5 | Rohit Kulkarni | rohit@gmail.com |   27 | Pune |
+|           3 | Sneha More     | sneha@gmail.com |   22 | Pune |
++-------------+----------------+-----------------+------+------+
+3 rows in set (0.00 sec)
+
+Q40 Display customers from Mumbai ordered by name.
+-->SELECT * FROM customers WHERE city = 'Mumbai' ORDER BY ASC;
+mysql> SELECT * FROM customers WHERE city = 'Mumbai' ORDER BY name DESC;
++-------------+--------------+-----------------+------+--------+
+| customer_id | name         | email           | age  | city   |
++-------------+--------------+-----------------+------+--------+
+|           1 | Priya Sharma | priya@gmail.com |   24 | Mumbai |
+|           7 | Akash Shinde | akash@gmail.com |   35 | Mumbai |
++-------------+--------------+-----------------+------+--------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM customers WHERE city = 'Mumbai' ORDER BY name ASC;
++-------------+--------------+-----------------+------+--------+
+| customer_id | name         | email           | age  | city   |
++-------------+--------------+-----------------+------+--------+
+|           7 | Akash Shinde | akash@gmail.com |   35 | Mumbai |
+|           1 | Priya Sharma | priya@gmail.com |   24 | Mumbai |
++-------------+--------------+-----------------+------+--------+
+2 rows in set (0.00 s
+
+🔴 Level 5 — Real Interview Questions
+Q41 Find customers from Pune whose age is between 20 and 30.
+-->SELECT * FROM customers WHERE city = 'Pune' AND age BETWEEN 20 AND 30;
+
+mysql> SELECT * FROM customers WHERE city = 'Pune' AND age BETWEEN 20 AND 30;
++-------------+----------------+-----------------+------+------+
+| customer_id | name           | email           | age  | city |
++-------------+----------------+-----------------+------+------+
+|           3 | Sneha More     | sneha@gmail.com |   22 | Pune |
+|           5 | Rohit Kulkarni | rohit@gmail.com |   27 | Pune |
+|           8 | Kiran Pawar    | kiran@gmail.com |   28 | Pune |
++-------------+----------------+-----------------+------+------+
+3 rows in set (0.00 sec)
+
+Q42 Find customers from Pune or Mumbai whose age is above 25.
+--> SELECT * FROM customers WHERE city IN('Pune', 'Mumbai') AND age > 25;
+mysql> SELECT * FROM customers WHERE city IN ('Pune', 'Mumbai') AND age > 25;
++-------------+----------------+-----------------+------+--------+
+| customer_id | name           | email           | age  | city   |
++-------------+----------------+-----------------+------+--------+
+|           5 | Rohit Kulkarni | rohit@gmail.com |   27 | Pune   |
+|           7 | Akash Shinde   | akash@gmail.com |   35 | Mumbai |
+|           8 | Kiran Pawar    | kiran@gmail.com |   28 | Pune   |
++-------------+----------------+-----------------+------+--------+
+3 rows in set (0.00 sec)
+
+Q43 Find customers whose name starts with S and city is Pune.
+--> SELECT * FROM customers WHERE LIKE 's%' AND city ='pune';
+mysql> SELECT * FROM customers WHERE name LIKE 'S%' AND city = 'Pune';
++-------------+------------+-----------------+------+------+
+| customer_id | name       | email           | age  | city |
++-------------+------------+-----------------+------+------+
+|           3 | Sneha More | sneha@gmail.com |   22 | Pune |
++-------------+------------+-----------------+------+------+
+1 row in set (0.00 sec)
+
+Q44 Find customers whose name contains a and age is greater than 25.
+-->SELECT * FROM customers WHERE name LIKE '%a%' AND age >=25;
+mysql> SELECT * FROM customers WHERE name LIKE '%a%' AND age >= 25;
++-------------+----------------+------------------+------+--------+
+| customer_id | name           | email            | age  | city   |
++-------------+----------------+------------------+------+--------+
+|           2 | Amit Joshi     | amit@gmail.com   |   29 | Nashik |
+|           4 | Neha Deshmukh  | neha@gmail.com   |   31 | Nagpur |
+|           5 | Rohit Kulkarni | rohit@gmail.com  |   27 | Pune   |
+|           7 | Akash Shinde   | akash@gmail.com  |   35 | Mumbai |
+|           8 | Kiran Pawar    | kiran@gmail.com  |   28 | Pune   |
+|           9 | Sakshi Jadhav  | sakshi@gmail.com |   26 | Nashik |
++-------------+----------------+------------------+------+--------+
+6 rows in set (0.00 sec)
+
+Q45 Find customers from Pune, Mumbai, or Nashik whose age is above 25.
+--> SELECT * FROM customers WHERE city IN ('Pune', 'Mumbai', 'Nashik') AND age >25;
+
+mysql> SELECT * FROM customers WHERE city IN ('Pune','Mumbai', 'Nashik') AND age >= 25;
++-------------+----------------+------------------+------+--------+
+| customer_id | name           | email            | age  | city   |
++-------------+----------------+------------------+------+--------+
+|           2 | Amit Joshi     | amit@gmail.com   |   29 | Nashik |
+|           5 | Rohit Kulkarni | rohit@gmail.com  |   27 | Pune   |
+|           7 | Akash Shinde   | akash@gmail.com  |   35 | Mumbai |
+|           8 | Kiran Pawar    | kiran@gmail.com  |   28 | Pune   |
+|           9 | Sakshi Jadhav  | sakshi@gmail.com |   26 | Nashik |
++-------------+----------------+------------------+------+--------+
+5 rows in set (0.00 s
+
+Q46 Display the oldest customer.
+-->SELECT  MIN(age) FROM customers;
+mysql> SELECT MIN(age) FROM customers;
++----------+
+| MIN(age) |
++----------+
+|       22 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MIN(age) AS olders_age FROM customers;
++------------+
+| olders_age |
++------------+
+|         22 |
++------------+
+1 row in set (0.00 sec)
+
+
+Q47 Display the youngest customer.
+-->SELECT MAX(age) AS younger_customer FROM customers AS younger_customer FROM customers;
+mysql> SELECT MAX(age) AS younger_customer FROM customers;
++------------------+
+| younger_customer |
++------------------+
+|               35 |
++------------------+
+1 row in set (0.00 sec)
+
+Q48 Display the 5 oldest customers.
+-->SELECT  * FROM customers ORDER BY age DESC LIMIT 5;
+
+mysql> SELECT * FROM customers ORDER BY age DESC LIMIT 5;
++-------------+----------------+-----------------+------+--------+
+| customer_id | name           | email           | age  | city   |
++-------------+----------------+-----------------+------+--------+
+|           7 | Akash Shinde   | akash@gmail.com |   35 | Mumbai |
+|           4 | Neha Deshmukh  | neha@gmail.com  |   31 | Nagpur |
+|           2 | Amit Joshi     | amit@gmail.com  |   29 | Nashik |
+|           8 | Kiran Pawar    | kiran@gmail.com |   28 | Pune   |
+|           5 | Rohit Kulkarni | rohit@gmail.com |   27 | Pune   |
++-------------+----------------+-----------------+------+--------+
+5 rows in set (0.00 sec) 
+
+Q49 Display customer name as Customer_Name and city as Customer_City.
+--> update  name = 'customers_name' , city = 'customers_city';
+mysql> SELECT name AS customer_name ,city AS customer_city FROM customers;
++----------------+---------------+
+| customer_name  | customer_city |
++----------------+---------------+
+| Priya Sharma   | Mumbai        |
+| Amit Joshi     | Nashik        |
+| Sneha More     | Pune          |
+| Neha Deshmukh  | Nagpur        |
+| Rohit Kulkarni | Pune          |
+| Pooja Patil    | Kolhapur      |
+| Akash Shinde   | Mumbai        |
+| Kiran Pawar    | Pune          |
+| Sakshi Jadhav  | Nashik        |
++----------------+---------------+
+9 rows in set (0.00 sec)
+
+
+Q50 Find customers whose email is not NULL.
+-->
+mysql> SELECT * FROM customers WHERE email IS NOT NULL;
++-------------+----------------+------------------+------+----------+
+| customer_id | name           | email            | age  | city     |
++-------------+----------------+------------------+------+----------+
+|           1 | Priya Sharma   | priya@gmail.com  |   24 | Mumbai   |
+|           2 | Amit Joshi     | amit@gmail.com   |   29 | Nashik   |
+|           3 | Sneha More     | sneha@gmail.com  |   22 | Pune     |
+|           4 | Neha Deshmukh  | neha@gmail.com   |   31 | Nagpur   |
+|           5 | Rohit Kulkarni | rohit@gmail.com  |   27 | Pune     |
+|           6 | Pooja Patil    | pooja@gmail.com  |   23 | Kolhapur |
+|           7 | Akash Shinde   | akash@gmail.com  |   35 | Mumbai   |
+|           8 | Kiran Pawar    | kiran@gmail.com  |   28 | Pune     |
+|           9 | Sakshi Jadhav  | sakshi@gmail.com |   26 | Nashik   |
++-------------+----------------+------------------+------+----------+
+9 rows in set (0.05 sec)
+
+
+
