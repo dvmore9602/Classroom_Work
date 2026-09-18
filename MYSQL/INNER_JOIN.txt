@@ -1,0 +1,264 @@
+             Today's SQL Lecture — JOIN AND FOREING
+ Create the customers tables
+-->
+CREATE TABLE customers (
+    customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    city VARCHAR(50),
+    phone VARCHAR(15)
+);
+
+
+mysql> desc customers;
++---------------+--------------+------+-----+---------+----------------+
+| Field         | Type         | Null | Key | Default | Extra          |
++---------------+--------------+------+-----+---------+----------------+
+| customer_id   | int          | NO   | PRI | NULL    | auto_increment |
+| customer_name | varchar(100) | NO   |     | NULL    |                |
+| email         | varchar(100) | YES  | UNI | NULL    |                |
+| city          | varchar(50)  | YES  |     | NULL    |                |
+| phone         | varchar(15)  | YES  |     | NULL    |                |
++---------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.01 sec)
+
+Insert the 10 values
+-->INSERT INTO customers
+(customer_name, email, city, phone)
+VALUES
+('Rahul Patil', 'rahul@gmail.com', 'Pune', '9876543210'),
+('Priya Sharma', 'priya@gmail.com', 'Mumbai', '9876543211'),
+('Amit More', 'amit@gmail.com', 'Nashik', '9876543212'),
+('Sneha Joshi', 'sneha@gmail.com', 'Pune', '9876543213'),
+('Rohit Deshmukh', 'rohit@gmail.com', 'Nagpur', '9876543214'),
+('Pooja Kulkarni', 'pooja@gmail.com', 'Kolhapur', '9876543215'),
+('Akash Shinde', 'akash@gmail.com', 'Pune', '9876543216'),
+('Neha Pawar', 'neha@gmail.com', 'Mumbai', '9876543217'),
+('Vikas Jadhav', 'vikas@gmail.com', 'Satara', '9876543218'),
+('Kiran More', 'kiran@gmail.com', 'Aurangabad', '9876543219');
+
+mysql> select * from customers;
++-------------+----------------+-----------------+------------+------------+
+| customer_id | customer_name  | email           | city       | phone      |
++-------------+----------------+-----------------+------------+------------+
+|           1 | Rahul Patil    | rahul@gmail.com | Pune       | 9876543210 |
+|           2 | Priya Sharma   | priya@gmail.com | Mumbai     | 9876543211 |
+|           3 | Amit More      | amit@gmail.com  | Nashik     | 9876543212 |
+|           4 | Sneha Joshi    | sneha@gmail.com | Pune       | 9876543213 |
+|           5 | Rohit Deshmukh | rohit@gmail.com | Nagpur     | 9876543214 |
+|           6 | Pooja Kulkarni | pooja@gmail.com | Kolhapur   | 9876543215 |
+|           7 | Akash Shinde   | akash@gmail.com | Pune       | 9876543216 |
+|           8 | Neha Pawar     | neha@gmail.com  | Mumbai     | 9876543217 |
+|           9 | Vikas Jadhav   | vikas@gmail.com | Satara     | 9876543218 |
+|          10 | Kiran More     | kiran@gmail.com | Aurangabad | 9876543219 |
++-------------+----------------+-----------------+------------+------------+
+10 rows in set (0.00 sec)
+
+Orders Table
+
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT,
+    product_name VARCHAR(100),
+    quantity INT,
+    amount DECIMAL(10,2),
+    order_date DATE,
+
+    FOREIGN KEY (customer_id)
+    REFERENCES customers(customer_id)
+);
+
+mysql> desc ordes;
+ERROR 1146 (42S02): Table 'batch1343.ordes' doesn't exist
+mysql> desc orders;
++--------------+---------------+------+-----+---------+----------------+
+| Field        | Type          | Null | Key | Default | Extra          |
++--------------+---------------+------+-----+---------+----------------+
+| order_id     | int           | NO   | PRI | NULL    | auto_increment |
+| customer_id  | int           | YES  | MUL | NULL    |                |
+| product_name | varchar(100)  | YES  |     | NULL    |                |
+| quantity     | int           | YES  |     | NULL    |                |
+| amount       | decimal(10,2) | YES  |     | NULL    |                |
+| order_date   | date          | YES  |     | NULL    |                |
++--------------+---------------+------+-----+---------+----------------+
+6 rows in set (0.01 sec)
+
+Insert the orders values.
+-->
+INSERT INTO orders
+(customer_id, product_name, quantity, amount, order_date)
+VALUES
+(1, 'Laptop', 1, 55000, '2026-09-01'),
+(2, 'Mobile Phone', 1, 25000, '2026-09-02'),
+(1, 'Keyboard', 2, 1500, '2026-09-03'),
+(3, 'Headphones', 1, 2500, '2026-09-04'),
+(4, 'Monitor', 1, 12000, '2026-09-05'),
+(2, 'Mouse', 2, 1200, '2026-09-06'),
+(5, 'Laptop Bag', 1, 1800, '2026-09-07'),
+(7, 'Smart Watch', 1, 5000, '2026-09-08'),
+(1, 'USB Cable', 3, 900, '2026-09-09'),
+(8, 'Tablet', 1, 22000, '2026-09-10'),
+(3, 'Power Bank', 2, 3000, '2026-09-11'),
+(4, 'Web Camera', 1, 3500, '2026-09-12');
+
+mysql> select * from orders;
++----------+-------------+--------------+----------+----------+------------+
+| order_id | customer_id | product_name | quantity | amount   | order_date |
++----------+-------------+--------------+----------+----------+------------+
+|        1 |           1 | Laptop       |        1 | 55000.00 | 2026-09-01 |
+|        2 |           2 | Mobile Phone |        1 | 25000.00 | 2026-09-02 |
+|        3 |           1 | Keyboard     |        2 |  1500.00 | 2026-09-03 |
+|        4 |           3 | Headphones   |        1 |  2500.00 | 2026-09-04 |
+|        5 |           4 | Monitor      |        1 | 12000.00 | 2026-09-05 |
+|        6 |           2 | Mouse        |        2 |  1200.00 | 2026-09-06 |
+|        7 |           5 | Laptop Bag   |        1 |  1800.00 | 2026-09-07 |
+|        8 |           7 | Smart Watch  |        1 |  5000.00 | 2026-09-08 |
+|        9 |           1 | USB Cable    |        3 |   900.00 | 2026-09-09 |
+|       10 |           8 | Tablet       |        1 | 22000.00 | 2026-09-10 |
+|       11 |           3 | Power Bank   |        2 |  3000.00 | 2026-09-11 |
+|       12 |           4 | Web Camera   |        1 |  3500.00 | 2026-09-12 |
++----------+-------------+--------------+----------+----------+------------+
+12 rows in set (0.00 sec)
+
+Relationship customer and orders
+customers
+----------------
+customer_id  ← PRIMARY KEY
+customer_name
+city
+
+
+orders
+----------------
+order_id
+customer_id    ← FOREIGN KEY
+product_name
+quantity
+amount
+order_date
+
+SELECT * FROM orders;
+select * from customers;
+
+INNER JOIN--> ( INNER JOIN is used to combine data from two tables and return only the rows where a matching value exists in both tables.)
+INNER JOIN = Only matching records from both tables.
+Syntax:
+SELECT columns
+FROM table1
+INNER JOIN table2
+ON table1.column = table2.column;
+
+query
+mysql> SELECT customers.customer_name,orders.product_name, orders.quantity, orders.amount, orders.order_date FROM  customers INNER JOIN orders ON customers.customer_id = orders.customer_id;
++----------------+--------------+----------+----------+------------+
+| customer_name  | product_name | quantity | amount   | order_date |
++----------------+--------------+----------+----------+------------+
+| Rahul Patil    | Laptop       |        1 | 55000.00 | 2026-09-01 |
+| Rahul Patil    | Keyboard     |        2 |  1500.00 | 2026-09-03 |
+| Rahul Patil    | USB Cable    |        3 |   900.00 | 2026-09-09 |
+| Priya Sharma   | Mobile Phone |        1 | 25000.00 | 2026-09-02 |
+| Priya Sharma   | Mouse        |        2 |  1200.00 | 2026-09-06 |
+| Amit More      | Headphones   |        1 |  2500.00 | 2026-09-04 |
+| Amit More      | Power Bank   |        2 |  3000.00 | 2026-09-11 |
+| Sneha Joshi    | Monitor      |        1 | 12000.00 | 2026-09-05 |
+| Sneha Joshi    | Web Camera   |        1 |  3500.00 | 2026-09-12 |
+| Rohit Deshmukh | Laptop Bag   |        1 |  1800.00 | 2026-09-07 |
+| Akash Shinde   | Smart Watch  |        1 |  5000.00 | 2026-09-08 |
+| Neha Pawar     | Tablet       |        1 | 22000.00 | 2026-09-10 |
++----------------+--------------+----------+----------+------------+
+12 rows in set (0.00 sec)
+
+INNER JOIN + WHERE use 
+
+--> SELECT customers.customer_name, customers.city, orders.order_name, orders.prodeuct_name, orders.quantity, orders.amount FROM customers INNER JOIN orders ON customers.customer_id = orders.customer_id WHERE city = 'Pune';
+
+mysql> SELECT customers.customer_name, customers.city, orders.product_name, orders.quantity, orders.amount FROM customers INNER JOIN orders ON customers.customer_id = orders.customer_id WHERE customers.city = 'Pune';
++---------------+------+--------------+----------+----------+
+| customer_name | city | product_name | quantity | amount   |
++---------------+------+--------------+----------+----------+
+| Rahul Patil   | Pune | Laptop       |        1 | 55000.00 |
+| Rahul Patil   | Pune | Keyboard     |        2 |  1500.00 |
+| Rahul Patil   | Pune | USB Cable    |        3 |   900.00 |
+| Sneha Joshi   | Pune | Monitor      |        1 | 12000.00 |
+| Sneha Joshi   | Pune | Web Camera   |        1 |  3500.00 |
+| Akash Shinde  | Pune | Smart Watch  |        1 |  5000.00 |
++---------------+------+--------------+----------+----------+
+6 rows in set (0.00 sec)
+
+INNER JOIN + Amount Condition
+
+--> SELECT c.customer_name, o.product_name, o.quantity, o.amount FROM customers c INNER JOIN orders o ON c.customer_id = o.customer_id WHERE amount > 10000;
+mysql> SELECT c.customer_name, o.product_name, o.quantity, o.amount FROM customers c INNER JOIN orders o ON c.customer_id = o.customer_id WHERE amount > 10000;
++---------------+--------------+----------+----------+
+| customer_name | product_name | quantity | amount   |
++---------------+--------------+----------+----------+
+| Rahul Patil   | Laptop       |        1 | 55000.00 |
+| Priya Sharma  | Mobile Phone |        1 | 25000.00 |
+| Sneha Joshi   | Monitor      |        1 | 12000.00 |
+| Neha Pawar    | Tablet       |        1 | 22000.00 |
++---------------+--------------+----------+----------+
+4 rows in set (0.03 sec)
+
+INNER JOIN + AND
+
+--> SELECT  c.customer_name,  c.city, c.customer_id, o.product_name, o.quantity, o.amount, FROM customers c INNER JOIN orders o ON c.customer_id = o.customer_id WHERE city = 'Pune' AND o.amount > 10000;
+mysql> SELECT c.customer_id, c.customer_name, c.city, o.product_name, o.quantity, o.amount FROM customers c INNER JOIN orders o ON c.customer_id = o.customer_id WHERE city = 'Pune' AND amount > 10000;
++-------------+---------------+------+--------------+----------+----------+
+| customer_id | customer_name | city | product_name | quantity | amount   |
++-------------+---------------+------+--------------+----------+----------+
+|           1 | Rahul Patil   | Pune | Laptop       |        1 | 55000.00 |
+|           4 | Sneha Joshi   | Pune | Monitor      |        1 | 12000.00 |
++-------------+---------------+------+--------------+----------+----------+
+2 rows in set (0.00 sec)
+
+INNER JOIN +GROUP BY 
+
+--> SELECT c.customer_name COUNT(o.order_id) AS total_orders FROM customers c INNER JOIN order o ON c.customrs_id = o.customers_id GROUP BY c.customer_id, c.customer_name;
+ysql>  SELECT c.customer_id, c.customer_name, COUNT(o.order_id) AS total_orders FROM customers c INNER JOIN orders o ON c.customer_id = o.customer_id GROUP BY c.customer_id, c.customer_name;
++-------------+----------------+--------------+
+| customer_id | customer_name  | total_orders |
++-------------+----------------+--------------+
+|           1 | Rahul Patil    |            3 |
+|           2 | Priya Sharma   |            2 |
+|           3 | Amit More      |            2 |
+|           4 | Sneha Joshi    |            2 |
+|           5 | Rohit Deshmukh |            1 |
+|           7 | Akash Shinde   |            1 |
+|           8 | Neha Pawar     |            1 |
++-------------+----------------+--------------+
+7 rows in set (0.08 sec)
+
+INNER JOIN + SUM
+--> SELECT c.custome_id, c.customer_name, SUM(o.amount) AS total_amount FROM customers c INNER JOIN orders o ON c.customer_id = o.customer_id GROUP BY c.customer_id , customer_name;
+
+mysql>  SELECT c.customer_id, c.customer_name, SUM(o.amount) AS total_amount FROM customers c INNER JOIN orders o ON c.customer_id = o.customer_id GROUP BY c.customer_id, c.customer_name;
++-------------+----------------+--------------+
+| customer_id | customer_name  | total_amount |
++-------------+----------------+--------------+
+|           1 | Rahul Patil    |     57400.00 |
+|           2 | Priya Sharma   |     26200.00 |
+|           3 | Amit More      |      5500.00 |
+|           4 | Sneha Joshi    |     15500.00 |
+|           5 | Rohit Deshmukh |      1800.00 |
+|           7 | Akash Shinde   |      5000.00 |
+|           8 | Neha Pawar     |     22000.00 |
++-------------+----------------+--------------+
+7 rows in set (0.00 sec)
+
+
+INNER JOIN + HAVING
+--> SELECT c.custome_id, c.customer_name, SUM(o.amount) AS total_amount FROM customers c INNER JOIN orders o ON c.customer_id = o.customer_id GROUP BY c.customer_id , customer_name;
+
+mysql>  SELECT c.customer_id, c.customer_name, SUM(o.amount) AS total_amount FROM customers c INNER JOIN orders o ON c.customer_id = o.customer_id GROUP BY c.customer_id, c.customer_name HAVING SUM(o.amount) > 20000;
++-------------+---------------+--------------+
+| customer_id | customer_name | total_amount |
++-------------+---------------+--------------+
+|           1 | Rahul Patil   |     57400.00 |
+|           2 | Priya Sharma  |     26200.00 |
+|           8 | Neha Pawar    |     22000.00 |
++-------------+---------------+--------------+
+3 rows in set (0.00 sec)
+
+
+
+
