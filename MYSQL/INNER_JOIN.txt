@@ -1,4 +1,4 @@
-             Today's SQL Lecture — JOIN AND FOREING
+             Today's SQL Lecture — JOIN AND FOREING KEY
  Create the customers tables
 -->
 CREATE TABLE customers (
